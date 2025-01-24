@@ -10,7 +10,7 @@ body {
 header {
     background-color: #004080; /* Slightly lighter deep blue */
     color: white;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     text-align: center;
 }
 
@@ -18,35 +18,27 @@ footer {
     background-color: #003366;
     color: white;
     text-align: center;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     position: fixed;
     bottom: 0;
     width: 100%;
-	height: 5%
+    height: 5%;
 }
 
-main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 2rem;
-}
-
-/* Greeting Box */
-.greeting-section,
-.status-section {
-    flex: 1 1 30%;
-    text-align: center;
-    background-color: #ffffff;
-    color: #001f3f;
+/* Main grid layout */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    grid-template-rows: auto 1fr;  /* Dynamic height rows */
+    gap: 1rem; /* Space between grid items */
     padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    height: calc(100vh - 10rem); /* Adjust for header/footer height */
 }
 
 /* Calendar Section */
 .calendar-section {
-    flex: 2 1 60%;
+    grid-column: 1; /* Left column */
+    grid-row: 1 / 3; /* Span top and bottom rows */
     text-align: center;
     background-color: #ffffff;
     color: #001f3f;
@@ -57,7 +49,7 @@ main {
 
 .calendar {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 1fr); /* 7-day week */
     gap: 10px;
     margin-top: 1rem;
     padding: 1rem;
@@ -71,4 +63,16 @@ main {
     text-align: center;
     font-weight: bold;
     color: #001f3f;
+}
+
+/* Greeting Section */
+.greeting-section {
+    grid-column: 2; /* Right column */
+    grid-row: 1; /* Top row only */
+    text-align: center;
+    background-color: #ffffff;
+    color: #001f3f;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }

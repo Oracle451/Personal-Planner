@@ -10,43 +10,25 @@
     <header>
         <h1>Task Manager</h1>
     </header>
-    <main>
+    <main class="grid-layout">
         <section class="calendar-section">
             <h2>Your Calendar for <span id="current-month"></span></h2>
             <div class="calendar" id="calendar"></div>
         </section>
         <section class="greeting-section">
-		
             <div class="greeting">
-				<h2 id="greeting">Good Morning!</h2>
-			</div>
-			
-			<div class="status">
-				<p id="time">The time is currently: --:--</p>
-				<p id="day">Today is: --</p>
-				<p id="weather">Weather Report: --</p>
-			</div>
-			
+                <p id="greeting">Good Morning!</p>
+            </div>
         </section>
     </main>
     <footer>
         <p>&copy; 2025 Task Manager</p>
     </footer>
     <script>
-	
-		// Get the current month (0-11)
-		const currentMonth = new Date().getMonth();
+        // Display the current month
+        document.getElementById('current-month').textContent = new Date().toLocaleString('default', { month: 'long' });
 
-		// Array of month names
-		const months = [
-		  'January', 'February', 'March', 'April', 'May', 'June', 
-		  'July', 'August', 'September', 'October', 'November', 'December'
-		];
-
-		// Display the current month
-		document.getElementById('current-month').textContent = months[currentMonth];
-		
-		// Function to update the greeting based on time
+        // Function to update the greeting based on time
         function updateGreeting() {
             const hours = new Date().getHours();
             const greeting = document.getElementById("greeting");
@@ -58,14 +40,15 @@
                 greeting.textContent = "Good Evening!";
             }
         }
-		
+
+        // Generate a simple calendar
         function generateCalendar() {
             const calendarElement = document.getElementById("calendar");
             calendarElement.innerHTML = ""; // Clear existing content
 
             const now = new Date();
-            const currentMonth = now.getMonth();
             const currentYear = now.getFullYear();
+            const currentMonth = now.getMonth();
 
             const firstDay = new Date(currentYear, currentMonth, 1).getDay();
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -79,7 +62,7 @@
                 calendarElement.appendChild(dayElement);
             });
 
-            // Add empty cells for days before the first day
+            // Add empty cells before the first day
             for (let i = 0; i < firstDay; i++) {
                 const emptyCell = document.createElement("div");
                 emptyCell.className = "date";
@@ -94,37 +77,60 @@
                 calendarElement.appendChild(dateElement);
             }
         }
-		
-		 // Function to update the time and day
-        function updateTime() {
-            const now = new Date();
-            document.getElementById("time").textContent = `Time: ${now.toLocaleTimeString()}`;
-            document.getElementById("day").textContent = `Day: ${now.toLocaleDateString()}`;
-        }
 
-        // Function to fetch and update the weather
-        async function updateWeather() {
-            try {
-                const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=35.1050&longitude=-111.3712&current_weather=true');
-                const data = await response.json();
-                const temperature = data.current_weather.temperature;
-                const weather = data.current_weather.weathercode;
-                document.getElementById("weather").textContent = `Weather: ${temperature}°C, Code ${weather}`;
-            } catch (error) {
-                document.getElementById("weather").textContent = "Weather: Unable to fetch";
-            }
-        }
+        // Function to update the greeting and weather
+		async function updateGreetingAndWeather() {
+			try {
+				const now = new Date();
+				const hours = String(now.getHours()).padStart(2, '0');
+				const minutes = String(now.getMinutes()).padStart(2, '0');
+				const day = now.getDate();
+				const month = now.toLocaleString('default', { month: 'long' });
 
-        function initialize() {
-            generateCalendar();
-            updateGreeting();
-            updateTime();
-            updateWeather();
-            setInterval(updateTime, 1000); // Update time every second
-            updateGreeting();
-        }
+				// Determine the greeting message
+				let greetingMessage;
+				if (hours < 12) {
+					greetingMessage = "Good Morning";
+				} else if (hours < 18) {
+					greetingMessage = "Good Afternoon";
+				} else {
+					greetingMessage = "Good Evening";
+				}
 
-        document.addEventListener("DOMContentLoaded", initialize);
+				// Fetch weather data
+				const response = await fetch(
+					'https://api.open-meteo.com/v1/forecast?latitude=35.1050&longitude=-111.3712&current_weather=true&temperature_unit=fahrenheit'
+				);
+				const data = await response.json();
+				const temperature = data.current_weather.temperature;
+				const weatherDescriptions = {
+					0: "Clear Sky",
+					1: "Mainly Clear",
+					2: "Partly Cloudy",
+					3: "Overcast",
+					// Add more mappings as needed
+				};
+				const weatherCode = data.current_weather.weathercode;
+				const weather = weatherDescriptions[weatherCode] || "Unknown Weather";
+
+				// Update the greeting message
+				const greetingElement = document.getElementById("greeting");
+				greetingElement.textContent = `${greetingMessage}! It is currently ${hours}:${minutes} on ${month} ${day}. The weather is ${temperature}°F (${weather}). It looks like a perfect day to be productive!`;
+			} catch (error) {
+				const greetingElement = document.getElementById("greeting");
+				greetingElement.textContent = "Unable to fetch weather data. Please check your connection.";
+			}
+		}
+
+		// Initialize the app
+		function initialize() {
+			generateCalendar();
+			updateGreetingAndWeather();
+			updateTime();
+			setInterval(updateTime, 60000); // Update time every second
+		}
+
+		document.addEventListener("DOMContentLoaded", initialize);
     </script>
 </body>
 </html>
