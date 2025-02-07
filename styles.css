@@ -3,12 +3,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #001f3f; /* Deep blue background */
-    color: #ffffff; /* White text */
+    background-color: #001f3f;
+    color: #ffffff;
 }
 
 header {
-    background-color: #004080; /* Slightly lighter deep blue */
+    background-color: #004080;
     color: white;
     padding: 0.5rem 0;
     text-align: center;
@@ -25,39 +25,49 @@ footer {
     height: 5%;
 }
 
-/* Main grid layout */
-.grid-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    grid-template-rows: auto 1fr;  /* Dynamic height rows */
-    gap: 1rem; /* Space between grid items */
-    padding: 1rem;
-    height: calc(100vh - 10rem); /* Adjust for header/footer height */
-}
-
-/* Calendar Section */
-.calendar-section {
-    grid-column: 1; /* Left column */
-    grid-row: 1 / 3; /* Span top and bottom rows */
+/* Weather Box */
+.weather-section {
     text-align: center;
     background-color: #ffffff;
     color: #001f3f;
     padding: 1rem;
+    margin: 1rem auto;
     border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: fit-content;
+    max-width: 80%;
 }
 
+/* Streak Section (Smaller) */
+.streak-section {
+    text-align: center;
+    background-color: #ffffff;
+    color: #001f3f;
+    padding: 0.5rem;
+    margin: 0.5rem auto;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: fit-content;
+    max-width: 60%;
+}
+
+
+/* Calendar */
 .calendar {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7-day week */
+    grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     margin-top: 1rem;
     padding: 1rem;
 }
 
-.day,
-.date {
-    background-color: #e6f0ff; /* Light blue */
+.day {
+    background-color: #e6f0ff;
     padding: 10px;
     border-radius: 3px;
     text-align: center;
@@ -65,14 +75,115 @@ footer {
     color: #001f3f;
 }
 
-/* Greeting Section */
-.greeting-section {
-    grid-column: 2; /* Right column */
-    grid-row: 1; /* Top row only */
+.date {
+    background-color: #e6f0ff;
+    padding: 10px;
+    border-radius: 5px;
     text-align: center;
+    font-weight: bold;
+    color: #001f3f;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.date:hover {
+    background-color: #004080;
+    color: white;
+}
+
+/* Color-coded days */
+.date.good {
+    background-color: #4CAF50 !important;
+    color: white;
+}
+
+.date.decent {
+    background-color: #FFC107 !important;
+    color: black;
+}
+
+.date.bad {
+    background-color: #FF5722 !important;
+    color: white;
+}
+
+/* Popup */
+.popup-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
     background-color: #ffffff;
     color: #001f3f;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
 }
+
+.overlay-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+/* Buttons */
+.status-btn {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.status-btn.good { background-color: #4CAF50; color: white; }
+.status-btn.decent { background-color: #FFC107; color: black; }
+.status-btn.bad { background-color: #FF5722; color: white; }
+
+.status-btn:hover {
+    opacity: 0.8;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.close-btn:hover {
+    background: #cc0000;
+}
+
+/* 
+Center the Calendar Section (Not in use currentlyt */
+
+/* .calendar-section {
+    grid-column: 1 / -1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    text-align: center;
+    padding: 1rem;
+} */

@@ -11,21 +11,36 @@
         <h1>Task Manager</h1>
     </header>
     <main class="grid-layout">
+        <!-- Weather Section (New Box) -->
+        <section class="weather-section">
+            <p id="weather-info">Loading weather...</p>
+        </section>
+    
+        <!-- Streak Section (Smaller & Centered) -->
+        <section class="streak-section">
+            <h2>Current Streak: <span id="streak-count">0</span> days 🔥</h2>
+        </section>
+    
+        <!-- Calendar Section -->
         <section class="calendar-section">
             <h2>Your Calendar for <span id="current-month"></span></h2>
             <div class="calendar" id="calendar"></div>
         </section>
-        <section class="greeting-section">
-            <div class="greeting">
-                <p id="greeting">Good Morning!</p>
-            </div>
-        </section>
     </main>
+    
+
+    <!-- Background Overlay -->
+    <div id="overlay-bg" class="overlay-bg" onclick="closePopup()"></div>
+
+    <!-- Popup Window -->
+    <div id="popup" class="popup-overlay">
+        <div id="popup-content"></div>
+    </div>
+
     <footer>
         <p>&copy; 2025 Task Manager</p>
     </footer>
-	
-	<script src="script.js"></script>
-    
+
+    <script src="script.js"></script>
 </body>
 </html>
