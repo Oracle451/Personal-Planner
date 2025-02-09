@@ -9,7 +9,7 @@ async function updateGreetingAndWeather() {
         const month = now.toLocaleString('default', { month: 'long' });
 
         let greetingMessage = hours < 12 ? "Good Morning" :
-                              hours < 18 ? "Good Afternoon" : "Good Evening";
+            hours < 18 ? "Good Afternoon" : "Good Evening";
 
         const response = await fetch(
             'https://api.open-meteo.com/v1/forecast?latitude=35.1050&longitude=-111.3712&current_weather=true&temperature_unit=fahrenheit'
@@ -110,8 +110,42 @@ function updateStreak() {
     document.getElementById("streak-count").textContent = streak;
 }
 
+function updateTheme() {
+    var selector = document.getElementById("themes");
+    selector.onchange = (event) => {
+        localStorage.setItem("theme", selector.value);
+        setTheme();
+    }
+
+}
+
+function setTheme() {
+    var selector = document.getElementById("themes");
+    selector.value = localStorage.getItem("theme");
+    switch (selector.value) {
+        case "og":
+            document.body.style.backgroundColor = "#001f3f"
+            document.body.style.color = "#ffffff"
+            document.getElementById("head").style.backgroundColor = "#004080"
+            document.getElementById("foot").style.backgroundColor = "#003366"
+            selector.style.backgroundColor = "#004080"
+            selector.style.borderColor = "#004080"
+            break;
+        case "mint":
+            document.body.style.backgroundColor = "#F5E8E4"
+            document.body.style.color = "#2C2C2C"
+            document.getElementById("head").style.backgroundColor = "#1B3A1A"
+            document.getElementById("foot").style.backgroundColor = "#4E6E4D"
+            selector.style.backgroundColor = "#1B3A1A"
+            selector.style.borderColor = "#1B3A1A"
+            break;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     generateCalendar();
     updateGreetingAndWeather();
     updateStreak();
+    updateTheme();
+    setTheme();
 });

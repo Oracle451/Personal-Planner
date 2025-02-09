@@ -7,7 +7,7 @@ body {
     color: #ffffff;
 }
 
-header {
+#head {
     background-color: #004080;
     color: white;
     padding: 0.5rem 0;
@@ -35,7 +35,7 @@ footer {
     border-radius: 5px;
     font-size: 1.5rem;
     font-weight: bold;
-    
+
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     width: fit-content;
     max-width: 80%;
@@ -87,7 +87,7 @@ footer {
 }
 
 .date:hover {
-    background-color: #004080;
+    background-color: green;
     color: white;
 }
 
@@ -149,9 +149,20 @@ footer {
     transition: 0.3s;
 }
 
-.status-btn.good { background-color: #4CAF50; color: white; }
-.status-btn.decent { background-color: #FFC107; color: black; }
-.status-btn.bad { background-color: #FF5722; color: white; }
+.status-btn.good {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.status-btn.decent {
+    background-color: #FFC107;
+    color: black;
+}
+
+.status-btn.bad {
+    background-color: #FF5722;
+    color: white;
+}
 
 .status-btn:hover {
     opacity: 0.8;
@@ -173,6 +184,13 @@ footer {
 
 .close-btn:hover {
     background: #cc0000;
+}
+
+.themes {
+    background-color: #003366;
+    border-color: #003366;
+    border-radius: 12px;
+    color: white;
 }
 
 /* 
