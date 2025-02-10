@@ -7,8 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <header id="head">
         <h1>Task Manager</h1>
+        <label for="theme-select">Select a theme:</label>
+        <select id="themes" class="themes" name="theme-select" onchange="updateTheme()">
+            <option value="og">Deep Ocean</option>
+            <option value="mint">Forest</option>
+        </select>
     </header>
     <main class="grid-layout">
         <!-- Weather Section (New Box) -->
@@ -37,7 +42,7 @@
         <div id="popup-content"></div>
     </div>
 
-    <footer>
+    <footer id="foot">
         <p>&copy; 2025 Task Manager</p>
     </footer>
 
