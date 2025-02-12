@@ -139,7 +139,15 @@ function setTheme() {
             selector.style.backgroundColor = "#1B3A1A"
             selector.style.borderColor = "#1B3A1A"
             break;
-    }
+        case "bubble_gum":
+            document.body.style.backgroundColor = "#921A40"
+            document.body.style.color = "#D9ABAB"
+            document.getElementById("head").style.backgroundColor = "#C75B7A"
+            document.getElementById("foot").style.backgroundColor = "#C75B7A"
+            selector.style.backgroundColor = "#F4D9D0"
+            selector.style.borderColor = "#F4D9D0"
+            break;        
+        }
 }
 
 document.addEventListener("DOMContentLoaded", () => {

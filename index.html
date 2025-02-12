@@ -17,6 +17,7 @@
         <select id="themes" class="themes" name="theme-select" onchange="updateTheme()">
             <option value="og">Deep Ocean</option>
             <option value="mint">Forest</option>
+            <option value="bubble_gum">Bubble Gum</option>
         </select>
     </header>
 	
@@ -24,13 +25,17 @@
         <!-- Weather Section (New Box) -->
         <section class="weather-section">
             <p id="weather-info">Loading weather...</p>
+            <h2 class="streak-section">Current Streak: <span id="streak-count">0</span> days 🔥</h2>
+			<h2 class="streak-section">Highest Streak: <span id="peak-streak">0</span> </h2> 
+
         </section>
     
-        <!-- Streak Section (Smaller & Centered) -->
+        <!-- 
         <section class="streak-section">
-            <h2>Current Streak: <span id="streak-count">0</span> days 🔥</h2>
-			<h2>Highest Streak: <span id="peak-streak">0</span> </h2>
+            
         </section>
+
+        -->
     
         <!-- Calendar Section -->
         <section class="calendar-section">
@@ -48,10 +53,12 @@
         <div id="popup-content"></div>
     </div>
 
+<!--  add back if adding back footer
     <footer id="foot">
         <p>&copy; 2025 Personal Planner</p>
     </footer>
-
+-->
+    
     <script src="script.js"></script>
 </body>
 </html>
