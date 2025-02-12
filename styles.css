@@ -30,12 +30,12 @@ footer {
     text-align: center;
     background-color: #ffffff;
     color: #001f3f;
-    padding: 1rem;
-    margin: 1rem auto;
+    padding: .5rem;
+    margin: .5rem auto;
     border-radius: 5px;
     font-size: 1.5rem;
     font-weight: bold;
-
+	flex: 5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     width: fit-content;
     max-width: 80%;
@@ -46,7 +46,7 @@ footer {
     text-align: center;
     background-color: #ffffff;
     color: #001f3f;
-    padding: 0.5rem;
+    padding: 0rem;
     margin: 0.5rem auto;
     border-radius: 5px;
     font-size: 0.75rem;
@@ -54,7 +54,20 @@ footer {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     width: fit-content;
     max-width: 60%;
+	flex: 1;
 }
+
+.grid-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+	margin: 10px;
+}
+
+.calendar-section {
+    width: 100%;
+}
+
 
 
 /* Calendar */
@@ -194,7 +207,7 @@ footer {
 }
 
 /* 
-Center the Calendar Section (Not in use currentlyt */
+Center the Calendar Section (Not in use currently */
 
 /* .calendar-section {
     grid-column: 1 / -1; 

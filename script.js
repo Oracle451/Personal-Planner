@@ -53,7 +53,7 @@ function generateCalendar() {
 
 function openPopup(day) {
     document.getElementById("popup-content").innerHTML = `
-        <h2>Day ${day}</h2>
+        <h2>Day: ${day}</h2>
         <button id="status-good" class="status-btn good">Good</button>
         <button id="status-decent" class="status-btn decent">Decent</button>
         <button id="status-bad" class="status-btn bad">Bad</button>
