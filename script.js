@@ -52,22 +52,41 @@ function generateCalendar() {
 }
 
 function openPopup(day) {
+    // inner html for popup
     document.getElementById("popup-content").innerHTML = `
-        <h2>Day: ${day}</h2>
-        <button id="status-good" class="status-btn good">Good</button>
-        <button id="status-decent" class="status-btn decent">Decent</button>
-        <button id="status-bad" class="status-btn bad">Bad</button>
-        <button id="popup-close-btn" class="close-btn">Close</button>
+         
+
+        <div class="calorie-counter">
+            <h2>Day: ${day}</h2>
+            <button id="status-good" class="status-btn good">Good</button>
+            <button id="status-decent" class="status-btn decent">Decent</button>
+            <button id="status-bad" class="status-btn bad">Bad</button>
+            <button id="popup-close-btn" class="close-btn">Close</button>
+
+            <h2>Calories: <span id="calories-${day}">0</span></h2>
+            <button id="calories-plus-${day}" class="calorie-btn">+100</button>
+            <button id="calories-minus-${day}" class="calorie-btn">-100</button>
+        </div>
     `;
 
     document.getElementById("popup").style.display = "flex";
     document.getElementById("overlay-bg").style.display = "block";
 
-    // ✅ Attach event listeners AFTER updating innerHTML
+    // attach event listeners AFTER updating innerHTML
     document.getElementById("status-good").addEventListener("click", () => setDayStatus(day, "good"));
     document.getElementById("status-decent").addEventListener("click", () => setDayStatus(day, "decent"));
     document.getElementById("status-bad").addEventListener("click", () => setDayStatus(day, "bad"));
     document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+
+    document.getElementById(`calories-plus-${day}`).addEventListener("click", () => updateCalories(day, 100));
+    document.getElementById(`calories-minus-${day}`).addEventListener("click", () => updateCalories(day, -100));
+
+    // set the initial calorie count
+    let storedCalories = localStorage.getItem(`calories-${day}`);
+    if (storedCalories) {
+        document.getElementById(`calories-${day}`).textContent = storedCalories;
+    }
+
 }
 
 function closePopup() {
@@ -149,6 +168,21 @@ function setTheme() {
             break;        
         }
 }
+
+// function to update the calorie count for a specific day
+function updateCalories(day, change) {
+    let currentCalories = parseInt(localStorage.getItem(`calories-${day}`)) || 0;
+    currentCalories += change;
+    localStorage.setItem(`calories-${day}`, currentCalories);
+    document.getElementById(`calories-${day}`).textContent = currentCalories;
+
+    // update the calendar day with the calorie count
+    const dateElement = document.getElementById(`date-${day}`);
+    if (dateElement) {
+        dateElement.textContent = `${day} (${currentCalories} cal)`;
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
     generateCalendar();

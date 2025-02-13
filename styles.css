@@ -300,3 +300,25 @@ Center the Calendar Section (Not in use currently */
     text-align: center;
     padding: 1rem;
 } */
+
+/* styling for calorie counter buttons */
+.calorie-counter {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.calorie-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.calorie-btn:hover {
+    opacity: 0.8;
+}
