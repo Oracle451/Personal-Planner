@@ -146,7 +146,6 @@ function setTheme() {
             document.body.style.backgroundColor = "#001f3f"
             document.body.style.color = "#ffffff"
             document.getElementById("head").style.backgroundColor = "#004080"
-            document.getElementById("foot").style.backgroundColor = "#003366"
             selector.style.backgroundColor = "#004080"
             selector.style.borderColor = "#004080"
             break;
@@ -154,7 +153,6 @@ function setTheme() {
             document.body.style.backgroundColor = "#F5E8E4"
             document.body.style.color = "#2C2C2C"
             document.getElementById("head").style.backgroundColor = "#1B3A1A"
-            document.getElementById("foot").style.backgroundColor = "#4E6E4D"
             selector.style.backgroundColor = "#1B3A1A"
             selector.style.borderColor = "#1B3A1A"
             break;
@@ -162,11 +160,10 @@ function setTheme() {
             document.body.style.backgroundColor = "#921A40"
             document.body.style.color = "#D9ABAB"
             document.getElementById("head").style.backgroundColor = "#C75B7A"
-            document.getElementById("foot").style.backgroundColor = "#C75B7A"
             selector.style.backgroundColor = "#F4D9D0"
             selector.style.borderColor = "#F4D9D0"
-            break;        
-        }
+            break;
+    }
 }
 
 // function to update the calorie count for a specific day
