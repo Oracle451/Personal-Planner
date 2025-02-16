@@ -160,7 +160,7 @@ A user saves their fitness data to a separate CSV file
 
 1. User selects “Export as CSV”  
 2. A file explorer window appears, letting the user select where they want to save the data and what it should be called.  
-3. The user selects a location and name then clicks save  
+3. The user selects a location and name then selects save  
 4. The iron man planner takes all user data currently stored in cookies and writes it into a CSV file.
 
 ![Diagram](Diagram2.jpg)
@@ -214,7 +214,7 @@ A user sets their recommended daily calorie intake
 
 A User Schedules a time to go to the gym and plans a workout
 
-1. The user clicks “edit calendar”  
+1. The user selects “edit calendar”  
 2. A window appears asking them what day they want to add to  
 3. The user selects a day  
 4. A window asking the user if this is an event or workout appears  
@@ -247,12 +247,12 @@ A User Schedules a time to go to the gym and plans a workout
 
 A trainer’s client is running a bit late to their session and needs to modify that client's workout for the day.
 
-1. The user clicks edit calendar  
+1. The user selects edit calendar  
 2. A popup asking for the date they wish to edit  
-3. A list of workouts currently set for the day shows up with clickable edit buttons next to each workout  
-4. Clicking edit brings up a menu similar to the menu to create workouts allowing user to change anything within the workout details or delete the workout as a whole  
+3. A list of workouts currently set for the day shows up with selectable buttons next to each workout  
+4. Selecting edit brings up a menu similar to the menu to create workouts allowing user to change anything within the workout details or delete the workout as a whole  
 5. A series of save buttons for workout, day, and calendar as a whole.  
-6. After save is clicked the calendar updates with the new information
+6. After save is selected the calendar updates with the new information
 
 ![Diagram](Diagram5.jpg)
 
@@ -278,7 +278,7 @@ A User wants to add a day to their streak.
 
 1. User presses view and modify streaks  
 2. A window appears asking if they want to add a day to their streak or change previous days  
-3. User selects to add a day or change previous days.   
+3. Users select to add a day or change previous days.   
 4. If added, a day is added. If it changes, it asks for which day.  
 5. When a day is selected, users can change whether they added to the streak that day or not.  
 6. User selects done and the window closes
