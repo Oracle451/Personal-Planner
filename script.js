@@ -39,12 +39,29 @@ async function updateGreetingAndWeather() {
 function generateCalendar() {
     const calendarElement = document.getElementById("calendar");
     calendarElement.innerHTML = "";
-
-    for (let i = 1; i <= 31; i++) {
+    let today = new Date(); 
+    let monthday = today.getDate(); /* gets the day in the month */
+    let last_day = new Date(today.getFullYear(), today.getMonth() + 1, 0)
+    let days_in_month = last_day.getDate(); /* gets the length of this month */
+    let weekday = new Date(today.getFullYear(), today.getMonth(), 1).getDay(); /* gets the first weekday of this month */
+    /* creates filler before this month */
+    for (let i = 0; i < weekday; i++) {
+        const dateElement = document.createElement("div");
+        dateElement.className = "date";
+        calendarElement.appendChild(dateElement);
+    }
+    /* creates days of the month */
+    for (let i = 1; i <= days_in_month; i++) {
         const dateElement = document.createElement("div");
         dateElement.className = "date";
         dateElement.textContent = i;
         dateElement.addEventListener("click", () => openPopup(i));
+        calendarElement.appendChild(dateElement);
+    }
+    /* creates filler after this month */
+    for (let i = 0; i > last_day.getDay() - 6; i--) {
+        const dateElement = document.createElement("div");
+        dateElement.className = "date";
         calendarElement.appendChild(dateElement);
     }
 
@@ -188,3 +205,4 @@ document.addEventListener("DOMContentLoaded", () => {
     updateTheme();
     setTheme();
 });
+
