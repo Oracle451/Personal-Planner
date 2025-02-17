@@ -44,11 +44,13 @@ function generateCalendar() {
     let last_day = new Date(today.getFullYear(), today.getMonth() + 1, 0)
     let days_in_month = last_day.getDate(); /* gets the length of this month */
     let weekday = new Date(today.getFullYear(), today.getMonth(), 1).getDay(); /* gets the first weekday of this month */
+    let format = 0
     /* creates filler before this month */
     for (let i = 0; i < weekday; i++) {
         const dateElement = document.createElement("div");
-        dateElement.className = "date";
+        dateElement.className = "inactive-date";
         calendarElement.appendChild(dateElement);
+        format += 1
     }
     /* creates days of the month */
     for (let i = 1; i <= days_in_month; i++) {
@@ -59,9 +61,9 @@ function generateCalendar() {
         calendarElement.appendChild(dateElement);
     }
     /* creates filler after this month */
-    for (let i = 0; i > last_day.getDay() - 6; i--) {
+    for (let i = 0; i > days_in_month + format - 42; i--) {
         const dateElement = document.createElement("div");
-        dateElement.className = "date";
+        dateElement.className = "inactive-date";
         calendarElement.appendChild(dateElement);
     }
 
@@ -223,21 +225,6 @@ function setTheme() {
             });
 
             break;
-        case "mint":
-            document.body.style.backgroundColor = "#F5E8E4"
-            document.body.style.color = "#2C2C2C"
-            document.getElementById("head").style.backgroundColor = "#1B3A1A"
-            selector.style.backgroundColor = "#1B3A1A"
-            selector.style.borderColor = "#1B3A1A"
-            break;
-        case "bubble_gum":
-            document.body.style.backgroundColor = "#921A40"
-            document.body.style.color = "#D9ABAB"
-            document.getElementById("head").style.backgroundColor = "#C75B7A"
-            selector.style.backgroundColor = "#F4D9D0"
-            selector.style.borderColor = "#F4D9D0"
-            break;
-
         case "spring":
 
             /* the header's background and text color*/
