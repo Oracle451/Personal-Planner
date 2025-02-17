@@ -44,13 +44,11 @@ function generateCalendar() {
     let last_day = new Date(today.getFullYear(), today.getMonth() + 1, 0)
     let days_in_month = last_day.getDate(); /* gets the length of this month */
     let weekday = new Date(today.getFullYear(), today.getMonth(), 1).getDay(); /* gets the first weekday of this month */
-    let format = 0
     /* creates filler before this month */
     for (let i = 0; i < weekday; i++) {
         const dateElement = document.createElement("div");
         dateElement.className = "inactive-date";
         calendarElement.appendChild(dateElement);
-        format += 1
     }
     /* creates days of the month */
     for (let i = 1; i <= days_in_month; i++) {
@@ -61,7 +59,7 @@ function generateCalendar() {
         calendarElement.appendChild(dateElement);
     }
     /* creates filler after this month */
-    for (let i = 0; i > days_in_month + format - 42; i--) {
+    for (let i = 0; i > days_in_month + weekday - 42; i--) {
         const dateElement = document.createElement("div");
         dateElement.className = "inactive-date";
         calendarElement.appendChild(dateElement);
