@@ -99,12 +99,22 @@ header {
 
 
 /* Calendar */
+.day-labels {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 days */
+    /* formatting */
+    width: 70vw;
+    padding: 1rem;
+    padding-bottom: 0;
+    text-align: center;
+    font-size: large;
+}
+
 .calendar {
     /*display*/
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7-day week */
     /*grid formatting*/
-    margin-top: 1rem;
     padding: 1rem;
     width: 70vw;
     height: 62.5vh;
