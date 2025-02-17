@@ -4,8 +4,6 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #001f3f; /* Deep blue background */
-    color: #ffffff; /* White text */
 }
 
 
@@ -13,54 +11,35 @@ header {
     /*Background color*/
     background-color: #73c7e3; 
     /*text alignment and style*/
-    color: white;
+    color: #ffffff;
     padding: 0.5rem 0;
     text-align: center;
     text-shadow: -1px 1px #2e4a70;
 }
 
-
-/* footer {
-    background-color: #003366;
-    color: white;
-    text-align: center;
-    padding: 0.5rem 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 5%;
-    } */
-
-
 /* Weather Box */
 .weather-section {
+    /* grid layout/ formationg */
+    grid-column: 1; /* Right column */
+    grid-row: 1; /* Top row only */
+    width: 20vw;
+    /* color and text formating*/
     text-align: center;
-    background-color: #ffffff;
-    color: #001f3f;
-    padding: .5rem;
-    margin: .5rem auto;
-    border-radius: 5px;
+    background-color: #f0f2f2;
+    color: #2e4a70;
+    padding: 1rem;
     font-size: 1.5rem;
     font-weight: bold;
 	flex: 5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    width: fit-content;
-    max-width: 80%;
 }
 
 
-
 .streak-section {
-    text-align: center;
-    background-color: #ffffff;
-    color: #001f3f;
-    padding: 0rem;
     margin: 0.5rem auto;
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: inherit;
     width: fit-content;
     max-width: 60%;
-	flex: 1;
 }
 
 
@@ -84,12 +63,17 @@ header {
 .calendar-section {
     grid-column: 2; /* Left column */
     grid-row: 1; /* Span top and bottom rows */
-    text-align: center;
     background-color: #fff9f0;
-    color: #001f3f;
+    color: #2e4a70;
     width: 80vw;
     height: 90vh;
     padding: 1rem;
+}
+
+.month
+{
+    padding: 1rem;
+    margin: 0;
 }
 
 
@@ -104,7 +88,6 @@ header {
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7-day week */
     /*grid formatting*/
-    margin-top: 1rem;
     padding: 1rem;
     width: 70vw;
     height: 62.5vh;
@@ -127,16 +110,6 @@ header {
     transition: background-color 0.3s ease-in-out;
 }
 
-/* .date {
-    background-color: #e6f0ff;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-    color: #001f3f;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-} */
 
 .inactive-date {
     /*background color*/
@@ -156,7 +129,7 @@ header {
 .day
 {
     /*background color*/
-    background-color: #CF8A40;
+    background-color: #ffffff;
     /*box formatting and styling*/
     width:10vw;
     height: 2.5vh;
@@ -171,7 +144,7 @@ header {
 
 
 .date:hover {
-    background-color: #919191;
+    background-color: #24b0ba;
     color: white;
 }
 
@@ -270,37 +243,6 @@ header {
     background: #cc0000;
 }
 
-/* .themes {
-    background-color: #003366;
-    border-color: #003366;
-    border-radius: 12px;
-    color: white;
-} */
-
-/* Greeting Section */
-.greeting-section {
-    grid-column: 1; /* Right column */
-    grid-row: 1; /* Top row only */
-    width:20vw;
-    text-align: center;
-    background-color: #f0f2f2;
-    color: #001f3f;
-    padding: 1rem;
-}
-
-/* 
-Center the Calendar Section (Not in use currently */
-
-/* .calendar-section {
-    grid-column: 1 / -1; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; 
-    text-align: center;
-    padding: 1rem;
-} */
-
 /* styling for calorie counter buttons */
 .calorie-counter {
     text-align: center;
@@ -322,3 +264,56 @@ Center the Calendar Section (Not in use currently */
 .calorie-btn:hover {
     opacity: 0.8;
 }
+
+/* .themes {
+    background-color: #003366;
+    border-color: #003366;
+    border-radius: 12px;
+    color: white;
+} */
+
+/* Greeting Section
+.greeting-section {
+    grid-column: 1; 
+    grid-row: 1; 
+    width:20vw;
+    text-align: center;
+    background-color: #f0f2f2;
+    color: #001f3f;
+    padding: 1rem;
+} */
+
+/* 
+Center the Calendar Section (Not in use currently */
+
+/* .calendar-section {
+    grid-column: 1 / -1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    text-align: center;
+    padding: 1rem;
+} */
+
+/* footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 0.5rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 5%;
+    } */
+
+/* .date {
+    background-color: #e6f0ff;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #001f3f;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+} */

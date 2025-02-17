@@ -142,12 +142,69 @@ function setTheme() {
     var selector = document.getElementById("themes");
     selector.value = localStorage.getItem("theme");
     switch (selector.value) {
-        case "og":
-            document.body.style.backgroundColor = "#001f3f"
-            document.body.style.color = "#ffffff"
-            document.getElementById("head").style.backgroundColor = "#004080"
-            selector.style.backgroundColor = "#004080"
-            selector.style.borderColor = "#004080"
+        case "standard":
+
+            /* the header's background and text color*/
+            /*background color*/
+            document.getElementById("head").style.backgroundColor = "#73c7e3"
+            /*text color*/
+            document.getElementById("head").style.color = "#ffffff"
+            /*text shadow color*/
+            document.getElementById("head").style.textShadow = "-1px 1px #2e4a70"
+
+            /*weather sections's background and text color*/
+            document.querySelectorAll(".weather-section").forEach(element =>
+            {
+                /*background color*/
+                element.style.backgroundColor = "#f0f2f2";
+                /*text color*/
+                element.style.color = "#2e4a70";
+            });
+
+            /*calendar sections's background and text color*/
+            document.querySelectorAll(".calendar-section").forEach(element =>
+            {
+                /*background color*/
+                element.style.backgroundColor = "#fff9f0";
+                /*text color*/
+                element.style.color = "#2e4a70";
+            });
+
+
+            /*days of the week backgroung and text color*/
+            document.querySelectorAll(".day").forEach(element =>
+            {
+                /*background color*/
+                element.style.backgroundColor = "#cf8a40";
+                /*text color*/
+                element.style.color = "#2e4a70";
+                /*border color*/
+                element.style.borderColor = " #2e4a70";
+            });
+    
+            /*date backgroung and text color*/
+            document.querySelectorAll(".date").forEach(element =>
+            {
+                /*background color*/
+                element.style.backgroundColor = "#fff9f0";
+                /*text color*/
+                element.style.color = "#2e4a70";
+                /*border color*/
+                element.style.borderColor = " #2e4a70";
+                /*hover color*/
+                document.documentElement.style.setProperty('--date-hover-bg', '#24b0ba');
+
+            });
+
+            /*inactive-date backgroung and text color*/
+            document.querySelectorAll(".inactive-date").forEach(element =>
+            {
+                /*background color*/
+                element.style.backgroundColor = "#bbc7d6";
+                /*border color*/
+                element.style.borderColor = " #2e4a70";
+            });
+
             break;
         case "mint":
             document.body.style.backgroundColor = "#F5E8E4"
@@ -163,6 +220,70 @@ function setTheme() {
             selector.style.backgroundColor = "#F4D9D0"
             selector.style.borderColor = "#F4D9D0"
             break;
+
+        case "spring":
+
+            /* the header's background and text color*/
+            /*background color*/
+            document.getElementById("head").style.backgroundColor = "#35522b"
+            /*text color*/
+            document.getElementById("head").style.color = "#ffffff"
+            /*text shadow color*/
+            document.getElementById("head").style.textShadow = "-1px 1px #5b744b"
+
+            /*weather sections's background and text color*/
+            document.querySelectorAll(".weather-section").forEach(element =>
+            {
+                /*background color*/
+                element.style.backgroundColor = "#799567";
+                /*text color*/
+                element.style.color = "#ffffff";
+            });
+
+            /*calendar sections's background and text color*/
+            document.querySelectorAll(".calendar-section").forEach(element =>
+            {
+                /*background color*/
+                element.style.backgroundColor = "#a7b59e";
+                /*text color*/
+                element.style.color = "#ffffff";
+            });
+
+
+            /*days of the week backgroung and text color*/
+            document.querySelectorAll(".day").forEach(element =>
+            {
+                /*background color*/
+                element.style.backgroundColor = "#f3baba";
+                /*text color*/
+                element.style.color = "#ffffff";
+                /*border color*/
+                element.style.borderColor = " #35522b";
+            });
+    
+            /*date backgroung and text color*/
+            document.querySelectorAll(".date").forEach(element =>
+            {
+                /*background color*/
+                element.style.backgroundColor = "#f9ddd8";
+                /*text color*/
+                element.style.color = "#ffffff";
+                /*border color*/
+                element.style.borderColor = " #35522b";
+                /*hover color*/
+                document.documentElement.style.setProperty('--date-hover-bg', '#a7b59e');
+            });
+
+            /*inactive-date backgroung and text color*/
+            document.querySelectorAll(".inactive-date").forEach(element =>
+            {
+                /*background color*/
+                element.style.backgroundColor = "#f8d0c8";
+                /*border color*/
+                element.style.borderColor = " #35522b";
+            });
+
+        break;
     }
 }
 

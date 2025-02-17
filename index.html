@@ -1,57 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager</title>
-    <link rel="stylesheet" href="styles.css">
-	<link rel="icon" type="image/x-icon" href="personal_planner_icon.ico">
-</head>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="personal_planner_icon.ico" />
+  </head>
 
-<body>
-
+  <body>
     <header id="head">
-        <h1>Iron Man Planner</h1>
-        <label for="theme-select">Select a theme:</label>
-        <select id="themes" class="themes" name="theme-select" onchange="updateTheme()">
-            <option value="og">Deep Ocean</option>
-            <option value="mint">Forest</option>
-            <option value="bubble_gum">Bubble Gum</option>
-        </select>
+      <h1>Iron Man Planner</h1>
+      <label for="theme-select">Select a theme:</label>
+      <select
+        id="themes"
+        class="themes"
+        name="theme-select"
+        onchange="updateTheme()"
+      >
+        <option value="standard">Deep Ocean</option>
+        <option value="mint">Forest</option>
+        <option value="bubble_gum">Bubble Gum</option>
+        <option value="spring">spring</option>
+      </select>
     </header>
-	
-    <main class="grid-layout">
-        <!-- Weather Section (New Box) -->
-        <section class="weather-section">
-            <p id="weather-info">Loading weather...</p>
-            <h2 class="streak-section">Current Streak: <span id="streak-count">0</span> days 🔥</h2>
-			<h2 class="streak-section">Highest Streak: <span id="peak-streak">0</span> </h2> 
 
-        </section>
-    
-        <!-- Calendar Section -->
-        <section class="calendar-section">
-            <h2>Your Calendar for <span id="current-month"></span></h2>
-            <div class="calendar" id="calendar"></div>
-        </section>
+    <main class="grid-layout">
+      <!-- Weather Section (New Box) -->
+      <section class="weather-section">
+        <p id="weather-info">Loading weather...</p>
+        <h2 class="streak-section">
+          Current Streak: <span id="streak-count">0</span> days 🔥
+        </h2>
+        <h2 class="streak-section">
+          Highest Streak: <span id="peak-streak">0</span>
+        </h2>
+      </section>
+
+      <!-- Calendar Section -->
+      <section class="calendar-section">
+        <h2 class="month">
+          Your Calendar for <span id="current-month"></span>
+        </h2>
+        <div class="calendar" id="calendar"></div>
+      </section>
     </main>
-    
 
     <!-- Background Overlay -->
     <div id="overlay-bg" class="overlay-bg" onclick="closePopup()"></div>
 
     <!-- Popup Window -->
     <div id="popup" class="popup-overlay">
-        <div id="popup-content"></div>
+      <div id="popup-content"></div>
     </div>
 
-<!--  add back if adding back footer
+    <!--  add back if adding back footer
     <footer id="foot">
         <p>&copy; 2025 Personal Planner</p>
     </footer>
 -->
-    
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
