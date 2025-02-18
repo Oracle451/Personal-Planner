@@ -83,7 +83,6 @@ header {
 
 
 /* Calendar */
-
 .calendar {
     /*display*/
     display: grid;
@@ -129,10 +128,14 @@ header {
 
 .day
 {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 days */
     /*background color*/
     background-color: #ffffff;
     /*box formatting and styling*/
-    width:10vw;
+    width: 70vw;
+    padding: 1rem;
+    padding-bottom: 0;
     height: 2.5vh;
     border: #2e4a70;
     border-style: solid;
