@@ -59,7 +59,7 @@ function generateCalendar() {
         calendarElement.appendChild(dateElement);
     }
     /* creates filler after this month */
-    for (let i = 0; i > last_day.getDay() - 6; i--) {
+    for (let i = 0; i > days_in_month + weekday - 42; i--) {
         const dateElement = document.createElement("div");
         dateElement.className = "inactive-date";
         calendarElement.appendChild(dateElement);
@@ -184,32 +184,6 @@ function setTheme() {
             shadow = "#2e4a70"
             break;
         case "2":
-            header = "#1B3A1A"
-            header_text = "#ffffff"
-            body_text = "#2e4a70"
-            sidebar = "#f0f2f2"
-            calendar_bg = "#fff9f0"
-            day_bg = "#fff9f0"
-            inactive_day_bg = "#24b0ba"
-            label_bg = "#cf8a40"
-            border_color = "2e4a70"
-            hover = "#24b0ba"
-            shadow = "#2e4a70"
-            break;
-        case "3":
-            header = "#C75B7A"
-            header_text = "#ffffff"
-            body_text = "#2e4a70"
-            sidebar = "#f0f2f2"
-            calendar_bg = "#fff9f0"
-            day_bg = "#fff9f0"
-            inactive_day_bg = "#24b0ba"
-            label_bg = "#cf8a40"
-            border_color = "2e4a70"
-            hover = "#24b0ba"
-            shadow = "#2e4a70"
-            break;
-        case "4":
             header = "#35522b"
             header_text = "#ffffff"
             body_text = "#2e4a70"

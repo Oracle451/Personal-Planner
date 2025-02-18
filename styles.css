@@ -88,9 +88,9 @@ header {
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7-day week */
     /*grid formatting*/
-    padding: 1rem;
+    padding-left: 1rem;
     width: 70vw;
-    height: 62.5vh;
+    height: 60vh;
 }
 
 .date {
@@ -146,11 +146,28 @@ header {
     color: #ffffff;
 }
 
+.day-labels {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 days */
+    /* formatting */
+    width: fit-content;
+    padding: 1rem;
+    padding-bottom: 0;
+    text-align: center;
+    font-size: large;
+}
+
 
 .date:hover {
-    background-color: #24b0ba;
-    color: white;
+    background-color: #666666 !important;
+    color: white !important;
 }
+
+.inactive-date:hover {
+    background-color: #666666 !important;
+    color: white !important;
+}
+
 
 /* Color-coded days */
 .date.good {
@@ -268,25 +285,6 @@ header {
 .calorie-btn:hover {
     opacity: 0.8;
 }
-
-/* .themes {
-    background-color: #003366;
-    border-color: #003366;
-    border-radius: 12px;
-    color: white;
-} */
-
-/* Greeting Section
-.greeting-section {
-    grid-column: 1; 
-    grid-row: 1; 
-    width:20vw;
-    text-align: center;
-    background-color: #f0f2f2;
-    color: #001f3f;
-    padding: 1rem;
-} */
-
 /* 
 Center the Calendar Section (Not in use currently */
 
@@ -310,14 +308,3 @@ Center the Calendar Section (Not in use currently */
     width: 100%;
     height: 5%;
     } */
-
-/* .date {
-    background-color: #e6f0ff;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-    color: #001f3f;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-} */
