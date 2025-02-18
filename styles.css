@@ -146,18 +146,6 @@ header {
     color: #ffffff;
 }
 
-.day-labels {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 days */
-    /* formatting */
-    width: fit-content;
-    padding: 1rem;
-    padding-bottom: 0;
-    text-align: center;
-    font-size: large;
-}
-
-
 .date:hover {
     background-color: #666666 !important;
     color: white !important;
