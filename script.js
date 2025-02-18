@@ -39,7 +39,7 @@ async function updateGreetingAndWeather() {
 function generateCalendar() {
     const calendarElement = document.getElementById("calendar");
     calendarElement.innerHTML = "";
-    let today = new Date(); 
+    let today = new Date();
     let monthday = today.getDate(); /* gets the day in the month */
     let last_day = new Date(today.getFullYear(), today.getMonth() + 1, 0)
     let days_in_month = last_day.getDate(); /* gets the length of this month */
@@ -64,7 +64,7 @@ function generateCalendar() {
         dateElement.className = "inactive-date";
         calendarElement.appendChild(dateElement);
     }
-
+    document.getElementById(`add-task`).addEventListener("click", () => addTask());
     updateCalendarColors(); // Load saved colors when generating calendar
 }
 
@@ -205,8 +205,7 @@ function setTheme() {
     document.getElementById("head").style.textShadow = "-1px 1px " + shadow; // header text shadow
 
     /*weather sections's background and text color*/
-    document.querySelectorAll(".weather-section").forEach(element =>
-    {
+    document.querySelectorAll(".weather-section").forEach(element => {
         /*background color*/
         element.style.backgroundColor = sidebar;
         /*text color*/
@@ -214,8 +213,7 @@ function setTheme() {
     });
 
     /*calendar sections's background and text color*/
-    document.querySelectorAll(".calendar-section").forEach(element =>
-    {
+    document.querySelectorAll(".calendar-section").forEach(element => {
         /*background color*/
         element.style.backgroundColor = calendar_bg;
         /*text color*/
@@ -224,8 +222,7 @@ function setTheme() {
 
 
     /*days of the week backgroung and text color*/
-    document.querySelectorAll(".day").forEach(element =>
-    {
+    document.querySelectorAll(".day").forEach(element => {
         /*background color*/
         element.style.backgroundColor = label_bg;
         /*text color*/
@@ -233,10 +230,9 @@ function setTheme() {
         /*border color*/
         element.style.borderColor = border_color;
     });
-    
+
     /*date backgroung and text color*/
-    document.querySelectorAll(".date").forEach(element =>
-    {
+    document.querySelectorAll(".date").forEach(element => {
         /*background color*/
         element.style.backgroundColor = day_bg;
         /*text color*/
@@ -249,8 +245,7 @@ function setTheme() {
     });
 
     /*inactive-date backgroung and text color*/
-    document.querySelectorAll(".inactive-date").forEach(element =>
-    {
+    document.querySelectorAll(".inactive-date").forEach(element => {
         /*background color*/
         element.style.backgroundColor = inactive_day_bg;
         /*border color*/
@@ -258,10 +253,10 @@ function setTheme() {
     });
 
     document.querySelectorAll(".date").forEach(element => {
-        element.addEventListener("mouseover", function() {
+        element.addEventListener("mouseover", function () {
             element.style.backgroundColor = hover;
         })
-        element.addEventListener("mouseout", function() {
+        element.addEventListener("mouseout", function () {
             element.style.backgroundColor = day_bg;
         })
     });
@@ -283,6 +278,49 @@ function updateCalories(day, change) {
     }
 }
 
+//Function for add task button
+function addTask() {
+    document.getElementById("popup-content").innerHTML = `
+
+        <div class="task-adder">
+            <h2>Task Maker: </h2>
+            <button id="popup-close-btn" class="close-btn">Close</button>
+
+            <form>
+                <h3>When:</h3>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time">
+                <br>
+
+                <h3>Where:</h3>
+
+                <label for="location">Address:</label>
+                <input type="text" id="locations" name="location">
+                <br>
+
+                <h3>What:</h3>
+                <label for="desc">Description:</label>
+                <br>
+                
+                <textarea id="desc" name="desc" rows="5" cols="25" maxlength="144"></textarea>
+                <br>
+
+                <input type="submit" value="Submit">
+            </form>
+
+            
+        </div>
+    `;
+
+    document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay-bg").style.display = "block";
+
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
     generateCalendar();
@@ -290,5 +328,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateStreak();
     updateTheme();
     setTheme();
+
 });
 

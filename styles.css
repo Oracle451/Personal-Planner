@@ -9,7 +9,7 @@ body {
 
 header {
     /*Background color*/
-    background-color: #73c7e3; 
+    background-color: #73c7e3;
     /*text alignment and style*/
     color: #ffffff;
     padding: 0.5rem 0;
@@ -20,8 +20,10 @@ header {
 /* Weather Box */
 .weather-section {
     /* grid layout/ formationg */
-    grid-column: 1; /* Right column */
-    grid-row: 1; /* Top row only */
+    grid-column: 1;
+    /* Right column */
+    grid-row: 1;
+    /* Top row only */
     width: 20vw;
     /* color and text formating*/
     text-align: center;
@@ -30,7 +32,7 @@ header {
     padding: 1rem;
     font-size: 1.5rem;
     font-weight: bold;
-	flex: 5;
+    flex: 5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -46,9 +48,12 @@ header {
 .grid-layout {
     /*grid set up*/
     display: grid;
-    grid-template-columns: 1fr 4fr; /* Two equal columns */
-    grid-template-rows: auto;  /* Dynamic height rows */
-    height: calc(100vh - 10rem); /* Adjust for header/footer height */
+    grid-template-columns: 1fr 4fr;
+    /* Two equal columns */
+    grid-template-rows: auto;
+    /* Dynamic height rows */
+    height: calc(100vh - 10rem);
+    /* Adjust for header/footer height */
 }
 
 /* .grid-layout {
@@ -61,8 +66,10 @@ header {
 
 /* Calendar Section */
 .calendar-section {
-    grid-column: 2; /* Left column */
-    grid-row: 1; /* Span top and bottom rows */
+    grid-column: 2;
+    /* Left column */
+    grid-row: 1;
+    /* Span top and bottom rows */
     background-color: #fff9f0;
     color: #2e4a70;
     width: 80vw;
@@ -70,8 +77,7 @@ header {
     padding: 1rem;
 }
 
-.month
-{
+.month {
     padding: 1rem;
     margin: 0;
 }
@@ -86,7 +92,8 @@ header {
 .calendar {
     /*display*/
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7-day week */
+    grid-template-columns: repeat(7, 1fr);
+    /* 7-day week */
     /*grid formatting*/
     padding-left: 1rem;
     width: 70vw;
@@ -97,7 +104,7 @@ header {
     /*background color*/
     background-color: #fff9f0;
     /*box formatting and styling*/
-    width:10vw;
+    width: 10vw;
     height: 10vh;
     border: #2e4a70;
     border-style: solid;
@@ -115,7 +122,7 @@ header {
     /*background color*/
     background-color: #bbc7d6;
     /*box formatting and styling*/
-    width:10vw;
+    width: 10vw;
     height: 10vh;
     border: #2e4a70;
     border-style: solid;
@@ -126,10 +133,10 @@ header {
     color: #001f3f;
 }
 
-.day
-{
+.day {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 days */
+    grid-template-columns: repeat(7, 1fr);
+    /* 7 days */
     /*background color*/
     background-color: #ffffff;
     /*box formatting and styling*/
@@ -148,7 +155,8 @@ header {
 
 .day-labels {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 days */
+    grid-template-columns: repeat(7, 1fr);
+    /* 7 days */
     /* formatting */
     width: fit-content;
     padding: 1rem;
@@ -285,6 +293,35 @@ header {
 .calorie-btn:hover {
     opacity: 0.8;
 }
+
+/* Styles for add-task button*/
+.add-task {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 12px 25px;
+    background-color: #C75B7A;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    border-color: red;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+}
+
+.add-task:hover {
+    box-shadow: 0 0 20px pink;
+    transition: .5s;
+}
+
+.task-adder {
+    align-items: start;
+}
+
+.desc {
+    height: 50px;
+    width: 50px;
+}
+
 /* 
 Center the Calendar Section (Not in use currently */
 
