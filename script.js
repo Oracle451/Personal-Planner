@@ -158,17 +158,17 @@ function updateTheme() {
 function setTheme() {
     var selector = document.getElementById("themes");
     selector.value = localStorage.getItem("theme");
-    let header = "#73c7e3"
-    let header_text = "#ffffff"
-    let body_text = "#2e4a70"
-    let sidebar = "#f0f2f2"
-    let calendar_bg = "#fff9f0"
-    let day_bg = "#fff9f0"
-    let inactive_day_bg = "#24b0ba"
-    let label_bg = "#cf8a40"
-    let barder = "2e4a70"
-    let hover = "#24b0ba"
-    let shadow = "#2e4a70"
+    let header = "#73c7e3" // header background color
+    let header_text = "#ffffff" // header text
+    let body_text = "#2e4a70" // text for the rest of the page
+    let sidebar = "#f0f2f2" // the background colore for the sidebar
+    let calendar_bg = "#fff9f0" // the background colore for the calendar
+    let day_bg = "#fff9f0" // the background color for the days on the calendar not the day labels
+    let inactive_day_bg = "#24b0ba" // the background for the inactive days
+    let label_bg = "#cf8a40" // the background for the day labels; sunday - saturday
+    let barder = "2e4a70" // all border colors
+    let hover = "#24b0ba" // the hover color
+    let shadow = "#2e4a70" // text shadow
     switch (selector.value) {
         case "1":
             header = "#73c7e3"
