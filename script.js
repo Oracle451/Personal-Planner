@@ -47,7 +47,7 @@ function generateCalendar() {
     /* creates filler before this month */
     for (let i = 0; i < weekday; i++) {
         const dateElement = document.createElement("div");
-        dateElement.className = "date";
+        dateElement.className = "inactive-date";
         calendarElement.appendChild(dateElement);
     }
     /* creates days of the month */
@@ -61,7 +61,7 @@ function generateCalendar() {
     /* creates filler after this month */
     for (let i = 0; i > last_day.getDay() - 6; i--) {
         const dateElement = document.createElement("div");
-        dateElement.className = "date";
+        dateElement.className = "inactive-date";
         calendarElement.appendChild(dateElement);
     }
 
@@ -158,150 +158,141 @@ function updateTheme() {
 function setTheme() {
     var selector = document.getElementById("themes");
     selector.value = localStorage.getItem("theme");
+    let header = "#73c7e3"
+    let header_text = "#ffffff"
+    let body_text = "#2e4a70"
+    let sidebar = "#f0f2f2"
+    let calendar_bg = "#fff9f0"
+    let day_bg = "#fff9f0"
+    let inactive_day_bg = "#24b0ba"
+    let label_bg = "#cf8a40"
+    let barder = "2e4a70"
+    let hover = "#24b0ba"
+    let shadow = "#2e4a70"
     switch (selector.value) {
-        case "standard":
-
-            /* the header's background and text color*/
-            /*background color*/
-            document.getElementById("head").style.backgroundColor = "#73c7e3"
-            /*text color*/
-            document.getElementById("head").style.color = "#ffffff"
-            /*text shadow color*/
-            document.getElementById("head").style.textShadow = "-1px 1px #2e4a70"
-
-            /*weather sections's background and text color*/
-            document.querySelectorAll(".weather-section").forEach(element =>
-            {
-                /*background color*/
-                element.style.backgroundColor = "#f0f2f2";
-                /*text color*/
-                element.style.color = "#2e4a70";
-            });
-
-            /*calendar sections's background and text color*/
-            document.querySelectorAll(".calendar-section").forEach(element =>
-            {
-                /*background color*/
-                element.style.backgroundColor = "#fff9f0";
-                /*text color*/
-                element.style.color = "#2e4a70";
-            });
-
-
-            /*days of the week backgroung and text color*/
-            document.querySelectorAll(".day").forEach(element =>
-            {
-                /*background color*/
-                element.style.backgroundColor = "#cf8a40";
-                /*text color*/
-                element.style.color = "#2e4a70";
-                /*border color*/
-                element.style.borderColor = " #2e4a70";
-            });
-    
-            /*date backgroung and text color*/
-            document.querySelectorAll(".date").forEach(element =>
-            {
-                /*background color*/
-                element.style.backgroundColor = "#fff9f0";
-                /*text color*/
-                element.style.color = "#2e4a70";
-                /*border color*/
-                element.style.borderColor = " #2e4a70";
-                /*hover color*/
-                document.documentElement.style.setProperty('--date-hover-bg', '#24b0ba');
-
-            });
-
-            /*inactive-date backgroung and text color*/
-            document.querySelectorAll(".inactive-date").forEach(element =>
-            {
-                /*background color*/
-                element.style.backgroundColor = "#bbc7d6";
-                /*border color*/
-                element.style.borderColor = " #2e4a70";
-            });
-
+        case "1":
+            header = "#73c7e3"
+            header_text = "#ffffff"
+            body_text = "#2e4a70"
+            sidebar = "#f0f2f2"
+            calendar_bg = "#fff9f0"
+            day_bg = "#fff9f0"
+            inactive_day_bg = "#24b0ba"
+            label_bg = "#cf8a40"
+            border_color = "2e4a70"
+            hover = "#24b0ba"
+            shadow = "#2e4a70"
             break;
-        case "mint":
-            document.body.style.backgroundColor = "#F5E8E4"
-            document.body.style.color = "#2C2C2C"
-            document.getElementById("head").style.backgroundColor = "#1B3A1A"
-            selector.style.backgroundColor = "#1B3A1A"
-            selector.style.borderColor = "#1B3A1A"
+        case "2":
+            header = "#1B3A1A"
+            header_text = "#ffffff"
+            body_text = "#2e4a70"
+            sidebar = "#f0f2f2"
+            calendar_bg = "#fff9f0"
+            day_bg = "#fff9f0"
+            inactive_day_bg = "#24b0ba"
+            label_bg = "#cf8a40"
+            border_color = "2e4a70"
+            hover = "#24b0ba"
+            shadow = "#2e4a70"
             break;
-        case "bubble_gum":
-            document.body.style.backgroundColor = "#921A40"
-            document.body.style.color = "#D9ABAB"
-            document.getElementById("head").style.backgroundColor = "#C75B7A"
-            selector.style.backgroundColor = "#F4D9D0"
-            selector.style.borderColor = "#F4D9D0"
+        case "3":
+            header = "#C75B7A"
+            header_text = "#ffffff"
+            body_text = "#2e4a70"
+            sidebar = "#f0f2f2"
+            calendar_bg = "#fff9f0"
+            day_bg = "#fff9f0"
+            inactive_day_bg = "#24b0ba"
+            label_bg = "#cf8a40"
+            border_color = "2e4a70"
+            hover = "#24b0ba"
+            shadow = "#2e4a70"
             break;
-
-        case "spring":
-
-            /* the header's background and text color*/
-            /*background color*/
-            document.getElementById("head").style.backgroundColor = "#35522b"
-            /*text color*/
-            document.getElementById("head").style.color = "#ffffff"
-            /*text shadow color*/
-            document.getElementById("head").style.textShadow = "-1px 1px #5b744b"
-
-            /*weather sections's background and text color*/
-            document.querySelectorAll(".weather-section").forEach(element =>
-            {
-                /*background color*/
-                element.style.backgroundColor = "#799567";
-                /*text color*/
-                element.style.color = "#ffffff";
-            });
-
-            /*calendar sections's background and text color*/
-            document.querySelectorAll(".calendar-section").forEach(element =>
-            {
-                /*background color*/
-                element.style.backgroundColor = "#a7b59e";
-                /*text color*/
-                element.style.color = "#ffffff";
-            });
-
-
-            /*days of the week backgroung and text color*/
-            document.querySelectorAll(".day").forEach(element =>
-            {
-                /*background color*/
-                element.style.backgroundColor = "#f3baba";
-                /*text color*/
-                element.style.color = "#ffffff";
-                /*border color*/
-                element.style.borderColor = " #35522b";
-            });
-    
-            /*date backgroung and text color*/
-            document.querySelectorAll(".date").forEach(element =>
-            {
-                /*background color*/
-                element.style.backgroundColor = "#f9ddd8";
-                /*text color*/
-                element.style.color = "#ffffff";
-                /*border color*/
-                element.style.borderColor = " #35522b";
-                /*hover color*/
-                document.documentElement.style.setProperty('--date-hover-bg', '#a7b59e');
-            });
-
-            /*inactive-date backgroung and text color*/
-            document.querySelectorAll(".inactive-date").forEach(element =>
-            {
-                /*background color*/
-                element.style.backgroundColor = "#f8d0c8";
-                /*border color*/
-                element.style.borderColor = " #35522b";
-            });
-
-        break;
+        case "4":
+            header = "#35522b"
+            header_text = "#ffffff"
+            body_text = "#2e4a70"
+            sidebar = "#799567"
+            calendar_bg = "#a7b59e"
+            day_bg = "#f9ddd8"
+            inactive_day_bg = "#f3baba"
+            label_bg = "#f3baba"
+            border_color = "2e4a70"
+            hover = "#a7b59e"
+            shadow = "#2e4a70"
+            break;
     }
+    /* the header's background and text color*/
+    document.getElementById("head").style.backgroundColor = header;
+    /*text color*/
+    document.getElementById("head").style.color = header_text; // header text
+    /*text shadow color*/
+    document.getElementById("head").style.textShadow = "-1px 1px " + shadow; // header text shadow
+
+    /*weather sections's background and text color*/
+    document.querySelectorAll(".weather-section").forEach(element =>
+    {
+        /*background color*/
+        element.style.backgroundColor = sidebar;
+        /*text color*/
+        element.style.color = body_text;
+    });
+
+    /*calendar sections's background and text color*/
+    document.querySelectorAll(".calendar-section").forEach(element =>
+    {
+        /*background color*/
+        element.style.backgroundColor = calendar_bg;
+        /*text color*/
+        element.style.color = body_text;
+    });
+
+
+    /*days of the week backgroung and text color*/
+    document.querySelectorAll(".day").forEach(element =>
+    {
+        /*background color*/
+        element.style.backgroundColor = label_bg;
+        /*text color*/
+        element.style.color = body_text;
+        /*border color*/
+        element.style.borderColor = border_color;
+    });
+    
+    /*date backgroung and text color*/
+    document.querySelectorAll(".date").forEach(element =>
+    {
+        /*background color*/
+        element.style.backgroundColor = day_bg;
+        /*text color*/
+        element.style.color = body_text;
+        /*border color*/
+        element.style.borderColor = border_color;
+        /*hover color*/
+        document.documentElement.style.setProperty('--date-hover-bg', hover);
+
+    });
+
+    /*inactive-date backgroung and text color*/
+    document.querySelectorAll(".inactive-date").forEach(element =>
+    {
+        /*background color*/
+        element.style.backgroundColor = inactive_day_bg;
+        /*border color*/
+        element.style.borderColor = border_color;
+    });
+
+    document.querySelectorAll(".date").forEach(element => {
+        element.addEventListener("mouseover", function() {
+            element.style.backgroundColor = hover;
+        })
+        element.addEventListener("mouseout", function() {
+            element.style.backgroundColor = day_bg;
+        })
+    });
+
+    selector.style.backgroundColor = sidebar;
 }
 
 // function to update the calorie count for a specific day
