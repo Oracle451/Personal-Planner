@@ -1,28 +1,43 @@
 /* General Styles */
 body {
     /* font */
-    font-family: Arial, sans-serif;
+    font-family: 'MyFont', sans-serif;
     margin: 0;
     padding: 0;
 }
 
 
 header {
+    /* grid layout/ formationg */
+    grid-column: 1 / -1;
+    /* Right column */
+    grid-row: 1;
+
     /*Background color*/
     background-color: #73c7e3;
     /*text alignment and style*/
     color: #ffffff;
+    font-size: 2.3rem;
     padding: 0.5rem 0;
     text-align: center;
-    text-shadow: -1px 1px #2e4a70;
 }
+
+/* Font Section */
+
+@font-face {
+    font-family: 'MyFont';
+    src: url('/Fonts/IRON_MAN.ttf') format('opentype'); /* or "otf" */
+    font-weight: Bold;
+    font-style: normal;
+}
+
 
 /* Weather Box */
 .weather-section {
     /* grid layout/ formationg */
     grid-column: 1;
     /* Right column */
-    grid-row: 1;
+    grid-row: 2;
     /* Top row only */
     width: 20vw;
     /* color and text formating*/
@@ -68,7 +83,7 @@ header {
 .calendar-section {
     grid-column: 2;
     /* Left column */
-    grid-row: 1;
+    grid-row: 2;
     /* Span top and bottom rows */
     background-color: #fff9f0;
     color: #2e4a70;
@@ -157,7 +172,7 @@ header {
     padding: 1rem;
     padding-bottom: 0;
     text-align: center;
-    font-size: large;
+    font-size: 1.2rem;
 }
 
 /* replace .day and add .day-lables (dont add this comment) */
@@ -292,7 +307,7 @@ header {
 
 /* Styles for add-task button*/
 .add-task {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'MyFont', Helvetica, sans-serif;
     padding: 12px 25px;
     background-color: #C75B7A;
     color: white;

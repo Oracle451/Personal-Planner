@@ -167,7 +167,7 @@ function setTheme() {
             /*text color*/
             document.getElementById("head").style.color = "#ffffff"
             /*text shadow color*/
-            document.getElementById("head").style.textShadow = "-1px 1px #2e4a70"
+            document.getElementById("head").style.textShadow = "-2px 2px #2e4a70"
 
             /*weather sections's background and text color*/
             document.querySelectorAll(".weather-section").forEach(element => {
@@ -175,6 +175,9 @@ function setTheme() {
                 element.style.backgroundColor = "#f0f2f2";
                 /*text color*/
                 element.style.color = "#2e4a70";
+
+                // font color
+                element.style.textShadow = "-1px 1px rgb(119, 119, 119)"
             });
 
             /*calendar sections's background and text color*/
@@ -183,6 +186,10 @@ function setTheme() {
                 element.style.backgroundColor = "#fff9f0";
                 /*text color*/
                 element.style.color = "#2e4a70";
+
+             // font color
+            element.style.textShadow = "-1px 1px rgb(119, 119, 119)"
+
             });
 
 
@@ -225,7 +232,7 @@ function setTheme() {
             /*text color*/
             document.getElementById("head").style.color = "#ffffff"
             /*text shadow color*/
-            document.getElementById("head").style.textShadow = "-1px 1px #5b744b"
+            document.getElementById("head").style.textShadow = "-4px 4px  rgb(93, 93, 93)"
 
             /*weather sections's background and text color*/
             document.querySelectorAll(".weather-section").forEach(element => {
@@ -233,6 +240,9 @@ function setTheme() {
                 element.style.backgroundColor = "#799567";
                 /*text color*/
                 element.style.color = "#ffffff";
+
+                // text shadow
+                element.style.textShadow = "-1px 1px rgb(93, 93, 93)"
             });
 
             /*calendar sections's background and text color*/
@@ -241,6 +251,9 @@ function setTheme() {
                 element.style.backgroundColor = "#a7b59e";
                 /*text color*/
                 element.style.color = "#ffffff";
+
+                // text shadow
+                element.style.textShadow = "-1px 1px rgb(93, 93, 93)"
             });
 
 
