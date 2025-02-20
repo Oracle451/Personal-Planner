@@ -64,7 +64,7 @@ function generateCalendar() {
         dateElement.className = "inactive-date";
         calendarElement.appendChild(dateElement);
     }
-    document.getElementById(`add-task`).addEventListener("click", () => addTask());
+    document.getElementById(`add-task`).addEventListener("click", () => addTaskPopup());
     updateCalendarColors(); // Load saved colors when generating calendar
 }
 
@@ -187,8 +187,8 @@ function setTheme() {
                 /*text color*/
                 element.style.color = "#2e4a70";
 
-             // font color
-            element.style.textShadow = "-1px 1px rgb(119, 119, 119)"
+                // font color
+                element.style.textShadow = "-1px 1px rgb(119, 119, 119)"
 
             });
 
@@ -318,36 +318,36 @@ function updateCalories(day, change) {
 }
 
 //Function for add task button
-function addTask() {
+function addTaskPopup() {
     document.getElementById("popup-content").innerHTML = `
 
-        <div class="task-adder">
+        <div>
             <h2>Task Maker: </h2>
             <button id="popup-close-btn" class="close-btn">Close</button>
 
-            <form>
+            <form onsubmit="return false">
                 <h3>When:</h3>
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date">
+                <input type="date" id="date" name="date" required>
 
                 <label for="time">Time:</label>
-                <input type="time" id="time" name="time">
+                <input type="time" id="time" name="time" required>
                 <br>
 
                 <h3>Where:</h3>
 
                 <label for="location">Address:</label>
-                <input type="text" id="locations" name="location">
+                <input type="text" id="location" name="location">
                 <br>
 
                 <h3>What:</h3>
                 <label for="desc">Description:</label>
                 <br>
                 
-                <textarea id="desc" name="desc" rows="5" cols="25" maxlength="144"></textarea>
+                <textarea id="desc" name="desc" rows="5" cols="25" maxlength="144" required></textarea>
                 <br>
 
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit" id="pushTask">
             </form>
 
             
@@ -357,8 +357,39 @@ function addTask() {
     document.getElementById("popup-close-btn").addEventListener("click", closePopup);
     document.getElementById("popup").style.display = "block";
     document.getElementById("overlay-bg").style.display = "block";
+    document.getElementById("pushTask").addEventListener("click", () => addTask())
+
 
 }
+
+function addTask() {
+
+    var date = document.getElementById("date").value;
+    var time = document.getElementById("time").value;
+    var address = document.getElementById("location").value;
+    var desc = document.getElementById("desc").value;
+
+    if (date != null && time != null && desc != "") {
+
+        localStorage.setItem(date, "1")
+        if (localStorage.getItem(`${date}-taskAmount`) === "" || localStorage.getItem(`${date}-taskAmount`) === null) {
+            localStorage.setItem(`${date}-taskAmount`, 1)
+            localStorage.setItem(`${date}-task1`, desc)
+            localStorage.setItem(`${date}-time1`, time)
+            localStorage.setItem(`${date}-addy1`, address)
+        } else {
+            var taskAmount = parseInt(localStorage.getItem(`${date}-taskAmount`));
+            taskAmount = taskAmount + 1;
+            localStorage.setItem(`${date}-taskAmount`, (taskAmount))
+            localStorage.setItem(`${date}-task${taskAmount}`, desc)
+            localStorage.setItem(`${date}-time${taskAmount}`, time)
+            localStorage.setItem(`${date}-addy${taskAmount}`, address)
+
+        }
+    }
+
+}
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
