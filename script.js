@@ -53,10 +53,46 @@ function generateCalendar() {
     /* creates days of the month */
     for (let i = 1; i <= days_in_month; i++) {
         const dateElement = document.createElement("div");
+        let task = document.createElement("div");
+
+        /* Figures out what the date is*/
+
+        let date = new Date(today.getFullYear(), today.getMonth(), i)
+
+        if (parseInt(date.getMonth()) < 10) {
+            dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
+        } else {
+            dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
+        }
+
+        if (parseInt(date.getDate()) < 10) {
+            dateString = `${dateString}-0${date.getDate()}`;
+        } else {
+            dateString = `${dateString}-${date.getDate()}`;
+        }
+
         dateElement.className = "date";
         dateElement.textContent = i;
         dateElement.addEventListener("click", () => openPopup(i));
+
+        /* Based on dateString, attempts to add Tasks for that day*/
+        if (localStorage.getItem(`${dateString}-taskAmount`) !== null) {
+            let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
+
+            for (let k = 1; k <= taskAmount; k++) {
+                console.log("Creating task...");
+                task = document.createElement("div");
+                task.className = "task";
+                task.textContent = `${localStorage.getItem(`${dateString}-time${k}`)} ${localStorage.getItem(`${dateString}-task${k}`)}`;
+                console.log(task.textContent);
+                dateElement.appendChild(task);
+
+            }
+
+        }
+
         calendarElement.appendChild(dateElement);
+
     }
     /* creates filler after this month */
     for (let i = 0; i > days_in_month + weekday - 42; i--) {
@@ -291,6 +327,7 @@ function setTheme() {
     }
 
 
+    /*
     document.querySelectorAll(".date").forEach(element => {
         element.addEventListener("mouseover", function () {
             element.style.backgroundColor = hover;
@@ -299,6 +336,7 @@ function setTheme() {
             element.style.backgroundColor = day_bg;
         })
     });
+    */
 
     selector.style.backgroundColor = sidebar;
 }
@@ -387,6 +425,7 @@ function addTask() {
 
         }
     }
+    location.reload();
 
 }
 

@@ -26,7 +26,8 @@ header {
 
 @font-face {
     font-family: 'MyFont';
-    src: url('/Fonts/IRON_MAN.ttf') format('opentype'); /* or "otf" */
+    src: url('/Fonts/IRON_MAN.ttf') format('opentype');
+    /* or "otf" */
     font-weight: Bold;
     font-style: normal;
 }
@@ -331,6 +332,19 @@ header {
 .desc {
     height: 50px;
     width: 50px;
+}
+
+.task {
+    background-color: #f8d0c8;
+    border-radius: 50px;
+    text-align: start;
+    padding: 3px;
+    margin: 5px;
+
+    border: #35522b;
+    border-style: dashed;
+    border-width: 1px;
+
 }
 
 /* 
