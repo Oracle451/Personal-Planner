@@ -1,4 +1,3 @@
-document.getElementById('current-month').textContent = new Date().toLocaleString('default', { month: 'long' });
 
 let onScreenDate = new Date();
 
@@ -83,7 +82,7 @@ function generateCalendar(today) {
         if (parseInt(date.getMonth()) < 10) {
             dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
         } else {
-            dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
+            dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
         }
 
         if (parseInt(date.getDate()) < 10) {
@@ -147,7 +146,7 @@ function openPopup(day) {
                 
             </div>
 
-            <div class="task-Area">
+            <div class="task-Area" id="task-Area">
                 <h2>Tasks: </h2>
             </div>
 
@@ -174,6 +173,62 @@ function openPopup(day) {
     let storedCalories = localStorage.getItem(`calories-${day}`);
     if (storedCalories) {
         document.getElementById(`calories-${day}`).textContent = storedCalories;
+    }
+
+    populateTaskArea(day);
+
+}
+
+function populateTaskArea(numb) {
+
+    let date = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), numb)
+    console.log(date);
+
+    if (parseInt(date.getMonth()) < 10) {
+        dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
+    } else {
+        dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
+    }
+
+    if (parseInt(date.getDate()) < 10) {
+        dateString = `${dateString}-0${date.getDate()}`;
+    } else {
+        dateString = `${dateString}-${date.getDate()}`;
+    }
+
+    console.log(dateString);
+
+    if (localStorage.getItem(`${dateString}-taskAmount`) !== null) {
+        let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
+
+        for (let k = 1; k <= taskAmount; k++) {
+            task = document.createElement("div");
+            task.className = "task-Long";
+            task.innerHTML = `
+                <p>Title: ${localStorage.getItem(`${dateString}-task${k}`)} at <span class="times">${localStorage.getItem(`${dateString}-time${k}`)}</span>
+                    <br>
+                
+                    Where: ${localStorage.getItem(`${dateString}-addy${k}`)}
+                    <br>
+                    Description: ${localStorage.getItem(`${dateString}-desc${k}`)}
+                </p>
+                
+
+            `;
+            document.getElementById("task-Area").appendChild(task);
+
+        }
+
+    } else {
+        document.getElementById("task-Area").innerHTML = `
+                <h2>Tasks:</h2>
+                <p>
+                Nothing to Show!
+                </p>
+                
+
+            `;
+
     }
 
 }

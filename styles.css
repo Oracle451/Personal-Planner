@@ -88,7 +88,7 @@ header {
     /* Span top and bottom rows */
     background-color: #fff9f0;
     color: #2e4a70;
-    width: 80vw;
+    width: fill;
     height: 90vh;
     padding: 1rem;
 }
@@ -337,7 +337,6 @@ header {
     text-align: start;
     padding: 3px;
     margin: 5px;
-
     border: #35522b;
     border-style: dashed;
     border-width: 1px;
@@ -379,6 +378,20 @@ Create hover functionality for the clear cookies button
 .cool-Line {
     border-left: 6px solid green;
     height: 80vh;
+}
+
+.task-Long {
+    background-color: wheat;
+    border-radius: 20px;
+    padding: 2px 2px 2px 15px;
+    color: #001f3f;
+    font-size: large;
+    margin-bottom: 20px;
+}
+
+.times {
+    border-bottom: 1px solid #0000EE;
+    color: #0000EE;
 }
 
 
