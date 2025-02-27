@@ -347,6 +347,9 @@ header {
 
 }
 
+/* 
+Set up the styling for the clear cookies button
+*/
 .clear-button {
     background-color: red;
     color: white;
@@ -357,6 +360,9 @@ header {
     border-radius: 5px;
 }
 
+/* 
+Create hover functionality for the clear cookies button
+*/
 .clear-button:hover {
     background-color: darkred;
 }
