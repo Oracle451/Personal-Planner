@@ -440,3 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+function clearCookies() {
+    localStorage.clear()
+}
+
