@@ -324,7 +324,76 @@ function setTheme() {
             });
 
             break;
+        case "test":
+
+            /* the header's background and text color*/
+            /*background color*/
+            document.getElementById("head").style.backgroundColor = "#a35127"
+            /*text color*/
+            document.getElementById("head").style.color = "#ffffff"
+            /*text shadow color*/
+            document.getElementById("head").style.textShadow = "-2px 2px #2e4a70"
+
+            /*weather sections's background and text color*/
+            document.querySelectorAll(".weather-section").forEach(element => {
+                /*background color*/
+                element.style.backgroundColor = "#f0f2f2";
+                /*text color*/
+                element.style.color = "#000000";
+
+                // font color
+                element.style.textShadow = "-1px 1px rgb(119, 119, 119)"
+            });
+
+            /*calendar sections's background and text color*/
+            document.querySelectorAll(".calendar-section").forEach(element => {
+                /*background color*/
+                element.style.backgroundColor = "#fff9f0";
+                /*text color*/
+                element.style.color = "#000000";
+
+                // font color
+                element.style.textShadow = "-1px 1px rgb(119, 119, 119)"
+
+            });
+
+
+            /*days of the week backgroung and text color*/
+            document.querySelectorAll(".day").forEach(element => {
+                /*background color*/
+                element.style.backgroundColor = "#a66a4c"; 
+                /*text color*/
+                element.style.color = "#000000";
+                /*border color*/
+                element.style.borderColor = " #2e4a70";
+            });
+
+            /*date backgroung and text color*/
+            document.querySelectorAll(".date").forEach(element => {
+                /*background color*/
+                element.style.backgroundColor = "#fff9f0";
+                /*text color*/
+                element.style.color = "#000000";
+                /*border color*/
+                element.style.borderColor = " #000000";
+                /*hover color*/
+                document.documentElement.style.setProperty('--date-hover-bg', '#24b0ba');
+
+            });
+
+            /*inactive-date backgroung and text color*/
+            document.querySelectorAll(".inactive-date").forEach(element => {
+                /*background color*/
+                element.style.backgroundColor = "#bf6030";
+                /*border color*/
+                element.style.borderColor = " #000000";
+            });
+            break;
+
+        
     }
+
+        
 
 
     /*
