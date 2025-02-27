@@ -218,9 +218,6 @@ header {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     z-index: 1000;
     padding: 2rem;
 }
@@ -366,6 +363,25 @@ Create hover functionality for the clear cookies button
 .clear-button:hover {
     background-color: darkred;
 }
+
+.day-Popup {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 20vw 1vw 59vw;
+}
+
+.task-Area {
+    padding-top: 20px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.cool-Line {
+    border-left: 6px solid green;
+    height: 80vh;
+}
+
+
 
 /* 
 Center the Calendar Section (Not in use currently */
