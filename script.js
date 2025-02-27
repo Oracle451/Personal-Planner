@@ -440,7 +440,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+// Function to clear local cookies for the website
+// Called by the clear-button
 function clearCookies() {
+	// Clear local storage
     localStorage.clear()
 }
 
