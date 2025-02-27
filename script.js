@@ -1,5 +1,27 @@
 document.getElementById('current-month').textContent = new Date().toLocaleString('default', { month: 'long' });
 
+let onScreenDate = new Date();
+
+function updateOnScreen(num) {
+
+    console.log("Update on Screen Called");
+    switch (num) {
+        case 1:
+            onScreenDate = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth() + 2, 0)
+
+            break;
+        case -1:
+            onScreenDate = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), 0)
+            break;
+        default:
+            break;
+    }
+
+    document.getElementById('current-month').textContent = `${onScreenDate.toLocaleString('default', { month: 'long' })} : ${onScreenDate.getFullYear().toString()}`;
+    generateCalendar(onScreenDate);
+
+}
+
 async function updateGreetingAndWeather() {
     try {
         const now = new Date();
@@ -36,10 +58,11 @@ async function updateGreetingAndWeather() {
 }
 
 
-function generateCalendar() {
+function generateCalendar(today) {
+
+
     const calendarElement = document.getElementById("calendar");
     calendarElement.innerHTML = "";
-    let today = new Date();
     let monthday = today.getDate(); /* gets the day in the month */
     let last_day = new Date(today.getFullYear(), today.getMonth() + 1, 0)
     let days_in_month = last_day.getDate(); /* gets the length of this month */
@@ -102,6 +125,7 @@ function generateCalendar() {
     }
     document.getElementById(`add-task`).addEventListener("click", () => addTaskPopup());
     updateCalendarColors(); // Load saved colors when generating calendar
+    setTheme();
 }
 
 function openPopup(day) {
@@ -427,12 +451,20 @@ function addTask() {
     }
     location.reload();
 
+
+}
+
+function makeButtons() {
+    document.getElementById("back").addEventListener("click", () => updateOnScreen(-1));
+    document.getElementById("next").addEventListener("click", () => updateOnScreen(1));
 }
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    generateCalendar();
+
+    makeButtons();
+    updateOnScreen(0);
     updateGreetingAndWeather();
     updateStreak();
     updateTheme();
@@ -443,7 +475,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Function to clear local cookies for the website
 // Called by the clear-button
 function clearCookies() {
-	// Clear local storage
+    // Clear local storage
     localStorage.clear()
 }
 
