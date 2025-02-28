@@ -333,6 +333,12 @@ function setTheme() {
                 /*border color*/
                 element.style.borderColor = " #2e4a70";
             });
+            
+            // change options color
+            document.querySelectorAll(".option-content").forEach(element => {
+                /*background color*/
+                element.style.backgroundColor = "#cf8a40";
+            });
             break;
         case "spring":
 
@@ -397,7 +403,14 @@ function setTheme() {
                 element.style.borderColor = " #35522b";
             });
 
+            // change options color
+            document.querySelectorAll(".option-content").forEach(element => {
+                /*background color*/
+                element.style.backgroundColor = "#f3baba";
+            });
+
             break;
+
     }
 
 
