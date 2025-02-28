@@ -54,6 +54,24 @@ async function updateGreetingAndWeather() {
     }
 }
 
+function generateDateString(day) {
+
+    let date = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), day);;
+
+    if (parseInt(date.getMonth()) < 10) {
+        dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
+    } else {
+        dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
+    }
+
+    if (parseInt(date.getDate()) < 10) {
+        dateString = `${dateString}-0${date.getDate()}`;
+    } else {
+        dateString = `${dateString}-${date.getDate()}`;
+    }
+
+    return dateString;
+}
 
 function generateCalendar(today) {
 
@@ -75,25 +93,22 @@ function generateCalendar(today) {
         const dateElement = document.createElement("div");
         let task = document.createElement("div");
 
-        /* Figures out what the date is*/
-
-        let date = new Date(today.getFullYear(), today.getMonth(), i)
-
-        if (parseInt(date.getMonth()) < 10) {
-            dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
-        } else {
-            dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
-        }
-
-        if (parseInt(date.getDate()) < 10) {
-            dateString = `${dateString}-0${date.getDate()}`;
-        } else {
-            dateString = `${dateString}-${date.getDate()}`;
-        }
+        let dateString = generateDateString(i);
 
         dateElement.className = "date";
         dateElement.textContent = i;
         dateElement.addEventListener("click", () => openPopup(i));
+
+
+        if (localStorage.getItem(`${dateString}-stat`) !== null) {
+            console.log("Oye");
+            let status = localStorage.getItem(`${dateString}-stat`);
+            dateElement.classList.remove("good", "decent", "bad");
+            if (status) {
+                dateElement.classList.add(status);
+            }
+
+        }
 
         /* Based on dateString, attempts to add Tasks for that day*/
         if (localStorage.getItem(`${dateString}-taskAmount`) !== null) {
@@ -119,7 +134,6 @@ function generateCalendar(today) {
         calendarElement.appendChild(dateElement);
     }
     document.getElementById(`add-task`).addEventListener("click", () => addTaskPopup());
-    updateCalendarColors(); // Load saved colors when generating calendar
     setTheme();
 
 }
@@ -181,22 +195,7 @@ function openPopup(day) {
 
 function populateTaskArea(numb) {
 
-    let date = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), numb)
-    console.log(date);
-
-    if (parseInt(date.getMonth()) < 10) {
-        dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
-    } else {
-        dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
-    }
-
-    if (parseInt(date.getDate()) < 10) {
-        dateString = `${dateString}-0${date.getDate()}`;
-    } else {
-        dateString = `${dateString}-${date.getDate()}`;
-    }
-
-    console.log(dateString);
+    let dateString = generateDateString(numb);
 
     if (localStorage.getItem(`${dateString}-taskAmount`) !== null) {
         let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
@@ -212,25 +211,17 @@ function populateTaskArea(numb) {
                     <br>
                     Description: ${localStorage.getItem(`${dateString}-desc${k}`)}
                 </p>
-                
-
             `;
             document.getElementById("task-Area").appendChild(task);
-
         }
-
     } else {
         document.getElementById("task-Area").innerHTML = `
                 <h2>Tasks:</h2>
                 <p>
                 Nothing to Show!
                 </p>
-                
-
             `;
-
     }
-
 }
 
 function closePopup() {
@@ -239,29 +230,21 @@ function closePopup() {
 }
 
 function setDayStatus(day, status) {
-    localStorage.setItem(`dayStatus-${day}`, status);
-    updateCalendarColors();
-    updateStreak();
+    let dateString = generateDateString(day);
+    localStorage.setItem(`${dateString}-stat`, status);
     closePopup();
+    generateCalendar(onScreenDate);
+    updateStreak();
+
 }
 
-function updateCalendarColors() {
-    document.querySelectorAll(".date").forEach(date => {
-        let day = date.textContent.trim();
-        if (day) {
-            let status = localStorage.getItem(`dayStatus-${day}`);
-            date.classList.remove("good", "decent", "bad");
-            if (status) date.classList.add(status);
-        }
-    });
-}
 
 function updateStreak() {
     let streak = 0;
     let today = new Date().getDate();
 
     for (let i = today; i > 0; i--) {
-        let status = localStorage.getItem(`dayStatus-${i}`);
+        let status = localStorage.getItem(`${dateString}-stat`);
         if (status === "good") {
             streak++;
         } else {
