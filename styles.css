@@ -26,7 +26,7 @@ header {
 
 @font-face {
     font-family: 'MyFont';
-    src: url('/Fonts/IRON_MAN.ttf') format('opentype');
+    src: url('/Fonts/Simple_Bold.ttf.ttf') format('opentype');
     /* or "otf" */
     font-weight: Bold;
     font-style: normal;
@@ -42,7 +42,7 @@ header {
     /* Top row only */
     width: 20vw;
     /* color and text formating*/
-    text-align: center;
+    text-align: left;
     background-color: #f0f2f2;
     color: #2e4a70;
     padding: 1rem;
@@ -54,7 +54,7 @@ header {
 
 
 .streak-section {
-    margin: 0.5rem auto;
+    /* margin: 0.5rem auto; */
     font-size: inherit;
     width: fit-content;
     max-width: 60%;
@@ -308,7 +308,7 @@ header {
 
 /* Styles for add-task button*/
 .add-task {
-    font-family: 'MyFont', Helvetica, sans-serif;
+    font-family: 'MyFont', sans-serif;
     padding: 12px 25px;
     background-color: #C75B7A;
     color: white;
@@ -318,6 +318,9 @@ header {
     position: fixed;
     right: 40px;
     bottom: 40px;
+
+    cursor: pointer;
+
 }
 
 .add-task:hover {
@@ -348,6 +351,94 @@ header {
 }
 
 /* 
+<<<<<<< Updated upstream
+=======
+Set up the styling for the clear cookies button
+*/
+.clear-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* 
+Create hover functionality for the clear cookies button
+*/
+.clear-button:hover {
+    background-color: darkred;
+}
+
+.day-Popup {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 20vw 1vw 59vw;
+}
+
+.task-Area {
+    padding-top: 20px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.cool-Line {
+    border-left: 6px solid green;
+    height: 80vh;
+}
+
+.task-Long {
+    background-color: wheat;
+    border-radius: 20px;
+    padding: 2px 2px 2px 15px;
+    color: #001f3f;
+    font-size: large;
+    margin-bottom: 20px;
+}
+
+.times {
+    border-bottom: 1px solid #0000EE;
+    color: #0000EE;
+}
+
+/* BACK AND NEXT FORMATTING FOR CALENDAR */
+#back {
+    background-color: #3498db; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Spacing inside the button */
+    font-size: 16px; /* Text size */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+#back:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+#next {
+    background-color: #3498db; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Spacing inside the button */
+    font-size: 16px; /* Text size */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+#next:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+
+
+
+
+
+/* 
+>>>>>>> Stashed changes
 Center the Calendar Section (Not in use currently */
 
 /* .calendar-section {
