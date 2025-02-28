@@ -26,7 +26,7 @@ header {
 
 @font-face {
     font-family: 'MyFont';
-    src: url('/Fonts/IRON_MAN.ttf') format('opentype');
+    src: url('/Fonts/Simple_Bold.ttf.ttf') format('opentype');
     /* or "otf" */
     font-weight: Bold;
     font-style: normal;
@@ -42,7 +42,7 @@ header {
     /* Top row only */
     width: 20vw;
     /* color and text formating*/
-    text-align: center;
+    text-align: left;
     background-color: #f0f2f2;
     color: #2e4a70;
     padding: 1rem;
@@ -54,7 +54,7 @@ header {
 
 
 .streak-section {
-    margin: 0.5rem auto;
+    /* margin: 0.5rem auto; */
     font-size: inherit;
     width: fit-content;
     max-width: 60%;
@@ -305,7 +305,7 @@ header {
 
 /* Styles for add-task button*/
 .add-task {
-    font-family: 'MyFont', Helvetica, sans-serif;
+    font-family: 'MyFont', sans-serif;
     padding: 12px 25px;
     background-color: #C75B7A;
     color: white;
@@ -315,6 +315,9 @@ header {
     position: fixed;
     right: 40px;
     bottom: 40px;
+
+    cursor: pointer;
+
 }
 
 .add-task:hover {
@@ -393,29 +396,3 @@ Create hover functionality for the clear cookies button
     border-bottom: 1px solid #0000EE;
     color: #0000EE;
 }
-
-
-
-/* 
-Center the Calendar Section (Not in use currently */
-
-/* .calendar-section {
-    grid-column: 1 / -1; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; 
-    text-align: center;
-    padding: 1rem;
-} */
-
-/* footer {
-    background-color: #003366;
-    color: white;
-    text-align: center;
-    padding: 0.5rem 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 5%;
-    } */
