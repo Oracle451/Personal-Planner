@@ -347,6 +347,60 @@ header {
 
 }
 
+/* Calorie Tracker Styles */
+.calorie-tracker-section {
+    grid-column: 2;
+    grid-row: 3;
+    background-color: #f0f2f2; /* Or any background you prefer */
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#calorie-tracker h2 {
+    margin-top: 0;
+    color: #2e4a70; /* Use your main text color */
+}
+
+#food-input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#food-input input,
+#food-input button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#food-input button {
+    background-color: #4CAF50; /* Or any button color you like */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#food-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#food-list li {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+#food-list p {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
 /* 
 Center the Calendar Section (Not in use currently */
 
