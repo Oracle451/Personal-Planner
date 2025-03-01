@@ -9,34 +9,37 @@
   </head>
 
   <body>
-    
-
+    <header id="head">
+      <div class="option">
+        <button class="optionbtn">
+          <img src="personal_planner_icon.ico" alt="options_button" />
+        </button>
+        <div class="option-content">
+          <label for="theme-select">Select a theme:</label>
+          <select
+            id="themes"
+            class="themes"
+            name="theme-select"
+            onchange="updateTheme()"
+          >
+            <option value="standard">Deep Ocean</option>
+            <option value="spring">Spring</option>
+          </select>
+          <button onclick="clearCookies()">Clear Cookies</button>
+        </div>
+      </div>
+      <h1>Iron Man Planner</h1>
+    </header>
     <main class="grid-layout">
 
-      <header id="head">
-        <h1>Iron Man Planner</h1>
-        <label for="theme-select">Select a theme:</label>
-        <select
-          id="themes"
-          class="themes"
-          name="theme-select"
-          onchange="updateTheme()"
-        >
-  
-          <option value="standard">Deep Ocean</option>
-          <option value="spring">Spring</option>
-          
-          
-        </select>
-      </header>
-
-      
       <!-- Weather Section (New Box) -->
       <section class="weather-section">
         <p id="weather-info">Loading weather...</p>
+
         <h2 class="streak-section">
-          Current Streak: <span id="streak-count">0</span> days 🔥
+          Current Streak: <span id="streak-count">0</span>
         </h2>
+
         <h2 class="streak-section">
           Highest Streak: <span id="peak-streak">0</span>
         </h2>
@@ -47,6 +50,8 @@
         <h2 class="month">
           Your Calendar for <span id="current-month"></span>
         </h2>
+        <button id="back">back</button>
+        <button id="next">next</button>
 
         <div class="day-labels">
           <div class="day">Sunday</div>
@@ -56,7 +61,7 @@
           <div class="day">Thursday</div>
           <div class="day">Friday</div>
           <div class="day">Saturday</div>
-      </div>
+        </div>
 
         <div class="calendar" id="calendar"></div>
       </section>
