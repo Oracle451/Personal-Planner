@@ -31,6 +31,20 @@
       <h1>Iron Man Planner</h1>
     </header>
     <main class="grid-layout">
+      <header id="head">
+        <h1>Iron Man Planner</h1>
+        <label for="theme-select">Select a theme:</label>
+        <select
+          id="themes"
+          class="themes"
+          name="theme-select"
+          onchange="updateTheme()"
+        >
+  
+          <option value="standard">Deep Ocean</option>
+          <option value="spring">Spring</option>
+        </select>
+      </header>
       <!-- Weather Section (New Box) -->
       <section class="weather-section">
         <p id="weather-info">Loading weather...</p>
