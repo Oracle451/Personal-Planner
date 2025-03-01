@@ -31,7 +31,20 @@
       <h1>Iron Man Planner</h1>
     </header>
     <main class="grid-layout">
-
+      <header id="head">
+        <h1>Iron Man Planner</h1>
+        <label for="theme-select">Select a theme:</label>
+        <select
+          id="themes"
+          class="themes"
+          name="theme-select"
+          onchange="updateTheme()"
+        >
+  
+          <option value="standard">Deep Ocean</option>
+          <option value="spring">Spring</option>
+        </select>
+      </header>
       <!-- Weather Section (New Box) -->
       <section class="weather-section">
         <p id="weather-info">Loading weather...</p>
@@ -65,24 +78,6 @@
 
         <div class="calendar" id="calendar"></div>
       </section>
-
-      <section class="calorie-tracker-section">
-        <div id="calorie-tracker">
-            <h2>Calorie Tracker</h2>
-            <div id="food-input">
-                <input type="text" id="food-name" placeholder="Food">
-                <input type="number" id="food-weight" placeholder="Weight (grams)">
-                <input type="number" id="food-calories" placeholder="Calories">
-                <button id="add-food">Add Food</button>
-            </div>
-            <div id="food-list">
-                <h3>Food Log:</h3>
-                <ul id="food-items"></ul>
-                <p>Total Calories: <span id="total-calories">0</span></p>
-            </div>
-        </div>
-    </section>
-
     </main>
 
     <button class="add-task" id="add-task">+ Add Task</button>
