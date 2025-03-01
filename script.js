@@ -340,6 +340,7 @@ function setTheme() {
                 element.style.backgroundColor = "#cf8a40";
             });
             break;
+            
         case "spring":
 
             /* the header's background and text color*/
@@ -412,6 +413,8 @@ function setTheme() {
             break;
 
     }
+
+        
 
 
     /*
@@ -551,10 +554,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-// Function to clear local cookies for the website
-// Called by the clear-button
+// Calorie tracker
+const foodNameInput = document.getElementById('food-name');
+const foodWeightInput = document.getElementById('food-weight');
+const foodCaloriesInput = document.getElementById('food-calories');
+const addFoodButton = document.getElementById('add-food');
+const foodItemsList = document.getElementById('food-items');
+const totalCaloriesDisplay = document.getElementById('total-calories');
+
+let foodEntries =;
+
+addFoodButton.addEventListener('click', () => {
+    const name = foodNameInput.value;
+    const weight = parseInt(foodWeightInput.value);
+    const calories = parseInt(foodCaloriesInput.value);
+
+    if (name && !isNaN(weight) && !isNaN(calories)) {
+        foodEntries.push({ name, weight, calories });
+        updateFoodList();
+        foodNameInput.value = '';
+        foodWeightInput.value = '';
+        foodCaloriesInput.value = '';
+    }
+});
+
+function updateFoodList() {
+    foodItemsList.innerHTML = '';
+    let totalCalories = 0;
+
+    foodEntries.forEach(food => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${food.name} (${food.weight}g): ${food.calories} calories`;
+        foodItemsList.appendChild(listItem);
+        totalCalories += food.calories;
+    });
+
+    totalCaloriesDisplay.textContent = totalCalories;
+}
+
 function clearCookies() {
-    // Clear local storage
+
     localStorage.clear()
+
 }
 
