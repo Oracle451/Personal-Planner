@@ -1,4 +1,23 @@
-document.getElementById('current-month').textContent = new Date().toLocaleString('default', { month: 'long' });
+
+let onScreenDate = new Date();
+
+function updateOnScreen(num) {
+    switch (num) {
+        case 1:
+            onScreenDate = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth() + 2, 0)
+
+            break;
+        case -1:
+            onScreenDate = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), 0)
+            break;
+        default:
+            break;
+    }
+
+    document.getElementById('current-month').textContent = `${onScreenDate.toLocaleString('default', { month: 'long' })} : ${onScreenDate.getFullYear().toString()}`;
+    generateCalendar(onScreenDate);
+
+}
 
 async function updateGreetingAndWeather() {
     try {
@@ -35,11 +54,30 @@ async function updateGreetingAndWeather() {
     }
 }
 
+function generateDateString(day) {
 
-function generateCalendar() {
+    let date = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), day);;
+
+    if (parseInt(date.getMonth()) < 10) {
+        dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
+    } else {
+        dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
+    }
+
+    if (parseInt(date.getDate()) < 10) {
+        dateString = `${dateString}-0${date.getDate()}`;
+    } else {
+        dateString = `${dateString}-${date.getDate()}`;
+    }
+
+    return dateString;
+}
+
+function generateCalendar(today) {
+
+
     const calendarElement = document.getElementById("calendar");
     calendarElement.innerHTML = "";
-    let today = new Date();
     let monthday = today.getDate(); /* gets the day in the month */
     let last_day = new Date(today.getFullYear(), today.getMonth() + 1, 0)
     let days_in_month = last_day.getDate(); /* gets the length of this month */
@@ -55,36 +93,31 @@ function generateCalendar() {
         const dateElement = document.createElement("div");
         let task = document.createElement("div");
 
-        /* Figures out what the date is*/
-
-        let date = new Date(today.getFullYear(), today.getMonth(), i)
-
-        if (parseInt(date.getMonth()) < 10) {
-            dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
-        } else {
-            dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
-        }
-
-        if (parseInt(date.getDate()) < 10) {
-            dateString = `${dateString}-0${date.getDate()}`;
-        } else {
-            dateString = `${dateString}-${date.getDate()}`;
-        }
+        let dateString = generateDateString(i);
 
         dateElement.className = "date";
         dateElement.textContent = i;
         dateElement.addEventListener("click", () => openPopup(i));
+
+
+        if (localStorage.getItem(`${dateString}-stat`) !== null) {
+            console.log("Oye");
+            let status = localStorage.getItem(`${dateString}-stat`);
+            dateElement.classList.remove("good", "decent", "bad");
+            if (status) {
+                dateElement.classList.add(status);
+            }
+
+        }
 
         /* Based on dateString, attempts to add Tasks for that day*/
         if (localStorage.getItem(`${dateString}-taskAmount`) !== null) {
             let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
 
             for (let k = 1; k <= taskAmount; k++) {
-                console.log("Creating task...");
                 task = document.createElement("div");
                 task.className = "task";
                 task.textContent = `${localStorage.getItem(`${dateString}-time${k}`)} ${localStorage.getItem(`${dateString}-task${k}`)}`;
-                console.log(task.textContent);
                 dateElement.appendChild(task);
 
             }
@@ -101,25 +134,41 @@ function generateCalendar() {
         calendarElement.appendChild(dateElement);
     }
     document.getElementById(`add-task`).addEventListener("click", () => addTaskPopup());
-    updateCalendarColors(); // Load saved colors when generating calendar
+    setTheme();
+
 }
 
 function openPopup(day) {
     // inner html for popup
     document.getElementById("popup-content").innerHTML = `
          
+        <div class="day-Popup">
+            <div class="calorie-counter">
+                <h2>Day: ${day}</h2>
+                <button id="status-good" class="status-btn good">Good</button>
+                <button id="status-decent" class="status-btn decent">Decent</button>
+                <button id="status-bad" class="status-btn bad">Bad</button>
+                <button id="popup-close-btn" class="close-btn">Close</button>
 
-        <div class="calorie-counter">
-            <h2>Day: ${day}</h2>
-            <button id="status-good" class="status-btn good">Good</button>
-            <button id="status-decent" class="status-btn decent">Decent</button>
-            <button id="status-bad" class="status-btn bad">Bad</button>
-            <button id="popup-close-btn" class="close-btn">Close</button>
+                <h2>Calories: <span id="calories-${day}">0</span></h2>
+                <button id="calories-plus-${day}" class="calorie-btn">+100</button>
+                <button id="calories-minus-${day}" class="calorie-btn">-100</button>
+            </div>
 
-            <h2>Calories: <span id="calories-${day}">0</span></h2>
-            <button id="calories-plus-${day}" class="calorie-btn">+100</button>
-            <button id="calories-minus-${day}" class="calorie-btn">-100</button>
+            
+            <div class="cool-Line">
+                
+            </div>
+
+            <div class="task-Area" id="task-Area">
+                <h2>Tasks: </h2>
+            </div>
+
+
         </div>
+
+
+        
     `;
 
     document.getElementById("popup").style.display = "flex";
@@ -140,6 +189,39 @@ function openPopup(day) {
         document.getElementById(`calories-${day}`).textContent = storedCalories;
     }
 
+    populateTaskArea(day);
+
+}
+
+function populateTaskArea(numb) {
+
+    let dateString = generateDateString(numb);
+
+    if (localStorage.getItem(`${dateString}-taskAmount`) !== null) {
+        let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
+
+        for (let k = 1; k <= taskAmount; k++) {
+            task = document.createElement("div");
+            task.className = "task-Long";
+            task.innerHTML = `
+                <p>Title: ${localStorage.getItem(`${dateString}-task${k}`)} at <span class="times">${localStorage.getItem(`${dateString}-time${k}`)}</span>
+                    <br>
+                
+                    Where: ${localStorage.getItem(`${dateString}-addy${k}`)}
+                    <br>
+                    Description: ${localStorage.getItem(`${dateString}-desc${k}`)}
+                </p>
+            `;
+            document.getElementById("task-Area").appendChild(task);
+        }
+    } else {
+        document.getElementById("task-Area").innerHTML = `
+                <h2>Tasks:</h2>
+                <p>
+                Nothing to Show!
+                </p>
+            `;
+    }
 }
 
 function closePopup() {
@@ -148,29 +230,21 @@ function closePopup() {
 }
 
 function setDayStatus(day, status) {
-    localStorage.setItem(`dayStatus-${day}`, status);
-    updateCalendarColors();
-    updateStreak();
+    let dateString = generateDateString(day);
+    localStorage.setItem(`${dateString}-stat`, status);
     closePopup();
+    generateCalendar(onScreenDate);
+    updateStreak();
+
 }
 
-function updateCalendarColors() {
-    document.querySelectorAll(".date").forEach(date => {
-        let day = date.textContent.trim();
-        if (day) {
-            let status = localStorage.getItem(`dayStatus-${day}`);
-            date.classList.remove("good", "decent", "bad");
-            if (status) date.classList.add(status);
-        }
-    });
-}
 
 function updateStreak() {
     let streak = 0;
     let today = new Date().getDate();
 
     for (let i = today; i > 0; i--) {
-        let status = localStorage.getItem(`dayStatus-${i}`);
+        let status = localStorage.getItem(`${dateString}-stat`);
         if (status === "good") {
             streak++;
         } else {
@@ -259,6 +333,12 @@ function setTheme() {
                 /*border color*/
                 element.style.borderColor = " #2e4a70";
             });
+            
+            // change options color
+            document.querySelectorAll(".option-content").forEach(element => {
+                /*background color*/
+                element.style.backgroundColor = "#cf8a40";
+            });
             break;
         case "spring":
 
@@ -323,7 +403,14 @@ function setTheme() {
                 element.style.borderColor = " #35522b";
             });
 
+            // change options color
+            document.querySelectorAll(".option-content").forEach(element => {
+                /*background color*/
+                element.style.backgroundColor = "#f3baba";
+            });
+
             break;
+
     }
 
 
@@ -338,7 +425,7 @@ function setTheme() {
     });
     */
 
-    selector.style.backgroundColor = sidebar;
+    //selector.style.backgroundColor = sidebar;
 }
 
 // function to update the calorie count for a specific day
@@ -364,6 +451,23 @@ function addTaskPopup() {
             <button id="popup-close-btn" class="close-btn">Close</button>
 
             <form onsubmit="return false">
+                <h3>What:</h3>
+
+                <label for="title">Title:</label>
+                <br>
+                
+                <textarea id="title" name="title" maxlength="16" required></textarea>
+                <br>
+
+                <br>
+                <label for="desc">Description:</label>
+                <br>
+                
+                <textarea id="desc" name="desc" rows="5" cols="25" maxlength="144" required></textarea>
+                <br>
+
+
+
                 <h3>When:</h3>
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="date" required>
@@ -378,11 +482,6 @@ function addTaskPopup() {
                 <input type="text" id="location" name="location">
                 <br>
 
-                <h3>What:</h3>
-                <label for="desc">Description:</label>
-                <br>
-                
-                <textarea id="desc" name="desc" rows="5" cols="25" maxlength="144" required></textarea>
                 <br>
 
                 <input type="submit" value="Submit" id="pushTask">
@@ -406,20 +505,24 @@ function addTask() {
     var time = document.getElementById("time").value;
     var address = document.getElementById("location").value;
     var desc = document.getElementById("desc").value;
+    var title = document.getElementById("title").value;
 
     if (date != null && time != null && desc != "") {
 
         localStorage.setItem(date, "1")
         if (localStorage.getItem(`${date}-taskAmount`) === "" || localStorage.getItem(`${date}-taskAmount`) === null) {
             localStorage.setItem(`${date}-taskAmount`, 1)
-            localStorage.setItem(`${date}-task1`, desc)
+
+            localStorage.setItem(`${date}-task1`, title)
+            localStorage.setItem(`${date}-desc1`, desc)
             localStorage.setItem(`${date}-time1`, time)
             localStorage.setItem(`${date}-addy1`, address)
         } else {
             var taskAmount = parseInt(localStorage.getItem(`${date}-taskAmount`));
             taskAmount = taskAmount + 1;
             localStorage.setItem(`${date}-taskAmount`, (taskAmount))
-            localStorage.setItem(`${date}-task${taskAmount}`, desc)
+            localStorage.setItem(`${date}-task${taskAmount}`, title)
+            localStorage.setItem(`${date}-desc${taskAmount}`, desc)
             localStorage.setItem(`${date}-time${taskAmount}`, time)
             localStorage.setItem(`${date}-addy${taskAmount}`, address)
 
@@ -427,12 +530,20 @@ function addTask() {
     }
     location.reload();
 
+
+}
+
+function makeButtons() {
+    document.getElementById("back").addEventListener("click", () => updateOnScreen(-1));
+    document.getElementById("next").addEventListener("click", () => updateOnScreen(1));
 }
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    generateCalendar();
+
+    makeButtons();
+    updateOnScreen(0);
     updateGreetingAndWeather();
     updateStreak();
     updateTheme();
@@ -443,7 +554,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Function to clear local cookies for the website
 // Called by the clear-button
 function clearCookies() {
-	// Clear local storage
+    // Clear local storage
     localStorage.clear()
 }
 
