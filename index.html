@@ -28,7 +28,6 @@
           <button onclick="clearCookies()">Clear Cookies</button>
         </div>
       </div>
-      <h1>Iron Man Planner</h1>
     </header>
     <main class="grid-layout">
       <header id="head">
@@ -48,14 +47,16 @@
       <!-- Weather Section (New Box) -->
       <section class="weather-section">
         <p id="weather-info">Loading weather...</p>
-
-        <h2 class="streak-section">
-          Current Streak: <span id="streak-count">0</span>
-        </h2>
-
-        <h2 class="streak-section">
-          Highest Streak: <span id="peak-streak">0</span>
-        </h2>
+		
+		<hr>
+		
+		<div class="streak-section">
+			<h2><u>Streaks</u></h2>
+			<p>Current: <span id="streak-count">0</span> Days</p>
+			<p>Highest: <span id="peak-streak">0</span> Days</p>
+		</div>
+		
+		<hr>
       </section>
 
       <!-- Calendar Section -->
@@ -63,8 +64,8 @@
         <h2 class="month">
           Your Calendar for <span id="current-month"></span>
         </h2>
-        <button id="back">back</button>
-        <button id="next">next</button>
+        <button id="back">Previous</button>
+        <button id="next">Next</button>
 
         <div class="day-labels">
           <div class="day">Sunday</div>
