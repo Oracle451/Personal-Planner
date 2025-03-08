@@ -9,40 +9,26 @@
   </head>
 
   <body>
-    <header id="head">
-      <div class="option">
-        <button class="optionbtn">
-          <img src="personal_planner_icon.ico" alt="options_button" />
-        </button>
-        <div class="option-content">
-          <label for="theme-select">Select a theme:</label>
-          <select
-            id="themes"
-            class="themes"
-            name="theme-select"
-            onchange="updateTheme()"
-          >
-            <option value="standard">Deep Ocean</option>
-            <option value="spring">Spring</option>
-          </select>
-          <button onclick="clearCookies()">Clear Cookies</button>
-        </div>
-      </div>
-    </header>
     <main class="grid-layout">
       <header id="head">
         <h1>Iron Man Planner</h1>
-        <label for="theme-select">Select a theme:</label>
-        <select
-          id="themes"
-          class="themes"
-          name="theme-select"
-          onchange="updateTheme()"
-        >
-  
-          <option value="standard">Deep Ocean</option>
-          <option value="spring">Spring</option>
-        </select>
+        <div class="option">
+          <button class="optionbtn">
+            <img src="personal_planner_icon.ico" alt="options_button" />
+          </button>
+          <div class="option-content">
+            <label for="theme-select">Select a theme:</label>
+            <select
+              id="themes"
+              class="themes"
+              name="theme-select"
+              onchange="updateTheme()"
+            >
+              <option value="standard">Deep Ocean</option>
+              <option value="spring">Spring</option>
+            </select>
+            <button onclick="clearCookies()">Clear Cookies</button>
+          </div>
       </header>
       <!-- Weather Section (New Box) -->
       <section class="weather-section">
