@@ -338,7 +338,9 @@ header {
     background-color: #f8d0c8;
     border-radius: 50px;
     text-align: start;
-    padding: 3px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     margin: 5px;
     border: #35522b;
     border-style: dashed;
