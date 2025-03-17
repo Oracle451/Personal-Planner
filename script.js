@@ -1,4 +1,3 @@
-
 let onScreenDate = new Date();
 
 function updateOnScreen(num) {
@@ -56,21 +55,43 @@ async function updateGreetingAndWeather() {
     }
 }
 
-function generateDateString(day) {
+function generateDateString(day, bool) {
 
-    let date = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), day);;
+    let realDate = bool || false;
 
-    if (parseInt(date.getMonth()) < 10) {
-        dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
+    if (!realDate) {
+        let date = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), day);
+        if (parseInt(date.getMonth()) < 10) {
+            dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
+        } else {
+            dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
+        }
+
+        if (parseInt(date.getDate()) < 10) {
+            dateString = `${dateString}-0${date.getDate()}`;
+        } else {
+            dateString = `${dateString}-${date.getDate()}`;
+        }
+
     } else {
-        dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
+        let trueDate = new Date();
+        let date = new Date(trueDate.getFullYear(), trueDate.getMonth(), day);
+
+        if (parseInt(date.getMonth()) < 10) {
+            dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
+        } else {
+            dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
+        }
+
+        if (parseInt(date.getDate()) < 10) {
+            dateString = `${dateString}-0${date.getDate()}`;
+        } else {
+            dateString = `${dateString}-${date.getDate()}`;
+        }
+
     }
 
-    if (parseInt(date.getDate()) < 10) {
-        dateString = `${dateString}-0${date.getDate()}`;
-    } else {
-        dateString = `${dateString}-${date.getDate()}`;
-    }
+
 
     return dateString;
 }
@@ -246,16 +267,15 @@ function updateStreak() {
     let today = new Date().getDate();
     let k = 0;
 
-    for (let i = today; i > 0; i--) {
-        let dateString = generateDateString(today - k);
-        let status = localStorage.getItem(`${dateString}-stat`);
+    let dateString = generateDateString(today, true);
+    let status = localStorage.getItem(`${dateString}-stat`)
 
-        if (status === "good") {
-            streak++;
-        } else {
-            i = -1;
-        }
+    while (status !== null && status === "good") {
+        streak++;
         k++;
+
+        dateString = generateDateString(today - k, true);
+        status = localStorage.getItem(`${dateString}-stat`)
     }
 
     localStorage.setItem("streak", streak);
