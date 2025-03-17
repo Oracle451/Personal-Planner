@@ -163,6 +163,8 @@ function generateCalendar(today) {
 
 function openPopup(day) {
     // inner html for popup
+    let dateString = generateDateString(day);
+
     document.getElementById("popup-content").innerHTML = `
          
         <div class="day-Popup">
@@ -173,7 +175,7 @@ function openPopup(day) {
                 <button id="status-bad" class="status-btn bad">Bad</button>
                 <button id="popup-close-btn" class="close-btn">Close</button>
 
-                <h2>Calories: <span id="calories-${day}">0</span></h2>
+                <h2>Calories: <span id="calories-${dateString}">0</span></h2>
                 <button id="calories-plus-${day}" class="calorie-btn">+100</button>
                 <button id="calories-minus-${day}" class="calorie-btn">-100</button>
             </div>
@@ -207,13 +209,12 @@ function openPopup(day) {
     document.getElementById(`calories-minus-${day}`).addEventListener("click", () => updateCalories(day, -100));
 
     // set the initial calorie count
-    let storedCalories = localStorage.getItem(`calories-${day}`);
+    let storedCalories = localStorage.getItem(`calories-${dateString}`);
     if (storedCalories) {
-        document.getElementById(`calories-${day}`).textContent = storedCalories;
+        document.getElementById(`calories-${dateString}`).textContent = storedCalories;
     }
 
     populateTaskArea(day);
-
 }
 
 function populateTaskArea(numb) {
@@ -471,10 +472,11 @@ function setTheme() {
 
 // function to update the calorie count for a specific day
 function updateCalories(day, change) {
-    let currentCalories = parseInt(localStorage.getItem(`calories-${day}`)) || 0;
+    let dateString = generateDateString(day);
+    let currentCalories = parseInt(localStorage.getItem(`calories-${dateString}`)) || 0;
     currentCalories += change;
-    localStorage.setItem(`calories-${day}`, currentCalories);
-    document.getElementById(`calories-${day}`).textContent = currentCalories;
+    localStorage.setItem(`calories-${dateString}`, currentCalories);
+    document.getElementById(`calories-${dateString}`).textContent = currentCalories;
 
     // update the calendar day with the calorie count
     const dateElement = document.getElementById(`date-${day}`);
