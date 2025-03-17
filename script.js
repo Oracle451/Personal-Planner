@@ -22,13 +22,15 @@ function updateOnScreen(num) {
 async function updateGreetingAndWeather() {
     try {
         const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const hours = String(now.getHours());
+        const minutes = String(now.getMinutes());
+        let time = hours + ":" + minutes;
+        time = fixTime(time);
         const day = now.getDate();
         const month = now.toLocaleString('default', { month: 'long' });
 
-        let greetingMessage = hours < 12 ? "Good Morning" :
-            hours < 18 ? "Good Afternoon" : "Good Evening";
+        let greetingMessage = hours < 12 ? "Good Morning!" :
+            hours < 18 ? "Good Afternoon!" : "Good Evening!";
 
         const response = await fetch(
             'https://api.open-meteo.com/v1/forecast?latitude=35.1050&longitude=-111.3712&current_weather=true&temperature_unit=fahrenheit'
@@ -46,7 +48,7 @@ async function updateGreetingAndWeather() {
 
         // Update Weather Box
         document.getElementById("weather-info").textContent =
-            `${greetingMessage}! It's ${hours}:${minutes} on ${month} ${day}. 
+            `${greetingMessage} It's ${time} on ${month} ${day}. 
             The weather is ${temperature}°F (${weather}).`;
     } catch (error) {
         document.getElementById("weather-info").textContent =
@@ -101,7 +103,6 @@ function generateCalendar(today) {
 
 
         if (localStorage.getItem(`${dateString}-stat`) !== null) {
-            console.log("Oye");
             let status = localStorage.getItem(`${dateString}-stat`);
             dateElement.classList.remove("good", "decent", "bad");
             if (status) {
@@ -117,7 +118,7 @@ function generateCalendar(today) {
             for (let k = 1; k <= taskAmount; k++) {
                 task = document.createElement("div");
                 task.className = "task";
-                task.textContent = `${localStorage.getItem(`${dateString}-time${k}`)} ${localStorage.getItem(`${dateString}-task${k}`)}`;
+                task.textContent = `${localStorage.getItem(`${dateString}-task${k}`)} ${localStorage.getItem(`${dateString}-time${k}`)}`;
                 dateElement.appendChild(task);
 
             }
@@ -135,6 +136,7 @@ function generateCalendar(today) {
     }
     document.getElementById(`add-task`).addEventListener("click", () => addTaskPopup());
     setTheme();
+    updateStreak();
 
 }
 
@@ -242,18 +244,37 @@ function setDayStatus(day, status) {
 function updateStreak() {
     let streak = 0;
     let today = new Date().getDate();
+    let k = 0;
 
     for (let i = today; i > 0; i--) {
+        let dateString = generateDateString(today - k);
         let status = localStorage.getItem(`${dateString}-stat`);
+
         if (status === "good") {
             streak++;
         } else {
-            break;
+            i = -1;
         }
+        k++;
     }
 
     localStorage.setItem("streak", streak);
     document.getElementById("streak-count").textContent = streak;
+    setHighestStreak(streak);
+}
+
+function setHighestStreak(streakCount) {
+
+    if (localStorage.getItem("streak-High") !== null) {
+        if (streakCount > localStorage.getItem("streak-High")) {
+            localStorage.setItem("streak-High", streakCount);
+        }
+    } else {
+        localStorage.setItem("streak-High", streakCount);
+    }
+
+    document.getElementById("peak-streak").textContent = localStorage.getItem("streak-High");
+
 }
 
 function updateTheme() {
@@ -333,7 +354,7 @@ function setTheme() {
                 /*border color*/
                 element.style.borderColor = " #2e4a70";
             });
-            
+
             // change options color
             document.querySelectorAll(".option-content").forEach(element => {
                 /*background color*/
@@ -499,10 +520,36 @@ function addTaskPopup() {
 
 }
 
+function fixTime(timeStr) {
+
+    var time = timeStr.split(':');
+    var hours = time[0];
+    var minutes = time[1];
+    hours = parseInt(hours);
+    minutes = parseInt(minutes);
+
+    if (hours > 0 && hours <= 12) {
+        time = "" + hours;
+    } else if (hours > 12) {
+        time = "" + (hours - 12);
+    } else if (hours == 0) {
+        time = "12";
+    }
+
+    time += (minutes < 10) ? ":0" + minutes : ":" + minutes;
+    time += (hours >= 12) ? " pm" : " am";
+
+    return time;
+
+}
+
 function addTask() {
 
     var date = document.getElementById("date").value;
     var time = document.getElementById("time").value;
+
+    time = fixTime(time);
+
     var address = document.getElementById("location").value;
     var desc = document.getElementById("desc").value;
     var title = document.getElementById("title").value;
