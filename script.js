@@ -136,12 +136,16 @@ function generateCalendar(today) {
         if (localStorage.getItem(`${dateString}-taskAmount`) !== null) {
             let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
 
-            for (let k = 1; k <= taskAmount; k++) {
-                task = document.createElement("div");
-                task.className = "task";
-                task.textContent = `${localStorage.getItem(`${dateString}-task${k}`)} ${localStorage.getItem(`${dateString}-time${k}`)}`;
-                dateElement.appendChild(task);
+            task = document.createElement("div");
+            task.className = "task";
+            task.textContent = `${localStorage.getItem(`${dateString}-task1`)} ${localStorage.getItem(`${dateString}-time1`)}`;
+            dateElement.appendChild(task);
 
+            if (taskAmount > 1) {
+                task = document.createElement("div");
+                task.className = "see-More";
+                task.textContent = `See ${taskAmount - 1} more...`;
+                dateElement.appendChild(task);
             }
 
         }
