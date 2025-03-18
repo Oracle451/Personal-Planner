@@ -133,17 +133,25 @@ function generateCalendar(today) {
         }
 
         /* Based on dateString, attempts to add Tasks for that day*/
-        if (localStorage.getItem(`${dateString}-taskAmount`) !== null) {
+
+
+
+        if (doesDayHaveTasks(dateString)) {
             let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
+            let taskStart = localStorage.getItem(`${dateString}-taskStart`);
 
-            for (let k = 1; k <= taskAmount; k++) {
+            task = document.createElement("div");
+            task.className = "task";
+            task.textContent = `${localStorage.getItem(`${dateString}-task${taskStart}`)} ${localStorage.getItem(`${dateString}-time${taskStart}`)}`;
+            dateElement.appendChild(task);
+
+
+            if (taskAmount - taskStart > 0) {
                 task = document.createElement("div");
-                task.className = "task";
-                task.textContent = `${localStorage.getItem(`${dateString}-task${k}`)} ${localStorage.getItem(`${dateString}-time${k}`)}`;
+                task.className = "see-More";
+                task.textContent = `See ${taskAmount - taskStart} more...`;
                 dateElement.appendChild(task);
-
             }
-
         }
 
         calendarElement.appendChild(dateElement);
@@ -217,36 +225,6 @@ function openPopup(day) {
     populateTaskArea(day);
 }
 
-function populateTaskArea(numb) {
-
-    let dateString = generateDateString(numb);
-
-    if (localStorage.getItem(`${dateString}-taskAmount`) !== null) {
-        let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
-
-        for (let k = 1; k <= taskAmount; k++) {
-            task = document.createElement("div");
-            task.className = "task-Long";
-            task.innerHTML = `
-                <p>Title: ${localStorage.getItem(`${dateString}-task${k}`)} at <span class="times">${localStorage.getItem(`${dateString}-time${k}`)}</span>
-                    <br>
-                
-                    Where: ${localStorage.getItem(`${dateString}-addy${k}`)}
-                    <br>
-                    Description: ${localStorage.getItem(`${dateString}-desc${k}`)}
-                </p>
-            `;
-            document.getElementById("task-Area").appendChild(task);
-        }
-    } else {
-        document.getElementById("task-Area").innerHTML = `
-                <h2>Tasks:</h2>
-                <p>
-                Nothing to Show!
-                </p>
-            `;
-    }
-}
 
 function closePopup() {
     document.getElementById("popup").style.display = "none";
@@ -485,6 +463,62 @@ function updateCalories(day, change) {
     }
 }
 
+function addTask() {
+
+    var date = document.getElementById("date").value;
+    var time = document.getElementById("time").value;
+
+    time = fixTime(time);
+
+    var address = document.getElementById("location").value;
+    var desc = document.getElementById("desc").value;
+    var title = document.getElementById("title").value;
+
+    if (title !== "" && date !== "" && time !== ":NaN am") {
+
+        if (localStorage.getItem(`${date}-taskAmount`) === "" || localStorage.getItem(`${date}-taskAmount`) === null) {
+
+            localStorage.setItem(`${date}-taskStart`, 1);
+            localStorage.setItem(`${date}-taskAmount`, 1)
+
+            localStorage.setItem(`${date}-task1`, title)
+            localStorage.setItem(`${date}-desc1`, desc)
+            localStorage.setItem(`${date}-time1`, time)
+            localStorage.setItem(`${date}-addy1`, address)
+        } else {
+            var taskAmount = parseInt(localStorage.getItem(`${date}-taskAmount`));
+            taskAmount = taskAmount + 1;
+            localStorage.setItem(`${date}-taskAmount`, (taskAmount))
+            localStorage.setItem(`${date}-task${taskAmount}`, title)
+            localStorage.setItem(`${date}-desc${taskAmount}`, desc)
+            localStorage.setItem(`${date}-time${taskAmount}`, time)
+            localStorage.setItem(`${date}-addy${taskAmount}`, address)
+
+        }
+    }
+
+
+}
+
+
+function removeTask(when, which) {
+
+    let taskStart = parseInt(localStorage.getItem(`${when}-taskStart`));
+
+    localStorage.setItem(`${when}-task${which}`, localStorage.getItem(`${when}-task${taskStart}`));
+    localStorage.setItem(`${when}-desc${which}`, localStorage.getItem(`${when}-desc${taskStart}`));
+    localStorage.setItem(`${when}-time${which}`, localStorage.getItem(`${when}-time${taskStart}`));
+    localStorage.setItem(`${when}-addy${which}`, localStorage.getItem(`${when}-addy${taskStart}`));
+
+    localStorage.setItem(`${when}-taskStart`, taskStart + 1);
+
+    localStorage.removeItem(`${when}-task${taskStart}`);
+    localStorage.removeItem(`${when}-desc${taskStart}`);
+    localStorage.removeItem(`${when}-time${taskStart}`);
+    localStorage.removeItem(`${when}-addy${taskStart}`);
+
+}
+
 //Function for add task button
 function addTaskPopup() {
     document.getElementById("popup-content").innerHTML = `
@@ -493,7 +527,7 @@ function addTaskPopup() {
             <h2>Task Maker: </h2>
             <button id="popup-close-btn" class="close-btn">Close</button>
 
-            <form onsubmit="return false">
+            <form>
                 <h3>What:</h3>
 
                 <label for="title">Title:</label>
@@ -506,7 +540,7 @@ function addTaskPopup() {
                 <label for="desc">Description:</label>
                 <br>
                 
-                <textarea id="desc" name="desc" rows="5" cols="25" maxlength="144" required></textarea>
+                <textarea id="desc" name="desc" rows="5" cols="25" maxlength="144"></textarea>
                 <br>
 
 
@@ -542,6 +576,64 @@ function addTaskPopup() {
 
 }
 
+function doesDayHaveTasks(dateString) {
+    let total = -1;
+    if (localStorage.getItem(`${dateString}-taskAmount`) !== null && localStorage.getItem(`${dateString}-taskAmount`) > 0) {
+        let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
+        let taskStart = localStorage.getItem(`${dateString}-taskStart`);
+        total = taskAmount - taskStart;
+    }
+
+    if (total < 0) {
+        localStorage.removeItem(`${dateString}-taskAmount`);
+        localStorage.removeItem(`${dateString}-taskStart`);
+        return false;
+    }
+
+    return true;
+
+}
+
+function populateTaskArea(numb) {
+
+    let dateString = generateDateString(numb);
+    let total = -1;
+
+
+    if (doesDayHaveTasks(dateString)) {
+        let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
+        let taskStart = localStorage.getItem(`${dateString}-taskStart`);
+        for (let k = taskStart; k <= taskAmount; k++) {
+            task = document.createElement("div");
+            task.className = "task-Long";
+            task.innerHTML = `
+                <p>Title: ${localStorage.getItem(`${dateString}-task${k}`)} at <span class="times">${localStorage.getItem(`${dateString}-time${k}`)}</span>
+                    <br>
+                
+                    Where: ${localStorage.getItem(`${dateString}-addy${k}`)}
+                    <br>
+                    Description: ${localStorage.getItem(`${dateString}-desc${k}`)}
+                    <br>
+                    <button class="edit-Task" id="edit-${dateString}-task${k}">edit</button>
+                    <button class="remove-Task" id="remove-${dateString}-task${k}">remove</button>
+                </p> 
+            `;
+
+            document.getElementById("task-Area").appendChild(task);
+            document.getElementById(`edit-${dateString}-task${k}`).addEventListener("click", () => editTask(dateString, k));
+            document.getElementById(`remove-${dateString}-task${k}`).addEventListener("click", () => removeTask(dateString, k));
+
+        }
+    } else {
+        document.getElementById("task-Area").innerHTML = `
+                <h2>Tasks:</h2>
+                <p>
+                Nothing to Show!
+                </p>
+            `;
+    }
+}
+
 function fixTime(timeStr) {
 
     var time = timeStr.split(':');
@@ -565,42 +657,6 @@ function fixTime(timeStr) {
 
 }
 
-function addTask() {
-
-    var date = document.getElementById("date").value;
-    var time = document.getElementById("time").value;
-
-    time = fixTime(time);
-
-    var address = document.getElementById("location").value;
-    var desc = document.getElementById("desc").value;
-    var title = document.getElementById("title").value;
-
-    if (date != null && time != null && desc != "") {
-
-        localStorage.setItem(date, "1")
-        if (localStorage.getItem(`${date}-taskAmount`) === "" || localStorage.getItem(`${date}-taskAmount`) === null) {
-            localStorage.setItem(`${date}-taskAmount`, 1)
-
-            localStorage.setItem(`${date}-task1`, title)
-            localStorage.setItem(`${date}-desc1`, desc)
-            localStorage.setItem(`${date}-time1`, time)
-            localStorage.setItem(`${date}-addy1`, address)
-        } else {
-            var taskAmount = parseInt(localStorage.getItem(`${date}-taskAmount`));
-            taskAmount = taskAmount + 1;
-            localStorage.setItem(`${date}-taskAmount`, (taskAmount))
-            localStorage.setItem(`${date}-task${taskAmount}`, title)
-            localStorage.setItem(`${date}-desc${taskAmount}`, desc)
-            localStorage.setItem(`${date}-time${taskAmount}`, time)
-            localStorage.setItem(`${date}-addy${taskAmount}`, address)
-
-        }
-    }
-    location.reload();
-
-
-}
 
 function makeButtons() {
     document.getElementById("back").addEventListener("click", () => updateOnScreen(-1));

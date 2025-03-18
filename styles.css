@@ -109,7 +109,7 @@ header {
     font-weight: bold;
     flex: 5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	overflow-y: auto;
+    overflow-y: auto;
 }
 
 .streak-section {
@@ -405,6 +405,15 @@ header {
 
 }
 
+.see-More {
+    background-color: gray;
+    border-radius: 50px;
+    text-align: start;
+    font-size: small;
+    padding-left: 10px;
+    margin: 5px;
+}
+
 .day-Popup {
     width: 80vw;
     display: grid;
@@ -414,7 +423,9 @@ header {
 .task-Area {
     padding-top: 20px;
     padding-left: 10px;
+    height: 80vh;
     text-align: left;
+    overflow-y: auto;
 }
 
 .cool-Line {
@@ -429,6 +440,19 @@ header {
     color: #001f3f;
     font-size: large;
     margin-bottom: 20px;
+}
+
+.edit-Task,
+.remove-Task {
+    display: none;
+}
+
+
+
+.task-Long:hover .edit-Task,
+.task-Long:hover .remove-Task {
+    display: inline;
+
 }
 
 .times {
