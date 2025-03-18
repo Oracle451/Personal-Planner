@@ -109,12 +109,13 @@ header {
     font-weight: bold;
     flex: 5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	overflow-y: auto;
 }
 
 .streak-section {
     font-size: 1rem;
     width: fit-content;
-    max-width: 50%;
+    max-width: 100%;
     line-height: 0.8;
     padding: 0.2rem;
 }
