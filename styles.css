@@ -442,6 +442,19 @@ header {
     margin-bottom: 20px;
 }
 
+.edit-Task,
+.remove-Task {
+    display: none;
+}
+
+
+
+.task-Long:hover .edit-Task,
+.task-Long:hover .remove-Task {
+    display: inline;
+
+}
+
 .times {
     border-bottom: 1px solid #0000EE;
     color: #0000EE;
