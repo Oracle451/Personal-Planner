@@ -32,11 +32,11 @@ A Web Browser capable of running modern HTML, CSS, and JavaScript
 ```
 
 ```
-[Git](https://git-scm.com/)
+Git(https://git-scm.com/)
 ```
 
 ```
-A code editor (e.g., [Visual Studio Code](https://code.visualstudio.com/))
+A code editor (e.g., Visual Studio Code(https://code.visualstudio.com/))
 ```
 
 ### Installing
@@ -47,9 +47,7 @@ A step by step series of examples that tell you how to get a development env run
 
 ```
 Open your terminal and run the following command to clone the repository:
-
-   ```bash
-   git clone [https://github.com/your-username/personal-planner-app.git](https://github.com/Oracle451/Personal-Planner.git)
+git clone [https://github.com/your-username/personal-planner-app.git](https://github.com/Oracle451/Personal-Planner.git)
 ```
 
 **Navigate to the project directory:**
