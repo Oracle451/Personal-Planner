@@ -47,7 +47,7 @@ A step by step series of examples that tell you how to get a development env run
 
 ```
 Open your terminal and run the following command to clone the repository:
-git clone [https://github.com/your-username/personal-planner-app.git](https://github.com/Oracle451/Personal-Planner.git)
+git clone git@github.com:your-username/Personal-Planner.git
 ```
 
 **Navigate to the project directory:**
