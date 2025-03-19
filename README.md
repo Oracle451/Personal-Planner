@@ -31,23 +31,50 @@ What things you need to install the software and how to install them
 A Web Browser capable of running modern HTML, CSS, and JavaScript
 ```
 
+```
+[Git](https://git-scm.com/)
+```
+
+```
+A code editor (e.g., [Visual Studio Code](https://code.visualstudio.com/))
+```
+
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
+**Clone the repository:**
 
 ```
-Give the example
+Open your terminal and run the following command to clone the repository:
+
+   ```bash
+   git clone [https://github.com/your-username/personal-planner-app.git](https://github.com/Oracle451/Personal-Planner.git)
 ```
 
-And repeat
+**Navigate to the project directory:**
 
 ```
-until finished
+cd Personal-Planner
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+**Edit Codebase Files:**
+
+```
+open index.html, styles.css, and script.js in a text editor
+```
+
+**View Your Changes In Real Time:**
+
+```
+open index.html in your web browser to view your local version of the website
+```
+
+**Ensure it is Working Properly:**
+
+```
+Make a JavaScript function to retreive the current day or calorie count to become familiar with fetching data in the system
+```
 
 ## Running the tests
 
@@ -71,7 +98,7 @@ Give an example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Insert additional notes about how to deploy this on a live system
 
 ## Built With
 
@@ -109,7 +136,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.tx
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Various websites inspired the central side bar like Gmail
+* The Icloud website originally inspired the idea for an all in one planner site
 
