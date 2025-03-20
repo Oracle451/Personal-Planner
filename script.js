@@ -631,6 +631,273 @@ function addTaskPopup(title, desc, date, time, addy, task) {
 
 }
 
+function openCreateMealPopup() {
+    document.getElementById("popup-content").innerHTML = `
+      <div>
+        <h2>Create Meal</h2>
+        <button id="popup-close-btn" class="close-btn">Close</button>
+        <form id="create-meal-form">
+          <div>
+            <label for="create-meal-name">Meal Name:</label>
+            <input type="text" id="create-meal-name" name="create-meal-name" required>
+          </div>
+          <div>
+            <label for="create-meal-calories">Calories (per serving):</label>
+            <input type="number" id="create-meal-calories" name="create-meal-calories" min="0" required>
+          </div>
+          <div>
+            <label for="create-meal-protein">Protein (grams per serving) (Optional):</label>
+            <input type="number" id="create-meal-protein" name="create-meal-protein" min="0">
+          </div>
+          <div>
+            <label for="create-meal-carbs">Carbohydrates (grams per serving) (Optional):</label>
+            <input type="number" id="create-meal-carbs" name="create-meal-carbs" min="0">
+          </div>
+          <div>
+            <label for="create-meal-fats">Fats (grams per serving) (Optional):</label>
+            <input type="number" id="create-meal-fats" name="create-meal-fats" min="0">
+          </div>
+          <div>
+            <label for="create-meal-serving-size">Serving Size:</label>
+            <input type="text" id="create-meal-serving-size" name="create-meal-serving-size" required>
+          </div>
+          <br>
+          <button type="submit">Create Meal</button>
+        </form>
+      </div>
+    `;
+  
+    document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+    document.getElementById("create-meal-form").addEventListener("submit", handleCreateMealSubmit);
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay-bg").style.display = "block";
+  }
+  
+  function handleCreateMealSubmit(event) {
+    event.preventDefault(); 
+  
+    const mealName = document.getElementById("create-meal-name").value;
+    const calories = document.getElementById("create-meal-calories").value;
+    const protein = document.getElementById("create-meal-protein").value;
+    const carbs = document.getElementById("create-meal-carbs").value;
+    const fats = document.getElementById("create-meal-fats").value;
+    const servingSize = document.getElementById("create-meal-serving-size").value;
+  
+    const newMeal = {
+      name: mealName,
+      calories: calories,
+      protein: protein,
+      carbs: carbs,
+      fats: fats,
+      servingSize: servingSize
+    };
+  
+  
+    console.log("Created Meal:", newMeal);
+  
+  
+  
+    closePopup(); 
+  }
+  
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    const createMealButton = Array.from(document.querySelectorAll('.streak-section')).find(section => section.querySelector('h2')?.textContent.includes('Meals'))?.querySelectorAll('button')[0];
+    if (createMealButton) {
+      createMealButton.onclick = openCreateMealPopup;
+    }
+  });
+
+function openLogMealPopup() {
+    document.getElementById("popup-content").innerHTML = `
+      <div>
+        <h2>Log Meal</h2>
+        <button id="popup-close-btn" class="close-btn">Close</button>
+        <form id="log-meal-form">
+          <div>
+            <label for="meal-name">Meal Name:</label>
+            <input type="text" id="meal-name" name="meal-name" required>
+          </div>
+          <div>
+            <label for="meal-date">Date:</label>
+            <input type="date" id="meal-date" name="meal-date" value="${new Date().toISOString().split('T')[0]}" required>
+          </div>
+          <div>
+            <label for="meal-calories">Calories:</label>
+            <input type="number" id="meal-calories" name="meal-calories" min="0" required>
+          </div>
+          <div>
+            <label for="serving-size">Serving Size (Optional):</label>
+            <input type="text" id="serving-size" name="serving-size">
+          </div>
+          <br>
+          <button type="submit">Log Meal</button>
+        </form>
+      </div>
+    `;
+  
+    document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+    document.getElementById("log-meal-form").addEventListener("submit", handleLogMealSubmit);
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay-bg").style.display = "block";
+  }
+  
+  function handleLogMealSubmit(event) {
+    event.preventDefault(); 
+  
+    const mealName = document.getElementById("meal-name").value;
+    const mealDate = document.getElementById("meal-date").value;
+    const mealCalories = document.getElementById("meal-calories").value;
+    const servingSize = document.getElementById("serving-size").value;
+  
+    const loggedMeal = {
+      name: mealName,
+      date: mealDate,
+      calories: mealCalories,
+      servingSize: servingSize
+    };
+  
+ 
+    console.log("Logged Meal:", loggedMeal);
+  
+  
+    closePopup(); 
+  }
+
+  function openViewMealsPopup() {
+    let loggedMealsHTML = '<h3>Logged Meals:</h3>';
+    let createdMealsHTML = '<h3>Created Meals:</h3>';
+  
+    
+    let loggedMeals = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith('loggedMeal-')) {
+        try {
+          const meal = JSON.parse(localStorage.getItem(key));
+          loggedMeals.push(meal);
+        } catch (e) {
+          console.error('Error parsing logged meal:', key, e);
+        }
+      }
+    }
+  
+    if (loggedMeals.length > 0) {
+      loggedMeals.forEach(meal => {
+        loggedMealsHTML += `
+          <div class="meal-entry">
+            <strong>${meal.name}</strong> (${meal.date})<br>
+            Calories: ${meal.calories}
+            ${meal.servingSize ? `<br>Serving Size: ${meal.servingSize}` : ''}
+          </div>
+        `;
+      });
+    } else {
+      loggedMealsHTML += '<p>No meals have been logged yet.</p>';
+    }
+  
+    
+    let createdMeals = [];
+    const createdMealsString = localStorage.getItem('createdMeals');
+    if (createdMealsString) {
+      try {
+        createdMeals = JSON.parse(createdMealsString);
+      } catch (e) {
+        console.error('Error parsing created meals:', e);
+      }
+    }
+  
+    if (createdMeals.length > 0) {
+      createdMeals.forEach(meal => {
+        createdMealsHTML += `
+          <div class="meal-entry">
+            <strong>${meal.name}</strong><br>
+            Calories (per serving): ${meal.calories}
+            ${meal.protein ? `<br>Protein: ${meal.protein}g` : ''}
+            ${meal.carbs ? `<br>Carbs: ${meal.carbs}g` : ''}
+            ${meal.fats ? `<br>Fats: ${meal.fats}g` : ''}
+            Serving Size: ${meal.servingSize}
+          </div>
+        `;
+      });
+    } else {
+      createdMealsHTML += '<p>No meals have been created yet.</p>';
+    }
+  
+    document.getElementById("popup-content").innerHTML = `
+      <div>
+        <h2>View Meals</h2>
+        <button id="popup-close-btn" class="close-btn">Close</button>
+        ${loggedMealsHTML}
+        <hr>
+        ${createdMealsHTML}
+      </div>
+    `;
+  
+    document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay-bg").style.display = "block";
+  }
+  
+  
+  function handleLogMealSubmit(event) {
+    event.preventDefault();
+  
+    const mealName = document.getElementById("meal-name").value;
+    const mealDate = document.getElementById("meal-date").value;
+    const mealCalories = document.getElementById("meal-calories").value;
+    const servingSize = document.getElementById("serving-size").value;
+  
+    const loggedMeal = {
+      name: mealName,
+      date: mealDate,
+      calories: mealCalories,
+      servingSize: servingSize
+    };
+  
+   
+    const timestamp = new Date().getTime();
+    localStorage.setItem(`loggedMeal-${mealDate}-${timestamp}`, JSON.stringify(loggedMeal));
+  
+    closePopup();
+  }
+  
+ 
+  function handleCreateMealSubmit(event) {
+    event.preventDefault();
+  
+    const mealName = document.getElementById("create-meal-name").value;
+    const calories = document.getElementById("create-meal-calories").value;
+    const protein = document.getElementById("create-meal-protein").value;
+    const carbs = document.getElementById("create-meal-carbs").value;
+    const fats = document.getElementById("create-meal-fats").value;
+    const servingSize = document.getElementById("create-meal-serving-size").value;
+  
+    const newMeal = {
+      name: mealName,
+      calories: calories,
+      protein: protein,
+      carbs: carbs,
+      fats: fats,
+      servingSize: servingSize
+    };
+  
+    
+    const existingMealsString = localStorage.getItem('createdMeals');
+    let existingMeals = [];
+    if (existingMealsString) {
+      try {
+        existingMeals = JSON.parse(existingMealsString);
+      } catch (e) {
+        console.error('Error parsing existing created meals:', e);
+      }
+    }
+    existingMeals.push(newMeal);
+    localStorage.setItem('createdMeals', JSON.stringify(existingMeals));
+  
+    closePopup();
+  }
+
 function doesDayHaveTasks(dateString) {
     let total = -1;
     if (localStorage.getItem(`${dateString}-taskAmount`) !== null && localStorage.getItem(`${dateString}-taskAmount`) > 0) {
