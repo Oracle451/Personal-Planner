@@ -21,12 +21,11 @@ header {
     /*text alignment and style*/
     color: #ffffff;
     font-size: 2.3rem;
-<<<<<<< Updated upstream
-    padding: 0.5rem 0;
+
     text-align: center;
-=======
->>>>>>> Stashed changes
     text-shadow: -2px 2px #2e4a70;
+    line-height: 0.8;
+    padding: 0.2rem;
 }
 
 /*options drop down menu*/
@@ -45,7 +44,7 @@ header {
     cursor: pointer;
 }
 
-.optionbtn img{
+.optionbtn img {
     width: 50px;
     height: 50px;
 }
@@ -82,7 +81,7 @@ header {
 }
 
 /* Show dropdown when hovered */
-.option:hover .option-content{
+.option:hover .option-content {
     display: block;
 }
 
@@ -112,17 +111,16 @@ header {
     font-size: 1.5rem;
     flex: 5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
 }
 
-
 .streak-section {
-<<<<<<< Updated upstream
-    /* margin: 0.5rem auto; */
-    font-size: inherit;
-=======
->>>>>>> Stashed changes
+
+    font-size: 1rem;
     width: fit-content;
-    max-width: 60%;
+    max-width: 100%;
+    line-height: 0.8;
+    padding: 0.2rem;
 }
 
 .grid-layout {
@@ -378,12 +376,21 @@ header {
     background-color: #f8d0c8;
     border-radius: 50px;
     text-align: start;
-    padding: 3px;
+    padding: 5px 10px;
     margin: 5px;
     border: #35522b;
     border-style: dashed;
     border-width: 1px;
 
+}
+
+.see-More {
+    background-color: gray;
+    border-radius: 50px;
+    text-align: start;
+    font-size: small;
+    padding-left: 10px;
+    margin: 5px;
 }
 
 .day-Popup {
@@ -395,7 +402,9 @@ header {
 .task-Area {
     padding-top: 20px;
     padding-left: 10px;
+    height: 80vh;
     text-align: left;
+    overflow-y: auto;
 }
 
 .cool-Line {
@@ -410,6 +419,19 @@ header {
     color: #001f3f;
     font-size: large;
     margin-bottom: 20px;
+}
+
+.edit-Task,
+.remove-Task {
+    display: none;
+}
+
+
+
+.task-Long:hover .edit-Task,
+.task-Long:hover .remove-Task {
+    display: inline;
+
 }
 
 .times {
