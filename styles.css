@@ -4,6 +4,9 @@ body {
     font-family: 'MyFont', sans-serif;
     margin: 0;
     padding: 0;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 
@@ -18,8 +21,11 @@ header {
     /*text alignment and style*/
     color: #ffffff;
     font-size: 2.3rem;
+<<<<<<< Updated upstream
     padding: 0.5rem 0;
     text-align: center;
+=======
+>>>>>>> Stashed changes
     text-shadow: -2px 2px #2e4a70;
 }
 
@@ -86,7 +92,6 @@ header {
     font-family: 'MyFont';
     src: url('/Fonts/Simple_Bold.ttf.ttf') format('opentype');
     /* or "otf" */
-    font-weight: Bold;
     font-style: normal;
 }
 
@@ -105,19 +110,20 @@ header {
     color: #2e4a70;
     padding: 1rem;
     font-size: 1.5rem;
-    font-weight: bold;
     flex: 5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 
 .streak-section {
+<<<<<<< Updated upstream
     /* margin: 0.5rem auto; */
     font-size: inherit;
+=======
+>>>>>>> Stashed changes
     width: fit-content;
     max-width: 60%;
 }
-
 
 .grid-layout {
     /*grid set up*/
@@ -129,14 +135,6 @@ header {
     height: calc(100vh - 10rem);
     /* Adjust for header/footer height */
 }
-
-/* .grid-layout {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-	margin: 10px;
-} */
-
 
 /* Calendar Section */
 .calendar-section {
@@ -154,12 +152,6 @@ header {
     padding: 1rem;
     margin: 0;
 }
-
-
-/* .calendar-section {
-    width: 100%;
-} */
-
 
 /* Calendar */
 .calendar {
@@ -183,8 +175,6 @@ header {
     border-style: solid;
     border-width: 1px;
     /*text formatting*/
-    text-align: center;
-    font-weight: bold;
     color: #001f3f;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
@@ -201,8 +191,6 @@ header {
     border-style: solid;
     border-width: 1px;
     /*text formatting and styling*/
-    text-align: center;
-    font-weight: bold;
     color: #001f3f;
 }
 
@@ -216,8 +204,6 @@ header {
     border-style: solid;
     border-width: 1px;
     /*text formatting and styling*/
-    text-align: center;
-    font-weight: bold;
     color: #2e4a70;
 }
 
@@ -229,8 +215,6 @@ header {
     width: fit-content;
     padding: 1rem;
     padding-bottom: 0;
-    text-align: center;
-    font-size: 1rem;
 }
 
 /* replace .day and add .day-lables (dont add this comment) */
@@ -340,7 +324,6 @@ header {
 
 /* styling for calorie counter buttons */
 .calorie-counter {
-    text-align: center;
     margin-top: 20px;
 }
 
