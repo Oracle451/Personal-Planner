@@ -478,7 +478,6 @@ function addTask(taskNumb, oldDate) {
 
     if (localStorage.getItem(`${date}-taskAmount`) === "" || localStorage.getItem(`${date}-taskAmount`) === null) {
 
-      console.log("Hey")
       localStorage.setItem(`${date}-taskStart`, 1);
       localStorage.setItem(`${date}-taskAmount`, 1)
 
@@ -488,7 +487,6 @@ function addTask(taskNumb, oldDate) {
       localStorage.setItem(`${date}-addy1`, address)
     } else {
       var taskAmount;
-      console.log("Here!");
       if (taskNumb != 0 && givenDate === date) {
         taskAmount = taskNumb;
       } else {
@@ -512,6 +510,9 @@ function addTask(taskNumb, oldDate) {
 
 }
 
+if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
+  module.exports = { addTask };
+}
 
 function removeTask(when, which) {
 

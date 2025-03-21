@@ -1,0 +1,15 @@
+{
+  "name": "personal-planner",
+  "version": "1.0.0",
+  "description": "This is a group project for CS-386 (Software Engineering)",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
+  "author": "",
+  "license": "ISC"
+}
