@@ -516,6 +516,8 @@ function removeTask(when, which) {
     localStorage.removeItem(`${when}-desc${taskStart}`);
     localStorage.removeItem(`${when}-time${taskStart}`);
     localStorage.removeItem(`${when}-addy${taskStart}`);
+	
+	location.reload();
 
 }
 
