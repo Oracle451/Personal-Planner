@@ -134,8 +134,6 @@ function generateCalendar(today) {
 
         /* Based on dateString, attempts to add Tasks for that day*/
 
-
-        console.log(dateString);
         if (doesDayHaveTasks(dateString)) {
             let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
             let taskStart = localStorage.getItem(`${dateString}-taskStart`);
@@ -557,7 +555,8 @@ function editTaskSetUp(when, which) {
         hours += 12;
     }
 
-    time = hours;
+    time = "";
+    time += (hours < 10) ? "0" + hours : hours;
     time += (minutes < 10) ? ":0" + minutes : ":" + minutes;
 
 
