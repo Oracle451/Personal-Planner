@@ -13,7 +13,7 @@ function workoutPopup(name, desc, category, type) {
                     <form id="workout-form">
                         <label for="workout-name">Workout Name</label>
                         <br>
-                        <textarea id="workout-name" name="workout-name" maxlength="16" placeholder="Name workout here..." required>${givenName}</textarea>
+                        <textarea id="workout-name" name="workout-name" maxlength="63" placeholder="Name workout here..." required>${givenName}</textarea>
                         
                         <br>
                         <label for="workout-desc">Description:</label>
@@ -126,16 +126,16 @@ function showWorkoutLibrary() {
             
             // add edit and remove buttons
             element += `
-                <button class="edit-Task" id="edit-workout-${i}">edit</button>`
-                // <button class="remove-Task" id="remove-workout-${i}">remove</button>     remove this comment and move the tilde when adding the remove functionality
-
+                <button class="edit-Task" id="edit-workout-${i}">edit</button>
+                <button class="remove-Task" id="remove-workout-${i}">remove</button>`
+                
             // add to elements
             workout.innerHTML = element;    // add html to new div
             document.getElementById("workout-lib").appendChild(workout) // add new div to workouts tab
 
             // add functionality to the buttons
             document.getElementById(`edit-workout-${i}`).addEventListener("click", () => editWorkoutsSetup(i))
-            // document.getElementById(`remove-workout-${i}`).addEventListener("click", () => removeWorkout(i))     // remove comment when implementing remove functionality
+            document.getElementById(`remove-workout-${i}`).addEventListener("click", () => removeWorkout(i))
         }
     } else {
         // if there arn't any workouts, append no workouts message
@@ -166,5 +166,26 @@ function editWorkout(type) {
     localStorage.setItem(`workout-categories-${type}`, category)
 
     // call popup to update information
+    workoutPopup()
+}
+
+function removeWorkout(type) {
+    // get the last element for workouts
+    var last = localStorage.getItem("workout-amount")
+
+    // decrement workout amount
+    localStorage.setItem("workout-amount", last - 1)
+
+    // set last item data to item getting removed
+    localStorage.setItem(`workout-name-${type}`, localStorage.getItem(`workout-name-${last}`))
+    localStorage.setItem(`workout-desc-${type}`, localStorage.getItem(`workout-desc-${last}`))
+    localStorage.setItem(`workout-categories-${type}`, localStorage.getItem(`workout-categories-${last}`))
+
+    // remove last element
+    localStorage.removeItem(`workout-name-${last}`)
+    localStorage.removeItem(`workout-desc-${last}`)
+    localStorage.removeItem(`workout-categories-${last}`)
+
+    // reload popup
     workoutPopup()
 }
