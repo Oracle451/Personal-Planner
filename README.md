@@ -4,6 +4,8 @@ This is a group project for CS-386 (Software Engineering)
 
 The Iron Man Planner is a fitness and nutrition tracker that allows groups such as athletes, trainers, and health conscious people to efficiently manage aspects of their fitness tasks by integrating all of these key elements into a single platform.
 
+Current Version: 1.0.0
+
 ## Features
 
 - **Greeting Card**: Presents relevant data tailored to the user like a time specific greeting and weather status report.
