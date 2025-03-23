@@ -85,16 +85,6 @@ Print screen:
 
 ### Tests
 
-* You should implement automated tests that aim to verify the correct behavior of your code. Provide the following information:  
-* Test framework you used to develop your tests (e.g., JUnit, unittest, pytest, etc.)  
-* Link to your GitHub folder where your automated unit tests are located.  
-* An example of a test case. Include in your answer as a GitHub link to the class being tested and to the test.  
-* A print screen showing the result of the execution of the automated tests. 
-
-*Grading criteria (3 points):* You should have an adequate number of automated tests. They should be well-written to exercise the main components of your system, covering the relevant inputs.
-
-\[Insert Tests Here\]
-
 [Link to Tests Folder in the Github Repository](https://github.com/Oracle451/Personal-Planner/blob/main/script.test.js)
 
 Test 1: Add Task Stores Task In Local Storage
