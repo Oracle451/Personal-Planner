@@ -85,15 +85,22 @@ Print screen:
 
 ### Tests
 
-[Link to Tests Folder in the Github Repository](https://github.com/Oracle451/Personal-Planner/blob/main/script.test.js)
+Test Framework: Jest
 
-Test 1: Add Task Stores Task In Local Storage
+Test 1: AddTask is handling it’s responsibilities  
+Description: AddTask is expected to complete two things for each day it’s called on. For a given day, it is expected to save the task information to localStorage, and increment taskAmount and save it in localStorage,
 
-Testing Framework: [JEST](https://jestjs.io/docs/getting-started)
+Test 2: doesDayHaveTasks properly returns a true or false boolean depending on a given dateString by accessing localStorage.
 
-Test 2: Add Task Increments the Task Counter
+Test 3: removeTask properly deletes data for it’s given task in localStorage
 
-Testing Framework: [JEST](https://jestjs.io/docs/getting-started)
+Github link to [script.test.js](https://github.com/Oracle451/Personal-Planner/blob/main/script.test.js), where the automated test code is.  
+Githublink to [script.js](https://github.com/Oracle451/Personal-Planner/blob/main/script.js), the script being tested, specifically functions:  
+addTask();  
+removeTask();  
+doesDayHaveTasks();
+
+![Img1](Image14.png)
 
 ### Technology
 
