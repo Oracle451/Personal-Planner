@@ -510,10 +510,6 @@ function addTask(taskNumb, oldDate) {
 
 }
 
-if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
-  module.exports = { addTask };
-}
-
 function removeTask(when, which) {
 
   let taskStart = parseInt(localStorage.getItem(`${when}-taskStart`));
@@ -928,6 +924,15 @@ function makeButtons() {
   document.getElementById("create-Meal").addEventListener("click", () => openCreateMealPopup());
   document.getElementById("log-Meal").addEventListener("click", () => openLogMealPopup());
   document.getElementById("view-Meals").addEventListener("click", () => openViewMealsPopup());
+}
+
+
+/*
+This if statement allows the jest to run, do not touch outside of appending functions after addTask
+so they can be recognized by script.test.js
+*/
+if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
+  module.exports = { addTask, removeTask, doesDayHaveTasks };
 }
 
 
