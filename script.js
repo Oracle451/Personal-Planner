@@ -276,12 +276,60 @@ function setHighestStreak(streakCount) {
 
 function updateTheme() {
   var selector = document.getElementById("themes");
+  
   selector.onchange = (event) => {
     localStorage.setItem("theme", selector.value);
     setTheme();
-  }
 
+    // Show toast notification
+    const toast = document.createElement("div");
+
+    var themeName;
+    if (selector.value == "standard") {
+      themeName = "Deep Ocean";
+    } else if (selector.value == "spring") {
+      themeName = "Spring";
+    } else {
+      themeName = selector.value; // fallback
+    }
+
+    toast.textContent = `Theme Set To ${themeName}`;
+
+    
+    // Style the toast
+    toast.style.position = "fixed";
+    toast.style.bottom = "30px";
+    toast.style.left = "50%";
+    toast.style.transform = "translateX(-50%)";
+    toast.style.backgroundColor = "white"; // Light blue
+    toast.style.color = "black";
+    toast.style.padding = "12px 20px";
+    toast.style.border = "2px solid black";
+    toast.style.borderRadius = "10px";
+    toast.style.fontWeight = "bold";
+    toast.style.boxShadow = "0px 4px 8px rgba(0,0,0,0.3)";
+    toast.style.opacity = "0";
+    toast.style.transition = "opacity 0.5s";
+    toast.style.zIndex = "1000";
+
+    // Add to DOM
+    document.body.appendChild(toast);
+
+    // Fade in
+    setTimeout(() => {
+      toast.style.opacity = "1";
+    }, 100);
+
+    // Fade out and remove
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      setTimeout(() => {
+        toast.remove();
+      }, 500);
+    }, 2500);
+  };
 }
+
 
 function setTheme() {
   var selector = document.getElementById("themes");
@@ -974,6 +1022,43 @@ document.addEventListener("DOMContentLoaded", () => {
 // Called by the clear-button
 function clearCookies() {
   // Clear local storage
-  localStorage.clear()
+  localStorage.clear();
+
+  // Create toast
+  const toast = document.createElement("div");
+  toast.textContent = "Cookies have been cleared!";
+  
+  // Style the toast
+  toast.style.position = "fixed";
+  toast.style.bottom = "30px";
+  toast.style.left = "50%";
+  toast.style.transform = "translateX(-50%)";
+  toast.style.backgroundColor = "red";
+  toast.style.color = "white";
+  toast.style.padding = "12px 20px";
+  toast.style.border = "2px solid black";
+  toast.style.borderRadius = "10px";
+  toast.style.fontWeight = "bold";
+  toast.style.boxShadow = "0px 4px 8px rgba(0,0,0,0.3)";
+  toast.style.opacity = "0";
+  toast.style.transition = "opacity 0.5s";
+  toast.style.zIndex = "1000";
+
+  // Add to DOM
+  document.body.appendChild(toast);
+
+  // Fade in
+  setTimeout(() => {
+    toast.style.opacity = "1";
+  }, 100);
+
+  // Fade out and remove
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    setTimeout(() => {
+      toast.remove();
+    }, 500);
+  }, 2500);
 }
+
 
