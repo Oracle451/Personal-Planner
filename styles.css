@@ -439,6 +439,61 @@ header {
     color: #0000EE;
 }
 
+.sidebarBtn {
+    width: 100%; /* Makes the button stretch across the container */
+    padding: 10px 20px;
+    background-color: lightblue; /* Light blue fill color */
+    border: 3px solid black; /* Bold black border */
+    border-radius: 25px; /* Rounded edges */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sidebarBtn:hover {
+    background-color: white; /* Turn background to white */
+    color: black; /* Change text color to black for contrast */
+	transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.clearcookiesBtn {
+    background-color: red; /* Red fill color */
+    border: 3px solid black; /* Bold black border */
+    border-radius: 25px; /* Rounded edges */
+    font-size: 16px;
+    font-weight: bold;
+    color: white; /* White text color */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.clearcookiesBtn:hover {
+    background-color: white; /* Turn background to white */
+    color: black; /* Change text color to black for contrast */
+	transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.themes {
+    padding: 10px 20px;
+    background-color: white; /* Red fill color */
+    border: 3px solid black; /* Bold black border */
+    border-radius: 25px; /* Rounded edges */
+    font-size: 16px;
+    font-weight: bold;
+    color: black; /* White text color */
+    cursor: pointer;
+    appearance: none; /* Remove default appearance in most browsers */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Smooth transitions */
+	margin-top: 20px; /* Add spacing above the select box */
+}
+
+/* Style for the select box when hovered */
+.themes:hover {
+    transform: scale(1.05); /* Slightly enlarge the select box */
+}
+
 /* Workout section */
 
 #workout-popup {

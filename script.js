@@ -357,6 +357,13 @@ function setTheme() {
         /*background color*/
         element.style.backgroundColor = "#cf8a40";
       });
+	  
+	  // Change the background color of the sidebar buttons
+	  document.querySelectorAll(".sidebarBtn").forEach(element => {
+		element.style.backgroundColor = "#73c7e3"; // Light blue color
+	  });
+
+	  
       break;
     case "spring":
 
@@ -426,6 +433,11 @@ function setTheme() {
         /*background color*/
         element.style.backgroundColor = "#f3baba";
       });
+	  
+	  // Change the background color of the sidebar buttons
+	  document.querySelectorAll(".sidebarBtn").forEach(element => {
+		element.style.backgroundColor = "#a7b59e"; // Green color
+	  });
 
       break;
 
