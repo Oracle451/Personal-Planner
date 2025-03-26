@@ -293,7 +293,7 @@ function updateTheme() {
       themeName = selector.value; // fallback
     }
 
-    toast.textContent = `Theme Set To ${themeName}`;
+    toast.textContent = `! Theme Set To ${themeName} !`;
 
     
     // Style the toast
@@ -1026,7 +1026,7 @@ function clearCookies() {
 
   // Create toast
   const toast = document.createElement("div");
-  toast.textContent = "Cookies have been cleared!";
+  toast.textContent = "! Cookies Have Been cleared !";
   
   // Style the toast
   toast.style.position = "fixed";
