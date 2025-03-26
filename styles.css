@@ -494,6 +494,24 @@ header {
     transform: scale(1.05); /* Slightly enlarge the select box */
 }
 
+.monthChangeBtn {
+    padding: 5px 10px;
+    background-color: #73c7e3; /* Light blue */
+    border: 3px solid black; /* Bold black border */
+    border-radius: 10px; /* Slightly rounded */
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.monthChangeBtn:hover {
+    background-color: white; /* Change to white on hover */
+    transform: scale(1.05); /* Slight grow effect */
+}
+
+
 /* Workout section */
 
 #workout-popup {

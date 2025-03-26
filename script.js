@@ -362,6 +362,11 @@ function setTheme() {
 	  document.querySelectorAll(".sidebarBtn").forEach(element => {
 		element.style.backgroundColor = "#73c7e3"; // Light blue color
 	  });
+	  
+	  // Change the background color of the change month buttons
+	  document.querySelectorAll(".monthChangeBtn").forEach(element => {
+		element.style.backgroundColor = "#73c7e3"; // Light blue color
+	  });
 
 	  
       break;
@@ -408,7 +413,7 @@ function setTheme() {
         element.style.borderColor = " #35522b";
       });
 
-      /*date backgroung and text color*/
+      /*date background and text color*/
       document.querySelectorAll(".date").forEach(element => {
         /*background color*/
         element.style.backgroundColor = "#f9ddd8";
@@ -437,6 +442,11 @@ function setTheme() {
 	  // Change the background color of the sidebar buttons
 	  document.querySelectorAll(".sidebarBtn").forEach(element => {
 		element.style.backgroundColor = "#a7b59e"; // Green color
+	  });
+	  
+	  // Change the background color of the change month buttons
+	  document.querySelectorAll(".monthChangeBtn").forEach(element => {
+		element.style.backgroundColor = "#f3baba"; // Light blue color
 	  });
 
       break;
