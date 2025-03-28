@@ -342,6 +342,21 @@ function setTheme() {
 
       });
 
+<<<<<<< Updated upstream
+=======
+
+      document.querySelectorAll(".upcoming-event").forEach(element => { 
+
+        element.style.backgroundColor = "#bbc7d6";
+        /*text color*/
+        element.style.color = "rgb(0, 0, 0)";
+
+        element.style.textShadow = "0px 0px #000000";
+
+
+      });
+
+>>>>>>> Stashed changes
       /*days of the week backgroung and text color*/
       document.querySelectorAll(".day").forEach(element => {
         /*background color*/
