@@ -1,37 +1,36 @@
+// workout section
 function workoutPopup(name, desc, category, type) {
     let givenName = name || "";
     let givenDesc = desc || "";
     let givenCategory = category || "";
     
     document.getElementById("popup-content").innerHTML = `
-        <div>
-            <button id="popup-close-btn" class="close-btn">Close</button>
-            <div id="workout-popup">
-                <div id="workout-title"><h2>Workouts: </h2></div>
-                <div id="workout-editor" class="workout-tab">
-                    <h3>Add Workouts</h3>
-                    <form id="workout-form">
-                        <label for="workout-name">Workout Name</label>
-                        <br>
-                        <textarea id="workout-name" name="workout-name" maxlength="63" placeholder="Name workout here..." required>${givenName}</textarea>
-                        
-                        <br>
-                        <label for="workout-desc">Description:</label>
-                        <br>
-                        <textarea id="workout-desc" name="workout-desc" rows="6" cols="30" maxlength="255" placeholder="Describe your workout here..." required>${givenDesc}</textarea>
+        <button id="popup-close-btn" class="close-btn">Close</button>
+        <div id="workout-popup">
+            <div id="workout-title"><h2>Workouts: </h2></div>
+            <div id="workout-editor" class="workout-tab">
+                <h3>Add Workouts</h3>
+                <form id="workout-form">
+                    <label for="workout-name">Workout Name</label>
+                    <br>
+                    <textarea id="workout-name" name="workout-name" maxlength="63" placeholder="Name workout here..." required>${givenName}</textarea>
+                    
+                    <br>
+                    <label for="workout-desc">Description:</label>
+                    <br>
+                    <textarea id="workout-desc" name="workout-desc" rows="6" cols="30" maxlength="255" placeholder="Describe your workout here..." required>${givenDesc}</textarea>
 
-                        <br>
-                        <label for="workout-category">Category:</label>
-                        <br>
-                        <textarea id="workout-category" name="workout-category" rows="3" cols="30" maxlength="255" placeholder="Add categories here separated by spaces">${givenCategory}</textarea>
-                        
-                        <br>
-                        <input type="submit" value="Add Workout" id="workout-submit">
-                    </form>
-                </div>
-                <div id="workout-lib" class="workout-tab">
-                    <h3>Workout Library</h3>
-                </div>
+                    <br>
+                    <label for="workout-category">Category:</label>
+                    <br>
+                    <textarea id="workout-category" name="workout-category" rows="3" cols="30" maxlength="255" placeholder="Add categories here separated by spaces">${givenCategory}</textarea>
+                    
+                    <br>
+                    <input type="submit" value="Add Workout" id="workout-submit">
+                </form>
+            </div>
+            <div id="workout-lib" class="workout-tab">
+                <h3>Workout Library</h3>
             </div>
         </div>
     `;
@@ -189,3 +188,4 @@ function removeWorkout(type) {
     // reload popup
     workoutPopup()
 }
+// End of workout section
