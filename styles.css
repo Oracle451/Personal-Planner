@@ -437,4 +437,148 @@ header {
 .times {
     border-bottom: 1px solid #0000EE;
     color: #0000EE;
+<<<<<<< Updated upstream
+=======
+}
+
+.sidebarBtn {
+    width: 100%; /* Makes the button stretch across the container */
+    padding: 10px 20px;
+    background-color: lightblue; /* Light blue fill color */
+    border: 1px solid rgba(0, 0, 0, 0.5); /* Bold black border */
+    border-radius: 25px; /* Rounded edges */
+    color: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sidebarBtn:hover {
+    background-color: white; /* Turn background to white */
+    color: black; /* Change text color to black for contrast */
+	transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.clearcookiesBtn {
+    background-color: red; /* Red fill color */
+    border: 1px solidrgba(0, 0, 0, 0.5)k; /* Bold black border */
+    border-radius: 25px; /* Rounded edges */
+    font-size: 16px;
+    font-weight: bold;
+    color: white; /* White text color */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.clearcookiesBtn:hover {
+    background-color: white; /* Turn background to white */
+    color: black; /* Change text color to black for contrast */
+	transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.themes {
+    padding: 10px 20px;
+    background-color: white; /* Red fill color */
+    border: 1px solid rgba(0, 0, 0, 0.5); /* Bold black border */
+    border-radius: 25px; /* Rounded edges */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    appearance: none; /* Remove default appearance in most browsers */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Smooth transitions */
+	margin-top: 20px; /* Add spacing above the select box */
+}
+
+/* Style for the select box when hovered */
+.themes:hover {
+    transform: scale(1.05); /* Slightly enlarge the select box */
+}
+
+.monthChangeBtn {
+    padding: 5px 10px;
+    background-color: #73c7e3; /* Light blue */
+    border: 1px solid rgba(0, 0, 0, 0.5); /* Bold black border */
+    border-radius: 10px; /* Slightly rounded */
+    font-size: 16px;
+    font-weight: bold;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.monthChangeBtn:hover {
+    background-color: white; /* Change to white on hover */
+    transform: scale(1.05); /* Slight grow effect */
+}
+
+.upcoming-event {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 12px;
+  padding: 16px;
+  display: inline-block;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 12px;
+}
+
+
+/* Workout section */
+
+#workout-popup {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 2fr 3fr;
+    text-align: left;
+    font-size: x-large;
+}
+
+#workout-popup h2{
+    margin-top: 0;
+}
+
+#workout-title {
+    grid-column: span 2;
+
+}
+
+#workout-editor {
+    background-color: lightgray;
+    height: 71vh;
+    padding: 15px;
+    padding-top: 0;
+    margin-right: 3px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow: auto;
+}
+
+#workout-editor textarea {
+    margin-bottom: 15px;
+    font-size: x-large;
+}
+
+#workout-submit {
+    font-size: x-large;
+}
+
+#workout-lib {
+    background-color: lightgrey;
+    height: 71vh;
+    padding: 15px;
+    padding-top: 0;
+    margin-left: 3px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: auto;
+}
+
+#workout-lib button {
+    font-size: medium;
+}
+
+#workout-lib p {
+    margin: 5px;
+>>>>>>> Stashed changes
 }

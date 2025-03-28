@@ -291,6 +291,7 @@ function setTheme() {
     switch (selector.value) {
         case "standard":
 
+<<<<<<< Updated upstream
             /* the header's background and text color*/
             /*background color*/
             document.getElementById("head").style.backgroundColor = "#73c7e3"
@@ -298,6 +299,14 @@ function setTheme() {
             document.getElementById("head").style.color = "#ffffff"
             /*text shadow color*/
             document.getElementById("head").style.textShadow = "-2px 2px #2e4a70"
+=======
+      /* the header's background and text color*/
+      /*background color*/
+      document.getElementById("head").style.backgroundColor = "#73c7e3"
+      /*text color*/
+      document.getElementById("head").style.color = "#ffffff"
+
+>>>>>>> Stashed changes
 
             /*weather sections's background and text color*/
             document.querySelectorAll(".weather-section").forEach(element => {
@@ -306,9 +315,13 @@ function setTheme() {
                 /*text color*/
                 element.style.color = "#2e4a70";
 
+<<<<<<< Updated upstream
                 // font color
                 element.style.textShadow = "-1px 1px rgb(119, 119, 119)"
             });
+=======
+      });
+>>>>>>> Stashed changes
 
             /*calendar sections's background and text color*/
             document.querySelectorAll(".calendar-section").forEach(element => {
@@ -317,10 +330,14 @@ function setTheme() {
                 /*text color*/
                 element.style.color = "#2e4a70";
 
+<<<<<<< Updated upstream
                 // font color
                 element.style.textShadow = "-1px 1px rgb(119, 119, 119)"
 
             });
+=======
+      });
+>>>>>>> Stashed changes
 
 
             /*days of the week backgroung and text color*/
@@ -415,6 +432,7 @@ function setTheme() {
                 document.documentElement.style.setProperty('--date-hover-bg', '#a7b59e');
             });
 
+<<<<<<< Updated upstream
             /*inactive-date backgroung and text color*/
             document.querySelectorAll(".inactive-date").forEach(element => {
                 /*background color*/
@@ -422,6 +440,9 @@ function setTheme() {
                 /*border color*/
                 element.style.borderColor = " #35522b";
             });
+=======
+ 
+>>>>>>> Stashed changes
 
             // change options color
             document.querySelectorAll(".option-content").forEach(element => {
@@ -445,7 +466,112 @@ function setTheme() {
     });
     */
 
+<<<<<<< Updated upstream
     //selector.style.backgroundColor = sidebar;
+=======
+      /* the header's background and text color*/
+      /*background color*/
+      document.getElementById("head").style.backgroundColor = "#35522b"
+      /*text color*/
+      document.getElementById("head").style.color = "#ffffff"
+
+
+      /*weather sections's background and text color*/
+      document.querySelectorAll(".weather-section").forEach(element => {
+        /*background color*/
+        element.style.backgroundColor = "#799567";
+        /*text color*/
+        element.style.color = "#ffffff";
+
+
+      });
+
+      /*calendar sections's background and text color*/
+      document.querySelectorAll(".calendar-section").forEach(element => {
+        /*background color*/
+        element.style.backgroundColor = "#a7b59e";
+        /*text color*/
+        element.style.color = "#ffffff";
+
+  
+      });
+
+
+      /*days of the week backgroung and text color*/
+      document.querySelectorAll(".day").forEach(element => {
+        /*background color*/
+        element.style.backgroundColor = "#f3baba";
+        /*text color*/
+        element.style.color = "#ffffff";
+        /*border color*/
+        element.style.borderColor = " #35522b";
+      });
+
+      /*date background and text color*/
+      document.querySelectorAll(".date").forEach(element => {
+        /*background color*/
+        element.style.backgroundColor = "#f9ddd8";
+        /*text color*/
+        element.style.color = "#ffffff";
+        /*border color*/
+        element.style.borderColor = " #35522b";
+        /*hover color*/
+        document.documentElement.style.setProperty('--date-hover-bg', '#a7b59e');
+      });
+
+      /*inactive-date backgroung and text color*/
+      document.querySelectorAll(".inactive-date").forEach(element => {
+        /*background color*/
+        element.style.backgroundColor = "#f8d0c8";
+        /*border color*/
+        element.style.borderColor = " #35522b";
+      });
+
+      // change options color
+      document.querySelectorAll(".option-content").forEach(element => {
+        /*background color*/
+        element.style.backgroundColor = "#f3baba";
+      });
+	  
+	  // Change the background color of the sidebar buttons
+	  document.querySelectorAll(".sidebarBtn").forEach(element => {
+		element.style.backgroundColor = "#a7b59e"; // Green color
+	  });
+	  
+	  // Change the background color of the change month buttons
+	  document.querySelectorAll(".monthChangeBtn").forEach(element => {
+		element.style.backgroundColor = "#f3baba"; // Light blue color
+	  });
+
+
+     /*upcoming event coloring */
+     document.querySelectorAll(".upcoming-event").forEach(element => {
+      /*background color*/
+      element.style.backgroundColor = "#f8d0c8";
+
+    
+      element.style.color = "#000000";
+
+
+    });
+      break;
+
+  }
+
+
+  /*
+  document.querySelectorAll(".date").forEach(element => {
+      element.addEventListener("mouseover", function () {
+          element.style.backgroundColor = hover;
+      })
+      element.addEventListener("mouseout", function () {
+          element.style.backgroundColor = day_bg;
+      })
+  });
+  */
+
+  //selector.style.backgroundColor = sidebar;
+>>>>>>> Stashed changes
 }
 
 // function to update the calorie count for a specific day
