@@ -320,6 +320,7 @@ function setTheme() {
             });
 
 
+<<<<<<< Updated upstream
             /*days of the week backgroung and text color*/
             document.querySelectorAll(".day").forEach(element => {
                 /*background color*/
@@ -329,6 +330,28 @@ function setTheme() {
                 /*border color*/
                 element.style.borderColor = " #2e4a70";
             });
+=======
+      document.querySelectorAll(".upcoming-event").forEach(element => { 
+
+        element.style.backgroundColor = "#bbc7d6";
+        /*text color*/
+        element.style.color = "rgb(0, 0, 0)";
+
+        element.style.textShadow = "0px 0px #000000";
+
+
+      });
+
+      /*days of the week backgroung and text color*/
+      document.querySelectorAll(".day").forEach(element => {
+        /*background color*/
+        element.style.backgroundColor = "#cf8a40";
+        /*text color*/
+        element.style.color = "#2e4a70";
+        /*border color*/
+        element.style.borderColor = " #2e4a70";
+      });
+>>>>>>> Stashed changes
 
             /*date backgroung and text color*/
             document.querySelectorAll(".date").forEach(element => {
@@ -379,9 +402,36 @@ function setTheme() {
                 /*text color*/
                 element.style.color = "#ffffff";
 
+<<<<<<< Updated upstream
                 // text shadow
                 element.style.textShadow = "-1px 1px rgb(93, 93, 93)"
             });
+=======
+        // text shadow
+        element.style.textShadow = "-1px 1px rgb(93, 93, 93)"
+      });
+
+      document.querySelectorAll(".upcoming-event").forEach(element => { 
+        element.style.backgroundColor = "#f8d0c8";
+        /*text color*/
+        element.style.color = "rgb(0, 0, 0)";
+
+        element.style.textShadow = "0px 0px #000000";
+
+
+      });
+      
+      /*calendar sections's background and text color*/
+      document.querySelectorAll(".calendar-section").forEach(element => {
+        /*background color*/
+        element.style.backgroundColor = "#a7b59e";
+        /*text color*/
+        element.style.color = "#ffffff";
+
+        // text shadow
+        element.style.textShadow = "-1px 1px rgb(93, 93, 93)"
+      });
+>>>>>>> Stashed changes
 
 
             /*days of the week backgroung and text color*/
