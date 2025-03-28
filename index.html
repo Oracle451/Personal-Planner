@@ -27,8 +27,9 @@
               <option value="standard">Deep Ocean</option>
               <option value="spring">Spring</option>
             </select>
-            <button onclick="clearCookies()">Clear Cookies</button>
+            <button class="clearcookiesBtn" onclick="clearCookies()">Clear Cookies</button>
           </div>
+		</div>
       </header>
       <!-- Weather Section (New Box) -->
       <section class="weather-section">
@@ -45,48 +46,52 @@
 		<hr>
 		
 		<div class="streak-section">
-			<h2><u>Todays Calories</u></h2>
-			<p>Current: <span>0</span> Calories</p>
-			<p>Goal: <span>0</span> Calories</p>
-			<button>Calculate Daily Goal</button>
+			<h2><u>Calories</u></h2>
+			<p>Todays Calories: <span>0</span> Calories</p>
+			<p>Daily Goal: <span>0</span> Calories</p>
+			<button class="sidebarBtn">Set Daily Calorie Goal</button>
 		</div>
 		
 		<hr>
 		
 		<div class="streak-section">
 			<h2><u>Workouts</u></h2>
-			<button>Add Workout</button>
+			<button class="sidebarBtn" onclick="workoutPopup()">Workouts</button>
 			<br>
 			<br>
-			<button>Create Routine</button>
-			<br>
-			<br>
-			<button>View Workout Library</button>
-			<br>
-			<br>
-			<button>View Workout Routines</button>
 		</div>
 		
 		<hr>
 		
 		<div class="streak-section">
 			<h2><u>Meals</u></h2>
-			<button>Create Meal</button>
+			<button class="sidebarBtn" id="create-Meal">Create Meal</button>
 			<br>
 			<br>
-			<button>Log Meal</button>
+			<button class="sidebarBtn" id="log-Meal">Log Meal</button>
 			<br>
 			<br>
-			<button>View Meals</button>
+			<button class="sidebarBtn" id="view-Meals">View Meals</button>
 		</div>
 		
 		<hr>
 		
 		<div class="streak-section">
 			<h2><u>Upcoming Events</u></h2>
-			<p>Event 1 Example</p>
-			<p>Event 2 Example</p>
-			<p>Event 3 Example</p>
+		
+			<div class="upcoming-event">
+			<p><u>Event Example</u></p>
+			<p>Date: XX-XX-XXXX</p>
+			<p>Where: Example Place</p>
+			<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+			</div>
+			
+			<div class="upcoming-event">
+			<p><u>Event Example</u></p>
+			<p>Date: XX-XX-XXXX</p>
+			<p>Where: Example Place</p>
+			<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+			</div>
 		</div>
 		
 		<hr>
@@ -104,8 +109,10 @@
         <h2 class="month">
           Your Calendar for <span id="current-month"></span>
         </h2>
-        <button id="back">Previous</button>
-        <button id="next">Next</button>
+		
+        <button class="monthChangeBtn" id="back">&larr; Previous</button>
+		<button class="monthChangeBtn" id="next">Next &rarr;</button>
+
 
         <div class="day-labels">
           <div class="day">Sunday</div>
@@ -138,5 +145,6 @@
 -->
 
     <script src="script.js"></script>
+    <script src="workout.js"></script>
   </body>
 </html>
