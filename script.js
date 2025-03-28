@@ -399,12 +399,28 @@ function setTheme() {
             /*text shadow color*/
             document.getElementById("head").style.textShadow = "-4px 4px  rgb(93, 93, 93)"
 
+<<<<<<< Updated upstream
             /*weather sections's background and text color*/
             document.querySelectorAll(".weather-section").forEach(element => {
                 /*background color*/
                 element.style.backgroundColor = "#799567";
                 /*text color*/
                 element.style.color = "#ffffff";
+=======
+	  /*date background and text color*/
+    document.querySelectorAll(".upcoming-event").forEach(element => {
+      /*background color*/
+      element.style.backgroundColor = "#bbc7d6";
+      /*text color*/
+      element.style.color = "#000000";
+
+      element.style.textShadow = "0px 0px #000000";
+  
+    });
+
+      break;
+    case "spring":
+>>>>>>> Stashed changes
 
                 // text shadow
                 element.style.textShadow = "-1px 1px rgb(93, 93, 93)"
@@ -479,8 +495,40 @@ function setTheme() {
                 element.style.borderColor = " #35522b";
             });
 
+<<<<<<< Updated upstream
             break;
     }
+=======
+      // change options color
+      document.querySelectorAll(".option-content").forEach(element => {
+        /*background color*/
+        element.style.backgroundColor = "#f3baba";
+      });
+	  
+	  // Change the background color of the sidebar buttons
+	  document.querySelectorAll(".sidebarBtn").forEach(element => {
+		element.style.backgroundColor = "#a7b59e"; // Green color
+	  });
+	  
+	  // Change the background color of the change month buttons
+	  document.querySelectorAll(".monthChangeBtn").forEach(element => {
+		element.style.backgroundColor = "#f3baba"; // Light blue color
+	  });
+
+     /*date background and text color*/
+     document.querySelectorAll(".upcoming-event").forEach(element => {
+      /*background color*/
+      element.style.backgroundColor = "#f8d0c8";
+      /*text color*/
+      element.style.color = "#000000";
+
+      element.style.textShadow = "0px 0px #000000";
+  
+    });
+      break;
+
+  }
+>>>>>>> Stashed changes
 
 
     /*
