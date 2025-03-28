@@ -528,6 +528,12 @@ header {
     display: grid;
     grid-template-rows: auto 1fr;
     grid-template-columns: 2fr 3fr;
+    text-align: left;
+    font-size: x-large;
+}
+
+#workout-popup h2{
+    margin-top: 0;
 }
 
 #workout-title {
@@ -537,7 +543,7 @@ header {
 
 #workout-editor {
     background-color: lightgray;
-    height: 74vh;
+    height: 71vh;
     padding: 15px;
     padding-top: 0;
     margin-right: 3px;
@@ -548,17 +554,26 @@ header {
 
 #workout-editor textarea {
     margin-bottom: 15px;
+    font-size: x-large;
+}
+
+#workout-submit {
+    font-size: x-large;
 }
 
 #workout-lib {
     background-color: lightgrey;
-    height: 74vh;
+    height: 71vh;
     padding: 15px;
     padding-top: 0;
     margin-left: 3px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     overflow: auto;
+}
+
+#workout-lib button {
+    font-size: medium;
 }
 
 #workout-lib p {

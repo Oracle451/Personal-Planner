@@ -126,8 +126,8 @@ function showWorkoutLibrary() {
             
             // add edit and remove buttons
             element += `
-                <button class="edit-Task" id="edit-workout-${i}">edit</button>
-                <button class="remove-Task" id="remove-workout-${i}">remove</button>`
+                <button class="edit-Task" id="edit-workout-${i}">Edit</button>
+                <button class="remove-Task" id="remove-workout-${i}">Remove</button>`
                 
             // add to elements
             workout.innerHTML = element;    // add html to new div
