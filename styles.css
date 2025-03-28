@@ -437,17 +437,21 @@ header {
 .times {
     border-bottom: 1px solid #0000EE;
     color: #0000EE;
-<<<<<<< Updated upstream
-=======
+
 }
 
 .sidebarBtn {
     width: 100%; /* Makes the button stretch across the container */
     padding: 10px 20px;
     background-color: lightblue; /* Light blue fill color */
+
     border: 1px solid rgba(0, 0, 0, 0.5); /* Bold black border */
     border-radius: 25px; /* Rounded edges */
     color: inherit;
+
+    border: 3px solid black; /* Bold black border */
+    border-radius: 25px; /* Rounded edges */
+
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -461,7 +465,10 @@ header {
 
 .clearcookiesBtn {
     background-color: red; /* Red fill color */
+
     border: 1px solidrgba(0, 0, 0, 0.5)k; /* Bold black border */
+
+    border: 3px solid black; /* Bold black border */
     border-radius: 25px; /* Rounded edges */
     font-size: 16px;
     font-weight: bold;
@@ -479,10 +486,18 @@ header {
 .themes {
     padding: 10px 20px;
     background-color: white; /* Red fill color */
+
     border: 1px solid rgba(0, 0, 0, 0.5); /* Bold black border */
     border-radius: 25px; /* Rounded edges */
     font-size: 16px;
     font-weight: bold;
+
+    border: 3px solid black; /* Bold black border */
+    border-radius: 25px; /* Rounded edges */
+    font-size: 16px;
+    font-weight: bold;
+    color: black; /* White text color */
+
     cursor: pointer;
     appearance: none; /* Remove default appearance in most browsers */
     -webkit-appearance: none; /* For Safari */
@@ -499,11 +514,18 @@ header {
 .monthChangeBtn {
     padding: 5px 10px;
     background-color: #73c7e3; /* Light blue */
+
     border: 1px solid rgba(0, 0, 0, 0.5); /* Bold black border */
     border-radius: 10px; /* Slightly rounded */
     font-size: 16px;
     font-weight: bold;
     color: inherit;
+
+    border: 3px solid black; /* Bold black border */
+    border-radius: 10px; /* Slightly rounded */
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
 }
@@ -580,5 +602,5 @@ header {
 
 #workout-lib p {
     margin: 5px;
->>>>>>> Stashed changes
+
 }

@@ -4,6 +4,8 @@ This is a group project for CS-386 (Software Engineering)
 
 The Iron Man Planner is a fitness and nutrition tracker that allows groups such as athletes, trainers, and health conscious people to efficiently manage aspects of their fitness tasks by integrating all of these key elements into a single platform.
 
+Current Version: 1.0.0
+
 ## Features
 
 - **Greeting Card**: Presents relevant data tailored to the user like a time specific greeting and weather status report.
@@ -76,27 +78,26 @@ Make a JavaScript function to retreive the current day or calorie count to becom
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+Iron Man Planner has a set of JavaScript tests to ensure proper functionality of the main features of the website.
 
-### Break down into end to end tests
-
-Explain what these tests test and why
+### How to Test
 
 ```
-Give an example
+Install NPM to your system using npm install --save-dev jest, run npn test in the repository, and sit back while jest confirms that all tests are passed
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
+### Why to Test
 
 ```
-Give an example
+When making changes to the Iron Man Planner codebase it is important to make sure that all features still work as intended before submitting that code via pull request. Our automated tests ensure that the most crucial features of our planner are fully functional.
 ```
 
 ## Deployment
 
-Insert additional notes about how to deploy this on a live system
+When Deploying Iron Man Planner on a live enviornment you have 2 options:
+
+1. Web Hosting - By uploading the codebase to a server you can host Iron Man Planner and access it from anywhere
+2. Local Hosting - By downloading the Iron Man Planner codebase from GitHub you can run Iron Man Planner directly from your computer by clicking the HTML file
 
 ## Built With
 
