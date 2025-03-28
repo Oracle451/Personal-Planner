@@ -416,6 +416,19 @@ function setTheme() {
 		element.style.backgroundColor = "#73c7e3"; // Light blue color
 	  });
 
+
+    /*upcoming event coloring */
+    document.querySelectorAll(".upcoming-event").forEach(element => {
+      /*background color*/
+      element.style.backgroundColor = "#bbc7d6";
+
+    
+      element.style.color = "#000000";
+
+      element.style.textShadow = "0px 0px";
+ 
+
+    });
 	  
       break;
     case "spring":
@@ -497,6 +510,18 @@ function setTheme() {
 		element.style.backgroundColor = "#f3baba"; // Light blue color
 	  });
 
+
+     /*upcoming event coloring */
+     document.querySelectorAll(".upcoming-event").forEach(element => {
+      /*background color*/
+      element.style.backgroundColor = "#f8d0c8";
+
+    
+      element.style.color = "#000000";
+
+      element.style.textShadow = "0px 0px";
+
+    });
       break;
 
   }
