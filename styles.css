@@ -114,6 +114,10 @@ header {
     overflow-y: auto;
 }
 
+.weather-section * {
+    text-shadow: none;
+}
+
 .streak-section {
 
     font-size: 1rem;
@@ -144,6 +148,10 @@ header {
     color: #2e4a70;
     height: 90vh;
     padding: 1rem;
+}
+
+.calendar-section * {
+    text-shadow: none;
 }
 
 .month {
