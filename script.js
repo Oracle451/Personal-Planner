@@ -373,6 +373,10 @@ function applyTheme(colors) {
   document.querySelectorAll(".upcoming-event").forEach(element => {
     element.style.backgroundColor = colors.backgroundColor3;
   });
+  
+  document.querySelectorAll(".option-content").forEach(element => {
+    element.style.backgroundColor = colors.calendarColor2;
+  });
 }
 
 
