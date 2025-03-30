@@ -369,6 +369,10 @@ function applyTheme(colors) {
   document.querySelectorAll(".inactive-date").forEach(element => {
     element.style.backgroundColor = colors.calendarColor2;
   });
+
+  document.querySelectorAll(".upcoming-event").forEach(element => {
+    element.style.backgroundColor = colors.backgroundColor3;
+  });
 }
 
 
