@@ -304,44 +304,28 @@ function setTheme() {
   switch (selector.value) {
     case "standard":
       colors = {
-        headerBg: "#73c7e3",
-        headerText: "#ffffff",
-        headerShadow: "-2px 2px #2e4a70",
-        weatherBg: "#f0f2f2",
-        weatherText: "#2e4a70",
-        calendarBg: "#fff9f0",
-        dayBg: "#cf8a40",
-        dayText: "#2e4a70",
-        dayBorder: "#2e4a70",
-        sidebarBtnBg: "#73c7e3",
-        monthChangeBtnBg: "#73c7e3",
-        dateHover: "#24b0ba",
-        dateBg: "#fff9f0",
-        dateColor: "#2e4a70",
-        dateBorder: "#2e4a70",
-        inactiveDateColor: "#bbc7d6",
-        inactiveDateBorder: "#2e4a70"
+		backgroundColor1: "#73c7e3",
+		backgroundColor2: "#f0f2f2",
+		backgroundColor3: "#fff9f0",
+		calendarColor1: "#73c7e3",
+		calendarColor2: "#bbc7d6",
+		calendarColor3: "#fff9f0",
+		textColor1: "#ffffff",
+		textColor2: "#2e4a70",
+		textColor3: "#2e4a70",
       };
       break;
     case "spring":
       colors = {
-        headerBg: "#35522b",
-        headerText: "#ffffff",
-        headerShadow: "-4px 4px rgb(93, 93, 93)",
-        weatherBg: "#799567",
-        weatherText: "#ffffff",
-        calendarBg: "#a7b59e",
-        dayBg: "#f3baba",
-        dayText: "#ffffff",
-        dayBorder: "#35522b",
-        sidebarBtnBg: "#f3baba",
-        monthChangeBtnBg: "#f3baba",
-        dateHover: "#a7b59e",
-        dateBg: "#f9ddd8",
-        dateColor: "#ffffff",
-        dateBorder: "#35522b",
-        inactiveDateColor: "#f8d0c8",
-        inactiveDateBorder: "#35522b"
+		backgroundColor1: "#35522b",
+		backgroundColor2: "#799567",
+		backgroundColor3: "#a7b59e",
+		calendarColor1: "#f3baba",
+		calendarColor2: "#f8d0c8",
+		calendarColor3: "#f9ddd8",
+		textColor1: "#ffffff",
+		textColor2: "#ffffff",
+		textColor3: "#ffffff",
       };
       break;
   }
@@ -351,46 +335,39 @@ function setTheme() {
 }
 
 function applyTheme(colors) {
-  document.getElementById("head").style.backgroundColor = colors.headerBg;
-  document.getElementById("head").style.color = colors.headerText;
-  document.getElementById("head").style.textShadow = colors.headerShadow;
+  document.getElementById("head").style.backgroundColor = colors.backgroundColor1;
+  document.getElementById("head").style.color = colors.textColor1;
 
   document.querySelectorAll(".weather-section").forEach(element => {
-    element.style.backgroundColor = colors.weatherBg;
-    element.style.color = colors.weatherText;
-    element.style.textShadow = "-1px 1px rgb(119, 119, 119)";
+    element.style.backgroundColor = colors.backgroundColor2;
+    element.style.color = colors.textColor2;
   });
 
   document.querySelectorAll(".calendar-section").forEach(element => {
-    element.style.backgroundColor = colors.calendarBg;
-    element.style.color = colors.weatherText;
-    element.style.textShadow = "-1px 1px rgb(119, 119, 119)";
+    element.style.backgroundColor = colors.backgroundColor3;
+    element.style.color = colors.textColor3;
   });
 
   document.querySelectorAll(".day").forEach(element => {
-    element.style.backgroundColor = colors.dayBg;
-    element.style.color = colors.dayText;
-    element.style.borderColor = colors.dayBorder;
+    element.style.backgroundColor = colors.calendarColor1;
+    element.style.color = colors.textColor3;
   });
   
   document.querySelectorAll(".date").forEach(element => {
-    element.style.backgroundColor = colors.dateBg;
-    element.style.color = colors.dateColor;
-    element.style.borderColor = colors.dateBorder;
-    document.documentElement.style.setProperty('--date-hover-bg', colors.dateHover);
+    element.style.backgroundColor = colors.calendarColor3;
+    element.style.color = colors.textColor3;
   });
 
   document.querySelectorAll(".sidebarBtn").forEach(element => {
-    element.style.backgroundColor = colors.sidebarBtnBg;
+    element.style.backgroundColor = colors.calendarColor1;
   });
 
   document.querySelectorAll(".monthChangeBtn").forEach(element => {
-    element.style.backgroundColor = colors.monthChangeBtnBg;
+    element.style.backgroundColor = colors.calendarColor1;
   });
   
   document.querySelectorAll(".inactive-date").forEach(element => {
-    element.style.backgroundColor = colors.inactiveDateColor;
-    element.style.borderColor = colors.inactiveDateBorder;
+    element.style.backgroundColor = colors.calendarColor2;
   });
 }
 
