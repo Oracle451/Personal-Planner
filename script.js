@@ -279,18 +279,10 @@ function updateTheme() {
   
   selector.onchange = (event) => {
     localStorage.setItem("theme", selector.value);
+	
     setTheme();
-					
-	var themeName;
-    if (selector.value == "standard") {
-      themeName = "Deep Ocean";
-    } else if (selector.value == "spring") {
-      themeName = "Spring";
-    } else {
-      themeName = selector.value; // fallback
-    }
     
-    showToast(`Theme Set To ${themeName}`);
+    showToast(`Theme Set To ${selector.value}`);
   };
 }
 
@@ -298,24 +290,34 @@ function updateTheme() {
 function setTheme() {
   var selector = document.getElementById("themes");
   selector.value = localStorage.getItem("theme");
-
+	
+  // Object to hold the color set values
   let colors = {};
 
   switch (selector.value) {
-    case "standard":
+    case "Deep Ocean":
       colors = {
+		// Header Background Color
 		backgroundColor1: "#73c7e3",
+		// Sidebar Background Color
 		backgroundColor2: "#f0f2f2",
+		// Calendar Section Background Color
 		backgroundColor3: "#fff9f0",
+		// Weekdays Header Background Color
 		calendarColor1: "#73c7e3",
+		// Inactive Days Background Color
 		calendarColor2: "#bbc7d6",
+		// Active Month Days Background Color
 		calendarColor3: "#fff9f0",
+		// Header Text Color
 		textColor1: "#ffffff",
+		// Sidebar Text Color
 		textColor2: "#2e4a70",
+		// Calendar Section Text Color
 		textColor3: "#2e4a70",
       };
       break;
-    case "spring":
+    case "Spring":
       colors = {
 		backgroundColor1: "#35522b",
 		backgroundColor2: "#799567",
@@ -323,6 +325,19 @@ function setTheme() {
 		calendarColor1: "#f3baba",
 		calendarColor2: "#f8d0c8",
 		calendarColor3: "#f9ddd8",
+		textColor1: "#ffffff",
+		textColor2: "#ffffff",
+		textColor3: "#ffffff",
+      };
+	  break;
+	case "Crimson":
+      colors = {
+		backgroundColor1: "#313131",
+		backgroundColor2: "#364651",
+		backgroundColor3: "#393d42",
+		calendarColor1: "#d3423d",
+		calendarColor2: "#99180d",
+		calendarColor3: "#b23028",
 		textColor1: "#ffffff",
 		textColor2: "#ffffff",
 		textColor3: "#ffffff",
