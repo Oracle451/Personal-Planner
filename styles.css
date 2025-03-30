@@ -23,7 +23,7 @@ header {
     font-size: 2.3rem;
 
     text-align: center;
-    text-shadow: -2px 2px #2e4a70;
+    text-shadow: -2px 2px #000000;
     line-height: 0.8;
     padding: 0.2rem;
 }
@@ -177,7 +177,7 @@ header {
     /*box formatting and styling*/
     width: 10vw;
     height: 10vh;
-    border: #2e4a70;
+    border: #000000;
     border-style: solid;
     border-width: 1px;
     /*text formatting*/
@@ -193,7 +193,7 @@ header {
     /*box formatting and styling*/
     width: 10vw;
     height: 10vh;
-    border: #2e4a70;
+    border: #000000;
     border-style: solid;
     border-width: 1px;
     /*text formatting and styling*/
@@ -202,11 +202,11 @@ header {
 
 .day {
     /*background color*/
-    background-color: #cf8a40;
+    background-color: #73c7e3;
     /*box formatting and styling*/
     width: 10vw;
     height: 2.5vh;
-    border: #2e4a70;
+    border: #000000;
     border-style: solid;
     border-width: 1px;
     /*text formatting and styling*/
