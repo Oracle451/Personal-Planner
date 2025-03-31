@@ -91,8 +91,6 @@ function generateDateString(day, bool) {
 
   }
 
-
-
   return dateString;
 }
 
@@ -230,12 +228,33 @@ function closePopup() {
 }
 
 function setDayStatus(day, status) {
+  // Get the date string for the selected day in the current on-screen month
   let dateString = generateDateString(day);
-  localStorage.setItem(`${dateString}-stat`, status);
-  closePopup();
-  generateCalendar(onScreenDate);
-  updateStreak();
-
+  
+  // Create proper date object using the onScreenDate context
+  let inputDate = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), day);
+  
+  // Get current date and yesterday, normalized to midnight
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  let yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+  yesterday.setHours(0, 0, 0, 0);
+  
+  // Normalize input date to midnight for accurate comparison
+  inputDate.setHours(0, 0, 0, 0);
+  
+  // Check if input date matches today or yesterday
+  if (inputDate.getTime() === today.getTime() || inputDate.getTime() === yesterday.getTime()) {
+    localStorage.setItem(`${dateString}-stat`, status);
+    closePopup();
+    generateCalendar(onScreenDate);
+    updateStreak();
+  } else {
+    showToast("You can only rate today and yesterday");
+    return;
+  }
 }
 
 
