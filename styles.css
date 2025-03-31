@@ -97,7 +97,7 @@ header {
 
 
 /* Weather Box */
-.weather-section {
+.sidebar {
     /* grid layout/ formationg */
     grid-column: 1;
     /* Right column */
@@ -115,7 +115,7 @@ header {
     overflow-y: auto;
 }
 
-.weather-section * {
+.sidebar * {
     text-shadow: none;
 }
 
@@ -357,8 +357,8 @@ header {
 /* Styles for add-task button*/
 .add-task {
     font-family: 'MyFont', sans-serif;
-    padding: 12px 25px;
-    background-color: #C75B7A;
+    padding: 15px 30px;
+    background-color: #73c7e3;
     color: white;
     border: none;
     border-radius: 20px;
@@ -368,11 +368,10 @@ header {
     bottom: 40px;
 
     cursor: pointer;
-
 }
 
 .add-task:hover {
-    box-shadow: 0 0 20px pink;
+    box-shadow: 0 0 20px white;
     transition: .5s;
 }
 
@@ -452,10 +451,43 @@ header {
     color: #0000EE;
 }
 
-.sidebarBtn {
-    width: 100%; /* Makes the button stretch across the container */
+.submenuBtn {
+	width: wrap-content; /* Makes the button stretch across the container */
     padding: 10px 20px;
-    background-color: lightblue; /* Light blue fill color */
+    background-color: white; /* Light blue fill color */
+    border: 3px solid black; /* Bold black border */
+    border-radius: 25px; /* Rounded edges */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submenuBtn:hover {
+    background-color: white; /* Turn background to white */
+    color: black; /* Change text color to black for contrast */
+	transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.inputArea {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.inputArea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+.sidebarBtn {
+    width: wrap-content; /* Makes the button stretch across the container */
+    padding: 10px 20px;
+    background-color: #73c7e3; /* Light blue fill color */
     border: 3px solid black; /* Bold black border */
     border-radius: 25px; /* Rounded edges */
     font-size: 16px;
