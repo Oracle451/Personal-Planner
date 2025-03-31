@@ -26,7 +26,7 @@ function workoutPopup(name, desc, category, type) {
                     <textarea id="workout-category" name="workout-category" rows="3" cols="30" maxlength="255" placeholder="Add categories here separated by spaces">${givenCategory}</textarea>
                     
                     <br>
-                    <input type="submit" value="Add Workout" id="workout-submit">
+                    <input type="submit" value="Add Workout" id="workout-submit" class="submenuBtn">
                 </form>
             </div>
             <div id="workout-lib" class="workout-tab">

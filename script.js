@@ -353,7 +353,7 @@ function applyTheme(colors) {
   document.getElementById("head").style.backgroundColor = colors.backgroundColor1;
   document.getElementById("head").style.color = colors.textColor1;
 
-  document.querySelectorAll(".weather-section").forEach(element => {
+  document.querySelectorAll(".sidebar").forEach(element => {
     element.style.backgroundColor = colors.backgroundColor2;
     element.style.color = colors.textColor2;
   });
@@ -391,6 +391,10 @@ function applyTheme(colors) {
   
   document.querySelectorAll(".option-content").forEach(element => {
     element.style.backgroundColor = colors.calendarColor2;
+  });
+  
+  document.querySelectorAll(".add-task").forEach(element => {
+    element.style.backgroundColor = colors.calendarColor1;
   });
 }
 
@@ -560,6 +564,10 @@ function addTaskPopup(title, desc, date, time, addy, task) {
 
         <div>
             <h2>Task Maker: </h2>
+			
+			<hr>
+			<br>
+			
             <button id="popup-close-btn" class="close-btn">Close</button>
 
             <form>
@@ -568,35 +576,37 @@ function addTaskPopup(title, desc, date, time, addy, task) {
                 <label for="title">Title:</label>
                 <br>
                 
-                <textarea id="title" name="title" maxlength="16" required>${givenTitle}</textarea>
+                <textarea id="title" name="title" maxlength="16" class="inputArea" required>${givenTitle}</textarea>
                 <br>
 
                 <br>
                 <label for="desc">Description:</label>
                 <br>
                 
-                <textarea id="desc" name="desc" rows="5" cols="25" maxlength="144">${givenDesc}</textarea>
+                <textarea id="desc" name="desc" rows="5" cols="25" maxlength="144" class="inputArea">${givenDesc}</textarea>
                 <br>
 
 
 
                 <h3>When:</h3>
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date" value="${givenDate}"required>
+                <input type="date" id="date" name="date" value="${givenDate}" class="inputArea" required>
+				<br>
+				<br>
 
                 <label for="time">Time:</label>
-                <input type="time" id="time" name="time" value="${givenTime}"required>
+                <input type="time" id="time" name="time" value="${givenTime}" class="inputArea" required>
                 <br>
 
                 <h3>Where:</h3>
 
                 <label for="location">Address:</label>
-                <input type="text" id="location" name="location" value="${givenAddy}">
+                <input type="text" id="location" name="location" value="${givenAddy}" class="inputArea">
                 <br>
 
                 <br>
 
-                <input type="submit" value="Submit" id="pushTask">
+                <input type="submit" value="Submit" id="pushTask" class="submenuBtn">
             </form>
 
             
@@ -616,34 +626,53 @@ function openCreateMealPopup() {
   document.getElementById("popup-content").innerHTML = `
       <div>
         <h2>Create Meal</h2>
+		
+		<hr>
+		<br>
+		
         <button id="popup-close-btn" class="close-btn">Close</button>
         <form id="create-meal-form">
           <div>
             <label for="create-meal-name">Meal Name:</label>
-            <input type="text" id="create-meal-name" name="create-meal-name" required>
+            <input type="text" id="create-meal-name" name="create-meal-name" class="inputArea" required>
           </div>
+		  
+		  <br>
+		  
           <div>
             <label for="create-meal-calories">Calories (per serving):</label>
-            <input type="number" id="create-meal-calories" name="create-meal-calories" min="0" required>
+            <input type="number" id="create-meal-calories" name="create-meal-calories" min="0" class="inputArea" required>
           </div>
+		  
+		  <br>
+		  
           <div>
             <label for="create-meal-protein">Protein (grams per serving) (Optional):</label>
-            <input type="number" id="create-meal-protein" name="create-meal-protein" min="0">
+            <input type="number" id="create-meal-protein" name="create-meal-protein" min="0" class="inputArea">
           </div>
+		  
+		  <br>
+		  
           <div>
             <label for="create-meal-carbs">Carbohydrates (grams per serving) (Optional):</label>
-            <input type="number" id="create-meal-carbs" name="create-meal-carbs" min="0">
+            <input type="number" id="create-meal-carbs" name="create-meal-carbs" min="0" class="inputArea">
           </div>
+		  
+		  <br>
+		  
           <div>
             <label for="create-meal-fats">Fats (grams per serving) (Optional):</label>
-            <input type="number" id="create-meal-fats" name="create-meal-fats" min="0">
+            <input type="number" id="create-meal-fats" name="create-meal-fats" min="0" class="inputArea">
           </div>
+		  
+		  <br>
+		  
           <div>
             <label for="create-meal-serving-size">Serving Size:</label>
-            <input type="text" id="create-meal-serving-size" name="create-meal-serving-size" required>
+            <input type="text" id="create-meal-serving-size" name="create-meal-serving-size" class="inputArea" required>
           </div>
           <br>
-          <button type="submit">Create Meal</button>
+          <button type="submit" class="submenuBtn">Create Meal</button>
         </form>
       </div>
     `;
@@ -659,26 +688,40 @@ function openLogMealPopup() {
   document.getElementById("popup-content").innerHTML = `
       <div>
         <h2>Log Meal</h2>
+		
+		<hr>
+		<br>
+		
         <button id="popup-close-btn" class="close-btn">Close</button>
         <form id="log-meal-form">
+		
           <div>
             <label for="meal-name">Meal Name:</label>
-            <input type="text" id="meal-name" name="meal-name" required>
+            <input type="text" id="meal-name" name="meal-name" class="inputArea" required>
           </div>
+		  
+		  <br>
+		  
           <div>
             <label for="meal-date">Date:</label>
-            <input type="date" id="meal-date" name="meal-date" value="${new Date().toISOString().split('T')[0]}" required>
+            <input type="date" id="meal-date" name="meal-date" value="${new Date().toISOString().split('T')[0]}" class="inputArea" required>
           </div>
+		  
+		  <br>
+		  
           <div>
             <label for="meal-calories">Calories:</label>
-            <input type="number" id="meal-calories" name="meal-calories" min="0" required>
+            <input type="number" id="meal-calories" name="meal-calories" min="0" class="inputArea" required>
           </div>
+		  
+		  <br>
+		  
           <div>
             <label for="serving-size">Serving Size (Optional):</label>
-            <input type="text" id="serving-size" name="serving-size">
+            <input type="text" id="serving-size" name="serving-size" class="inputArea">
           </div>
           <br>
-          <button type="submit">Log Meal</button>
+          <button type="submit" class="submenuBtn">Log Meal</button>
         </form>
       </div>
     `;
