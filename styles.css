@@ -172,6 +172,10 @@ header {
     height: 60vh;
 }
 
+.current-date {
+  background-color: #73c7e3;
+}
+
 .date {
     /*background color*/
     background-color: #fff9f0;

@@ -95,31 +95,40 @@ function generateDateString(day, bool) {
 }
 
 function generateCalendar(today) {
-
-
   const calendarElement = document.getElementById("calendar");
   calendarElement.innerHTML = "";
   let monthday = today.getDate(); /* gets the day in the month */
-  let last_day = new Date(today.getFullYear(), today.getMonth() + 1, 0)
+  let last_day = new Date(today.getFullYear(), today.getMonth() + 1, 0);
   let days_in_month = last_day.getDate(); /* gets the length of this month */
   let weekday = new Date(today.getFullYear(), today.getMonth(), 1).getDay(); /* gets the first weekday of this month */
+  
+  // Get current date for comparison
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
+  const currentDay = currentDate.getDate();
+
   /* creates filler before this month */
   for (let i = 0; i < weekday; i++) {
     const dateElement = document.createElement("div");
     dateElement.className = "inactive-date";
     calendarElement.appendChild(dateElement);
   }
+  
   /* creates days of the month */
   for (let i = 1; i <= days_in_month; i++) {
     const dateElement = document.createElement("div");
     let task = document.createElement("div");
-
     let dateString = generateDateString(i);
 
     dateElement.className = "date";
     dateElement.textContent = i;
     dateElement.addEventListener("click", () => openPopup(i));
 
+    // Highlight current date with different color if it matches
+    if (today.getFullYear() === currentYear && today.getMonth() === currentMonth && i === currentDay) {
+      dateElement.classList.add("current-date");
+    }
 
     if (localStorage.getItem(`${dateString}-stat`) !== null) {
       let status = localStorage.getItem(`${dateString}-stat`);
@@ -127,11 +136,9 @@ function generateCalendar(today) {
       if (status) {
         dateElement.classList.add(status);
       }
-
     }
 
     /* Based on dateString, attempts to add Tasks for that day*/
-
     if (doesDayHaveTasks(dateString)) {
       let taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
       let taskStart = localStorage.getItem(`${dateString}-taskStart`);
@@ -140,7 +147,6 @@ function generateCalendar(today) {
       task.className = "task";
       task.textContent = `${localStorage.getItem(`${dateString}-task${taskStart}`)} ${localStorage.getItem(`${dateString}-time${taskStart}`)}`;
       dateElement.appendChild(task);
-
 
       if (taskAmount - taskStart > 0) {
         task = document.createElement("div");
@@ -151,18 +157,18 @@ function generateCalendar(today) {
     }
 
     calendarElement.appendChild(dateElement);
-
   }
+  
   /* creates filler after this month */
   for (let i = 0; i > days_in_month + weekday - 42; i--) {
     const dateElement = document.createElement("div");
     dateElement.className = "inactive-date";
     calendarElement.appendChild(dateElement);
   }
+  
   document.getElementById(`add-task`).addEventListener("click", () => addTaskPopup());
   setTheme();
   updateStreak();
-
 }
 
 function openPopup(day) {
@@ -413,6 +419,10 @@ function applyTheme(colors) {
   });
   
   document.querySelectorAll(".add-task").forEach(element => {
+    element.style.backgroundColor = colors.calendarColor1;
+  });
+  
+  document.querySelectorAll(".current-date").forEach(element => {
     element.style.backgroundColor = colors.calendarColor1;
   });
 }
