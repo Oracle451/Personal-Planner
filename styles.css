@@ -104,7 +104,6 @@ header {
 .sidebar {
     grid-column: 1; /* First column */
     grid-row: 2; /* Second row */
-    width: 300px; /* Fixed width */
     text-align: left; /* Left-align text */
     background-color: #f0f2f2; /* Light gray background */
     color: #2e4a70; /* Dark blue text */
@@ -128,16 +127,16 @@ header {
 }
 
 /* ========================================================================= */
-/* Layout and Grid */
+/* Main Layout and Grid */
 /* ========================================================================= */
 .grid-layout {
     /*grid set up*/
     display: grid; /* Enable grid layout */
-    grid-template-columns: 1fr 4fr; /* Two columns: 1 part sidebar, 4 parts main */
+    grid-template-columns: 1fr 5fr; /* Two columns: 1 part sidebar, 4 parts main */
     /* Two equal columns */
     grid-template-rows: auto; /* Rows adjust to content */
     /* Dynamic height rows */
-    height: calc(100vh - 10rem); /* Full height minus header/footer */
+    height: 100vh; /* Full height minus header/footer */
     /* Adjust for header/footer height */
 }
 
@@ -150,7 +149,7 @@ header {
     grid-row: 2; /* Second row */
     background-color: #fff9f0; /* Light peach background */
     color: #2e4a70; /* Dark blue text */
-    height: 85vh; /* Fixed height */
+    height: auto; /* Fixed height */
     padding: 0.5rem; /* Internal padding */
 }
 
