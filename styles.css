@@ -245,7 +245,7 @@ header {
     border-color: #000000;
     border-width: 1px;
     border-radius: 100%;
-    width: 8%;
+    height: 10%;
     aspect-ratio: 1;
     top: 5%;
     right: 5%;
@@ -572,7 +572,7 @@ header {
     grid-template-rows: auto 1fr;
     grid-template-columns: 2fr 3fr;
     text-align: left;
-    font-size: x-large;
+    font-size: large;
     height: 100%;
 }
 
@@ -602,11 +602,11 @@ header {
 
 #workout-editor textarea {
     margin-bottom: 15px;
-    font-size: x-large;
+    font-size: large;
 }
 
 #workout-submit {
-    font-size: x-large;
+    font-size: large;
 }
 
 #workout-lib {
