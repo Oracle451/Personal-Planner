@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Character encoding and viewport settings -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Page title and styling -->
     <title>Task Manager</title>
     <link rel="stylesheet" href="styles.css" />
+    
+    <!-- Favicon for the browser tab -->
     <link rel="icon" type="image/x-icon" href="personal_planner_icon.ico" />
   </head>
 
   <body>
+    <!-- Main content container with grid layout -->
     <main class="grid-layout">
+      <!-- Header section -->
       <header id="head">
         <h1>Iron Man Planner</h1>
+        
+        <!-- Options dropdown -->
         <div class="option">
           <button class="optionbtn">
             <img src="personal_planner_icon.ico" alt="options_button" />
           </button>
           <div class="option-content">
-			<br>
-			Options:
-			<hr>
+            <br />
+            Options:
+            <hr />
+            <!-- Theme selection dropdown -->
             <label for="theme-select">Select Theme:</label>
             <select
               id="themes"
@@ -29,95 +39,104 @@
             >
               <option value="Deep Ocean">Deep Ocean</option>
               <option value="Spring">Spring</option>
-			  <option value="Crimson">Crimson</option>
+              <option value="Crimson">Crimson</option>
             </select>
-            <button class="clearcookiesBtn" onclick="clearCookies()">Clear Cookies</button>
+            <!-- Button to clear local storage -->
+            <button class="clearcookiesBtn" onclick="clearCookies()">
+              Clear Cookies
+            </button>
           </div>
-		</div>
+        </div>
       </header>
-      <!-- Weather Section (New Box) -->
+
+      <!-- Sidebar section for weather, streaks, and features -->
       <section class="sidebar">
+        <!-- Weather information display -->
         <p id="weather-info">Loading weather...</p>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<h2><u>Streaks</u></h2>
-			<p>Current: <span id="streak-count">0</span> Days</p>
-			<p>Highest: <span id="peak-streak">0</span> Days</p>
-		</div>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<h2><u>Calories</u></h2>
-			<p>Todays Calories: <span>0</span> Calories</p>
-			<p>Daily Goal: <span>0</span> Calories</p>
-			<button class="sidebarBtn">Set Daily Calorie Goal</button>
-		</div>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<h2><u>Workouts</u></h2>
-			<button class="sidebarBtn" onclick="workoutPopup()">Workouts</button>
-			<br>
-			<br>
-		</div>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<h2><u>Meals</u></h2>
-			<button class="sidebarBtn" id="create-Meal">Create Meal</button>
-			<br>
-			<br>
-			<button class="sidebarBtn" id="log-Meal">Log Meal</button>
-			<br>
-			<br>
-			<button class="sidebarBtn" id="view-Meals">View Meals</button>
-		</div>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<h2><u>Upcoming Events</u></h2>
-		
-			<div class="upcoming-event">
-			<p><u>Event Example</u></p>
-			<p>Date: XX-XX-XXXX</p>
-			<p>Where: Example Place</p>
-			<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-			</div>
-			
-			<div class="upcoming-event">
-			<p><u>Event Example</u></p>
-			<p>Date: XX-XX-XXXX</p>
-			<p>Where: Example Place</p>
-			<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-			</div>
-		</div>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<p>Iron Man Planner 2025</p>
-		</div>
-		
-		<hr>
-		
+        <hr />
+
+        <!-- Streak tracking -->
+        <div class="streak-section">
+          <h2><u>Streaks</u></h2>
+          <p>Current: <span id="streak-count">0</span> Days</p>
+          <p>Highest: <span id="peak-streak">0</span> Days</p>
+        </div>
+        <hr />
+
+        <!-- Calorie tracking -->
+        <div class="streak-section">
+          <h2><u>Calories</u></h2>
+          <p>Todays Calories: <span>0</span> Calories</p>
+          <p>Daily Goal: <span>0</span> Calories</p>
+          <button class="sidebarBtn">Set Daily Calorie Goal</button>
+        </div>
+        <hr />
+
+        <!-- Workouts section -->
+        <div class="streak-section">
+          <h2><u>Workouts</u></h2>
+          <button class="sidebarBtn" onclick="workoutPopup()">Workouts</button>
+          <br />
+          <br />
+        </div>
+        <hr />
+
+        <!-- Meals section -->
+        <div class="streak-section">
+          <h2><u>Meals</u></h2>
+          <button class="sidebarBtn" id="create-Meal">Create Meal</button>
+          <br />
+          <br />
+          <button class="sidebarBtn" id="log-Meal">Log Meal</button>
+          <br />
+          <br />
+          <button class="sidebarBtn" id="view-Meals">View Meals</button>
+        </div>
+        <hr />
+
+        <!-- Upcoming events section -->
+        <div class="streak-section">
+          <h2><u>Upcoming Events</u></h2>
+          <div class="upcoming-event">
+            <p><u>Event Example</u></p>
+            <p>Date: XX-XX-XXXX</p>
+            <p>Where: Example Place</p>
+            <p>
+              Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+          <div class="upcoming-event">
+            <p><u>Event Example</u></p>
+            <p>Date: XX-XX-XXXX</p>
+            <p>Where: Example Place</p>
+            <p>
+              Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+        </div>
+        <hr />
+
+        <!-- Footer note in sidebar -->
+        <div class="streak-section">
+          <p>Iron Man Planner 2025</p>
+        </div>
+        <hr />
       </section>
 
-      <!-- Calendar Section -->
+      <!-- Calendar section -->
       <section class="calendar-section">
+        <!-- Current month display -->
         <h2 class="month">
           Your Calendar for <span id="current-month"></span>
         </h2>
-		
-        <button class="monthChangeBtn" id="back">&larr; Previous</button>
-		<button class="monthChangeBtn" id="next">Next &rarr;</button>
 
+        <!-- Navigation buttons for months -->
+        <button class="monthChangeBtn" id="back">← Previous</button>
+        <button class="monthChangeBtn" id="next">Next →</button>
 
+        <!-- Weekday labels -->
         <div class="day-labels">
           <div class="day">Sunday</div>
           <div class="day">Monday</div>
@@ -128,21 +147,26 @@
           <div class="day">Saturday</div>
         </div>
 
+        <!-- Calendar grid container -->
         <div class="calendar" id="calendar"></div>
       </section>
     </main>
 
+    <!-- Button to add a new task -->
     <button class="add-task" id="add-task">+ Add Task</button>
 
-    <!-- Background Overlay -->
+    <!-- Overlay for popup background -->
     <div id="overlay-bg" class="overlay-bg" onclick="closePopup()"></div>
 
-    <!-- Popup Window -->
+    <!-- Popup window container -->
     <div id="popup" class="popup-overlay">
       <div id="popup-content"></div>
     </div>
 
+    <!-- JavaScript files for functionality -->
     <script src="script.js"></script>
     <script src="workout.js"></script>
+    <script src="calendar.js"></script>
+	<script src="meals.js"></script>
   </body>
 </html>

@@ -1,567 +1,585 @@
+/* ========================================================================= */
 /* General Styles */
+/* ========================================================================= */
 body {
-    font-family: 'MyFont', sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    font-size: 14px; /* Reduced base size */
-    font-weight: bold;
+    font-family: 'MyFont', sans-serif; /* Set default font with fallback */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    text-align: center; /* Center-align all text */
+    font-size: 14px; /* Base font size */
+    font-weight: bold; /* Bold text globally */
 }
 
 
 header {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    background-color: #73c7e3;
-    color: #ffffff;
-    font-size: 1.5rem; /* Reduced from 2.3rem */
-    text-align: center;
-    text-shadow: -1px 1px #000000; /* Slightly smaller shadow */
-    line-height: 1;
-    padding: 0.5rem; /* Adjusted padding */
+    grid-column: 1 / -1; /* Span all columns */
+    grid-row: 1; /* First row */
+    background-color: #73c7e3; /* Light blue background */
+    color: #ffffff; /* White text color */
+    font-size: 1.5rem; /* Header font size */
+    text-align: center; /* Center-align text */
+    text-shadow: -1px 1px #000000; /* Text shadow for depth */
+    line-height: 1; /* Tight line spacing */
+    padding: 0.5rem; /* Internal padding */
 }
 
+/* ========================================================================= */
+/* Header Options Dropdown */
+/* ========================================================================= */
 /*options drop down menu*/
 .option {
-    position: absolute;
-    display: inline-block;
-    top: 30px;
-    right: 10px;
+    position: absolute; /* Position relative to header */
+    display: inline-block; /* Inline layout */
+    top: 30px; /* Distance from top */
+    right: 10px; /* Distance from right */
 }
 
 /* Style the dropdown button */
 .optionbtn {
-    background-color: inherit;
-    color: #666666;
-    border: none;
-    cursor: pointer;
+    background-color: inherit; /* Inherit header background */
+    color: #666666; /* Gray color for button */
+    border: none; /* No border */
+    cursor: pointer; /* Hand cursor on hover */
 }
 
 .optionbtn img {
-    height: 70px;
-    border-radius: 20px;
+    height: 70px; /* Fixed image height */
+    border-radius: 20px; /* Rounded corners */
 }
 
 .optionbtn:hover {
-    background-color: #666666;
+    background-color: #666666; /* Gray background on hover */
 }
 
 /* Style the dropdown content (hidden by default) */
 .option-content {
-    background-color: #bbc7d6;
-    display: none;
-    position: absolute;
-    right: 0;
-    min-width: 200px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 5px;
-    overflow: hidden;
-	font-size: 1rem;
+    background-color: #bbc7d6; /* Light gray background */
+    display: none; /* Hidden by default */
+    position: absolute; /* Overlay positioning */
+    right: 0; /* Align to right */
+    min-width: 200px; /* Minimum width */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    z-index: 1; /* Above other elements */
+    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; /* Contain overflow */
+    font-size: 1rem; /* Font size for content */
 }
 
 /* Style the buttons inside the dropdown */
 .option-content button {
-    padding: 10px;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 10px
+    padding: 10px; /* Internal padding */
+    border: none; /* No border */
+    text-align: left; /* Left-align text */
+    cursor: pointer; /* Hand cursor */
+    border-radius: 5px; /* Rounded corners */
+    margin: 10px /* Spacing around buttons */
 }
 
+/* Hover effect for dropdown buttons */
 .option-content button:hover {
-    background-color: #666666;
+    background-color: #666666; /* Gray on hover */
 }
 
 /* Show dropdown when hovered */
 .option:hover .option-content {
-    display: block;
+    display: block; /* Reveal on hover */
 }
 
+/* ========================================================================= */
+/* Typography and Fonts */
+/* ========================================================================= */
 /* Font Section */
 
 @font-face {
-    font-family: 'MyFont';
-    src: url('/Fonts/Simple_Bold.ttf.ttf') format('opentype');
+    font-family: 'MyFont'; /* Define custom font */
+    src: url('/Fonts/Simple_Bold.ttf.ttf') format('opentype'); /* Font file path */
     /* or "otf" */
-    font-style: normal;
+    font-style: normal; /* Normal style */
 }
 
-
+/* ========================================================================= */
+/* Sidebar Styles */
+/* ========================================================================= */
 /* Weather Box */
 .sidebar {
-    grid-column: 1;
-    grid-row: 2;
-    width: 300px;
-    text-align: left;
-    background-color: #f0f2f2;
-    color: #2e4a70;
-    padding: 1rem;
-    font-size: 1rem;
-    flex: 1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
+    grid-column: 1; /* First column */
+    grid-row: 2; /* Second row */
+    width: 300px; /* Fixed width */
+    text-align: left; /* Left-align text */
+    background-color: #f0f2f2; /* Light gray background */
+    color: #2e4a70; /* Dark blue text */
+    padding: 1rem; /* Internal padding */
+    font-size: 1rem; /* Font size */
+    flex: 1; /* Flexible growth */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    overflow-y: auto; /* Scroll if content overflows */
 }
 
 .sidebar * {
-    text-shadow: none;
+    text-shadow: none; /* Remove text shadow for children */
 }
 
 .streak-section {
-
-    font-size: 1rem;
-    width: fit-content;
-    max-width: 100%;
-    line-height: 0.8;
-    padding: 0.2rem;
+    font-size: 1rem; /* Consistent font size */
+    width: fit-content; /* Fit to content */
+    max-width: 100%; /* Limit to container */
+    line-height: 0.8; /* Tight line spacing */
+    padding: 0.2rem; /* Minimal padding */
 }
 
+/* ========================================================================= */
+/* Layout and Grid */
+/* ========================================================================= */
 .grid-layout {
     /*grid set up*/
-    display: grid;
-    grid-template-columns: 1fr 4fr;
+    display: grid; /* Enable grid layout */
+    grid-template-columns: 1fr 4fr; /* Two columns: 1 part sidebar, 4 parts main */
     /* Two equal columns */
-    grid-template-rows: auto;
+    grid-template-rows: auto; /* Rows adjust to content */
     /* Dynamic height rows */
-    height: calc(100vh - 10rem);
+    height: calc(100vh - 10rem); /* Full height minus header/footer */
     /* Adjust for header/footer height */
 }
 
+/* ========================================================================= */
+/* Calendar Section Styles */
+/* ========================================================================= */
 /* Calendar Section */
 .calendar-section {
-    grid-column: 2;
-    grid-row: 2;
-    background-color: #fff9f0;
-    color: #2e4a70;
-    height: 85vh; /* Slightly reduced */
-    padding: 0.5rem; /* Reduced padding */
+    grid-column: 2; /* Second column */
+    grid-row: 2; /* Second row */
+    background-color: #fff9f0; /* Light peach background */
+    color: #2e4a70; /* Dark blue text */
+    height: 85vh; /* Fixed height */
+    padding: 0.5rem; /* Internal padding */
 }
 
 .calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    padding-left: 0.5rem;
-    width: 100%; /* Changed from 70vw */
-    height: 50vh; /* Reduced from 60vh */
+    display: grid; /* Grid layout for days */
+    grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
+    padding-left: 0.5rem; /* Left padding */
+    width: 100%; /* Full width */
+    height: 50vh; /* Fixed height */
 }
 
 .month {
-    padding: 1rem;
-    margin: 0;
+    padding: 1rem; /* Padding around month title */
+    margin: 0; /* No margin */
 }
 
 /* Calendar */
 .calendar {
     /*display*/
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    display: grid; /* Grid layout */
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for days */
     /* 7-day week */
     /*grid formatting*/
-    padding-left: 1rem;
-    width: 70vw;
-    height: 60vh;
+    padding-left: 1rem; /* Left padding */
+    width: 70vw; /* Fixed width */
+    height: 60vh; /* Fixed height */
 }
 
 .current-date {
-  background-color: #73c7e3;
+  background-color: #73c7e3; /* Highlight current day */
 }
 
 .date {
     /*background color*/
-    background-color: #fff9f0;
+    background-color: #fff9f0; /* Light peach background */
     /*box formatting and styling*/
-    width: 10vw;
-    height: 10vh;
-    border: #000000;
-    border-style: solid;
-    border-width: 1px;
+    width: 10vw; /* Fixed width */
+    height: 10vh; /* Fixed height */
+    border: #000000; /* Black border color */
+    border-style: solid; /* Solid border */
+    border-width: 1px; /* Border thickness */
     /*text formatting*/
-    color: #001f3f;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-    position: relative;
+    color: #001f3f; /* Dark navy text */
+    cursor: pointer; /* Hand cursor */
+    transition: background-color 0.3s ease-in-out; /* Smooth color transition */
+    position: relative; /* For child positioning */
 }
-
 
 .inactive-date {
     /*background color*/
-    background-color: #bbc7d6;
+    background-color: #bbc7d6; /* Gray background */
     /*box formatting and styling*/
-    width: 10vw;
-    height: 10vh;
-    border: #000000;
-    border-style: solid;
-    border-width: 1px;
+    width: 10vw; /* Fixed width */
+    height: 10vh; /* Fixed height */
+    border: #000000; /* Black border color */
+    border-style: solid; /* Solid border */
+    border-width: 1px; /* Border thickness */
     /*text formatting and styling*/
-    color: #001f3f;
+    color: #001f3f; /* Dark navy text */
 }
 
 .day {
     /*background color*/
-    background-color: #73c7e3;
+    background-color: #73c7e3; /* Light blue background */
     /*box formatting and styling*/
-    width: 10vw;
-    height: 2.5vh;
-    border: #000000;
-    border-style: solid;
-    border-width: 1px;
+    width: 10vw; /* Fixed width */
+    height: 2.5vh; /* Fixed height */
+    border: #000000; /* Black border color */
+    border-style: solid; /* Solid border */
+    border-width: 1px; /* Border thickness */
     /*text formatting and styling*/
-    color: #2e4a70;
+    color: #2e4a70; /* Dark blue text */
 }
 
 .day-labels {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    display: grid; /* Grid for weekday labels */
+    grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
     /* 7 days */
     /* formatting */
-    width: fit-content;
-    padding: 1rem;
-    padding-bottom: 0;
+    width: fit-content; /* Fit to content */
+    padding: 1rem; /* Internal padding */
+    padding-bottom: 0; /* No bottom padding */
 }
 
-/* replace .day and add .day-lables (dont add this comment) */
-
 .date:hover {
-    background-color: #666666 !important;
-    color: white !important;
+    background-color: #666666 !important; /* Gray on hover */
+    color: white !important; /* White text on hover */
 }
 
 .inactive-date:hover {
-    background-color: #666666 !important;
-    color: white !important;
+    background-color: #666666 !important; /* Gray on hover */
+    color: white !important; /* White text on hover */
 }
-
 
 /* Color-coded days */
 .day-rating {
-    position: absolute;
-    border-style: solid;
-    border-color: #000000;
-    border-width: 1px;
-    border-radius: 100%;
-    height: 10%;
-    aspect-ratio: 1;
-    top: 5%;
-    right: 5%;
+    position: absolute; /* Position relative to parent */
+    border-style: solid; /* Solid border */
+    border-color: #000000; /* Black border */
+    border-width: 1px; /* Border thickness */
+    border-radius: 100%; /* Circular shape */
+    height: 10%; /* Relative height */
+    aspect-ratio: 1; /* Square aspect ratio */
+    top: 5%; /* Offset from top */
+    right: 5%; /* Offset from right */
 }
 
+/* ========================================================================= */
+/* Popup Styles */
+/* ========================================================================= */
 /* Popup */
 .popup-overlay {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80vw;
-    height: 80vh;
-    background-color: #ffffff;
-    color: #001f3f;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    display: none;
-    z-index: 1000;
-    padding: 2rem;
+    position: fixed; /* Fixed over viewport */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust centering */
+    width: 80vw; /* Wide popup */
+    height: 80vh; /* Tall popup */
+    background-color: #ffffff; /* White background */
+    color: #001f3f; /* Dark navy text */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    display: none; /* Hidden by default */
+    z-index: 1000; /* Above overlay */
+    padding: 2rem; /* Internal padding */
 }
 
 .overlay-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    z-index: 999;
+    position: fixed; /* Cover entire viewport */
+    top: 0; /* Full height */
+    left: 0; /* Full width */
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    display: none; /* Hidden by default */
+    z-index: 999; /* Below popup */
 }
 
 #popup-content {
-    height: 100%;
+    height: 100%; /* Fill popup height */
 }
 
+.day-Popup {
+    width: 80vw; /* Match popup width */
+    display: grid; /* Grid layout */
+    grid-template-columns: 20vw 1vw 59vw; /* Three columns */
+}
+
+.task-Area {
+    padding-top: 20px; /* Top padding */
+    padding-left: 10px; /* Left padding */
+    height: 80vh; /* Full height */
+    text-align: left; /* Left-align text */
+    overflow-y: auto; /* Scroll if needed */
+}
+
+.cool-Line {
+    border-left: 6px solid green; /* Green vertical line */
+    height: 80vh; /* Full height */
+}
+
+/* ========================================================================= */
+/* Button Styles */
+/* ========================================================================= */
 /* Buttons */
 .status-btn {
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 5px;
-    transition: 0.3s;
+    padding: 10px 15px; /* Internal padding */
+    margin: 5px; /* External spacing */
+    border: none; /* No border */
+    cursor: pointer; /* Hand cursor */
+    font-size: 14px; /* Font size */
+    border-radius: 5px; /* Rounded corners */
+    transition: 0.3s; /* Smooth transition */
 }
 
 .status-btn.good {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #4CAF50; /* Green for good */
+    color: white; /* White text */
 }
 
 .status-btn.decent {
-    background-color: #FFC107;
-    color: black;
+    background-color: #FFC107; /* Amber for decent */
+    color: black; /* Black text */
 }
 
 .status-btn.bad {
-    background-color: #FF5722;
-    color: white;
+    background-color: #FF5722; /* Orange for bad */
+    color: white; /* White text */
 }
 
 .status-btn:hover {
-    opacity: 0.8;
+    opacity: 0.8; /* Fade on hover */
 }
 
 /* Close Button */
 .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
+    position: absolute; /* Position in popup */
+    top: 15px; /* Offset from top */
+    right: 20px; /* Offset from right */
+    background: #ff4d4d; /* Red background */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 8px 12px; /* Internal padding */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Hand cursor */
+    border-radius: 5px; /* Rounded corners */
 }
 
 .close-btn:hover {
-    background: #cc0000;
+    background: #cc0000; /* Darker red on hover */
 }
 
 /* styling for calorie counter buttons */
 .calorie-counter {
-    margin-top: 20px;
+    margin-top: 20px; /* Spacing above */
 }
 
 .calorie-btn {
-    padding: 10px 20px;
-    margin: 5px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 5px;
-    transition: 0.3s;
+    padding: 10px 20px; /* Internal padding */
+    margin: 5px; /* External spacing */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* No border */
+    cursor: pointer; /* Hand cursor */
+    font-size: 14px; /* Font size */
+    border-radius: 5px; /* Rounded corners */
+    transition: 0.3s; /* Smooth transition */
 }
 
 .calorie-btn:hover {
-    opacity: 0.8;
+    opacity: 0.8; /* Fade on hover */
 }
 
 /* Styles for add-task button*/
 .add-task {
-    font-family: 'MyFont', sans-serif;
-    padding: 15px 30px;
-    background-color: #73c7e3;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    border-color: red;
-    position: fixed;
-    right: 40px;
-    bottom: 40px;
-
-    cursor: pointer;
+    font-family: 'MyFont', sans-serif; /* Custom font */
+    padding: 15px 30px; /* Large padding */
+    background-color: #73c7e3; /* Light blue background */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 20px; /* Rounded corners */
+    border-color: red; /* Unused due to no border */
+    position: fixed; /* Fixed bottom-right */
+    right: 40px; /* Offset from right */
+    bottom: 40px; /* Offset from bottom */
+    cursor: pointer; /* Hand cursor */
 }
 
 .add-task:hover {
-    box-shadow: 0 0 20px white;
-    transition: .5s;
+    box-shadow: 0 0 20px white; /* Glow effect */
+    transition: .5s; /* Smooth transition */
 }
 
 .task-adder {
-    align-items: start;
+    align-items: start; /* Align items to start */
 }
 
 .desc {
-    height: 50px;
-    width: 50px;
+    height: 50px; /* Fixed height */
+    width: 50px; /* Fixed width */
 }
 
 .task {
-    background-color: #f8d0c8;
-    border-radius: 50px;
-    text-align: start;
-    padding: 5px 10px;
-    margin: 5px;
-    border: #35522b;
-    border-style: dashed;
-    border-width: 1px;
-
+    background-color: #f8d0c8; /* Light pink background */
+    border-radius: 50px; /* Fully rounded */
+    text-align: start; /* Left-align text */
+    padding: 5px 10px; /* Internal padding */
+    margin: 5px; /* External spacing */
+    border: #35522b; /* Green border color */
+    border-style: dashed; /* Dashed border */
+    border-width: 1px; /* Border thickness */
 }
 
 .see-More {
-    background-color: gray;
-    border-radius: 50px;
-    text-align: start;
-    font-size: small;
-    padding-left: 10px;
-    margin: 5px;
-}
-
-.day-Popup {
-    width: 80vw;
-    display: grid;
-    grid-template-columns: 20vw 1vw 59vw;
-}
-
-.task-Area {
-    padding-top: 20px;
-    padding-left: 10px;
-    height: 80vh;
-    text-align: left;
-    overflow-y: auto;
-}
-
-.cool-Line {
-    border-left: 6px solid green;
-    height: 80vh;
+    background-color: gray; /* Gray background */
+    border-radius: 50px; /* Fully rounded */
+    text-align: start; /* Left-align text */
+    font-size: small; /* Smaller text */
+    padding-left: 10px; /* Left padding */
+    margin: 5px; /* External spacing */
 }
 
 .task-Long {
-    background-color: wheat;
-    border-radius: 20px;
-    padding: 2px 2px 2px 15px;
-    color: #001f3f;
-    font-size: large;
-    margin-bottom: 20px;
+    background-color: wheat; /* Wheat background */
+    border-radius: 20px; /* Rounded corners */
+    padding: 2px 2px 2px 15px; /* Uneven padding */
+    color: #001f3f; /* Dark navy text */
+    font-size: large; /* Larger text */
+    margin-bottom: 20px; /* Spacing below */
 }
 
 .edit-Task,
 .remove-Task {
-    display: none;
+    display: none; /* Hidden by default */
 }
-
-
 
 .task-Long:hover .edit-Task,
 .task-Long:hover .remove-Task {
-    display: inline;
-
+    display: inline; /* Show on hover */
 }
 
 .times {
-    border-bottom: 1px solid #0000EE;
-    color: #0000EE;
+    border-bottom: 1px solid #0000EE; /* Blue underline */
+    color: #0000EE; /* Blue text */
 }
 
 .submenuBtn {
-	width: wrap-content; /* Makes the button stretch across the container */
-    background-color: white; /* Light blue fill color */
+    width: wrap-content; /* Intended as 'fit-content' */
+    background-color: white; /* White background */
     border: 2px solid black; /* Bold black border */
-    border-radius: 25px; /* Rounded edges */
-    font-weight: bold;
-    cursor: pointer;
-	padding: 5px 15px;
-    font-size: 14px;
+    border-radius: 25px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Hand cursor */
+    padding: 5px 15px; /* Internal padding */
+    font-size: 14px; /* Font size */
 }
 
 .submenuBtn:hover {
-    background-color: white; /* Turn background to white */
-    color: black; /* Change text color to black for contrast */
-	transform: scale(1.05); /* Slightly enlarge the button */
+    background-color: white; /* Remains white */
+    color: black; /* Black text */
+    transform: scale(1.05); /* Slight grow effect */
 }
 
+/* ========================================================================= */
+/* Form and Input Styles */
+/* ========================================================================= */
 .inputArea {
-    width: 100%;
-    padding: 4px;
-    border: 2px solid #ccc;
-    border-radius: 3px;
-    transition: border-color 0.3s ease-in-out;
-	resize: none;
-    max-height: 100px;
-    max-width: 200px;
+    width: 100%; /* Full width */
+    padding: 4px; /* Internal padding */
+    border: 2px solid #ccc; /* Light gray border */
+    border-radius: 3px; /* Slightly rounded */
+    transition: border-color 0.3s ease-in-out; /* Smooth border change */
+    resize: none; /* Prevent resizing */
+    max-height: 100px; /* Limit height */
+    max-width: 200px; /* Limit width */
     font-size: 10px; /* Smaller text */
 }
 
 .inputArea:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Subtle glow */
 }
 
 .sidebarBtn {
-    width: wrap-content; /* Makes the button stretch across the container */
-    background-color: #73c7e3; /* Light blue fill color */
+    width: wrap-content; /* Intended as 'fit-content' */
+    background-color: #73c7e3; /* Light blue background */
     border: 2px solid black; /* Bold black border */
-    border-radius: 25px; /* Rounded edges */
-    font-weight: bold;
-    cursor: pointer;
-	padding: 5px 15px; 
-    font-size: 14px; 
+    border-radius: 25px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Hand cursor */
+    padding: 5px 15px; /* Internal padding */
+    font-size: 14px; /* Font size */
 }
 
 .sidebarBtn:hover {
-    background-color: white; /* Turn background to white */
-    color: black; /* Change text color to black for contrast */
-	transform: scale(1.05); /* Slightly enlarge the button */
+    background-color: white; /* White on hover */
+    color: black; /* Black text */
+    transform: scale(1.05); /* Slight grow effect */
 }
 
 .clearcookiesBtn {
-    background-color: red; /* Red fill color */
+    background-color: red; /* Red background */
     border: 3px solid black; /* Bold black border */
-    border-radius: 25px; /* Rounded edges */
-    font-size: 16px;
-    font-weight: bold;
-    color: white; /* White text color */
-    cursor: pointer;
+    border-radius: 25px; /* Rounded corners */
+    font-size: 16px; /* Larger text */
+    font-weight: bold; /* Bold text */
+    color: white; /* White text */
+    cursor: pointer; /* Hand cursor */
     transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Smooth transitions */
 }
 
 .clearcookiesBtn:hover {
-    background-color: white; /* Turn background to white */
-    color: black; /* Change text color to black for contrast */
-	transform: scale(1.05); /* Slightly enlarge the button */
+    background-color: white; /* White on hover */
+    color: black; /* Black text */
+    transform: scale(1.05); /* Slight grow effect */
 }
 
 .themes {
-    padding: 10px 20px;
-    background-color: white; /* Red fill color */
+    padding: 10px 20px; /* Internal padding */
+    background-color: white; /* White background */
     border: 3px solid black; /* Bold black border */
-    border-radius: 25px; /* Rounded edges */
-    font-size: 16px;
-    font-weight: bold;
-    color: black; /* White text color */
-    cursor: pointer;
-    appearance: none; /* Remove default appearance in most browsers */
+    border-radius: 25px; /* Rounded corners */
+    font-size: 16px; /* Larger text */
+    font-weight: bold; /* Bold text */
+    color: black; /* Black text */
+    cursor: pointer; /* Hand cursor */
+    appearance: none; /* Remove default styling */
     -webkit-appearance: none; /* For Safari */
     -moz-appearance: none; /* For Firefox */
     transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Smooth transitions */
-	margin-top: 20px; /* Add spacing above the select box */
+    margin-top: 20px; /* Spacing above */
 }
 
 /* Style for the select box when hovered */
 .themes:hover {
-    transform: scale(1.05); /* Slightly enlarge the select box */
+    transform: scale(1.05); /* Slight grow effect */
 }
 
 .monthChangeBtn {
-    background-color: #73c7e3; /* Light blue */
+    background-color: #73c7e3; /* Light blue background */
     border: 2px solid black; /* Bold black border */
     border-radius: 10px; /* Slightly rounded */
-    font-weight: bold;
-    color: black;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-	padding: 5px 10px;
-    font-size: 14px; 
+    font-weight: bold; /* Bold text */
+    color: black; /* Black text */
+    cursor: pointer; /* Hand cursor */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+    padding: 5px 10px; /* Internal padding */
+    font-size: 14px; /* Font size */
 }
 
 .monthChangeBtn:hover {
-    background-color: white; /* Change to white on hover */
+    background-color: white; /* White on hover */
     transform: scale(1.05); /* Slight grow effect */
 }
 
 .upcoming-event {
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 12px;
-  padding: 16px;
-  display: inline-block;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-  margin-bottom: 12px;
+  background-color: white; /* White background */
+  border: 2px solid black; /* Bold black border */
+  border-radius: 12px; /* Rounded corners */
+  padding: 16px; /* Internal padding */
+  display: inline-block; /* Inline layout */
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* Light shadow */
+  margin-bottom: 12px; /* Spacing below */
 }
 
-
+/* ========================================================================= */
+/* Workout Section Styles */
+/* ========================================================================= */
 /* Workout section */
 
 #workout-popup {
