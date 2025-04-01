@@ -134,7 +134,20 @@ function generateCalendar(today) {
       let status = localStorage.getItem(`${dateString}-stat`);
       dateElement.classList.remove("good", "decent", "bad");
       if (status) {
-        dateElement.classList.add(status);
+        let rating = document.createElement("div");
+        rating.classList.add("day-rating");
+        switch (status) {
+          case "good":
+            rating.style.backgroundColor = "#4CAF50"
+            break;
+          case "decent":
+            rating.style.backgroundColor = "#FFC107"
+            break;
+          case "bad":
+            rating.style.backgroundColor = "#FF5722"
+            break;
+        }
+        dateElement.appendChild(rating);
       }
     }
 
