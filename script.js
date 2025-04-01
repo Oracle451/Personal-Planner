@@ -396,6 +396,7 @@ function applyTheme(colors) {
   document.querySelectorAll(".date").forEach(element => {
     element.style.backgroundColor = colors.calendarColor3;
     element.style.color = colors.textColor3;
+    element.style.fontSize = "12px";
   });
 
   document.querySelectorAll(".sidebarBtn").forEach(element => {
@@ -429,13 +430,15 @@ function applyTheme(colors) {
 
 
 
+// Global variable to track active toasts
+let toastStack = [];
+
 function showToast(message) {
   const toast = document.createElement("div");
   toast.textContent = `! ${message} !`;
 
   // Style the toast
   toast.style.position = "fixed";
-  toast.style.bottom = "30px";
   toast.style.left = "50%";
   toast.style.transform = "translateX(-50%)";
   toast.style.backgroundColor = "white";
@@ -449,8 +452,15 @@ function showToast(message) {
   toast.style.transition = "opacity 0.5s";
   toast.style.zIndex = "1000";
 
-  // Add to DOM
+  // Add to DOM and track in stack
   document.body.appendChild(toast);
+  toastStack.push(toast);
+
+  // Calculate vertical position
+  const toastHeight = 60; // Approximate height including margin (adjust as needed)
+  const baseOffset = 30;  // Distance from bottom for first toast
+  const index = toastStack.length - 1;
+  toast.style.bottom = `${baseOffset + (index * toastHeight)}px`;
 
   // Fade in
   setTimeout(() => {
@@ -462,8 +472,53 @@ function showToast(message) {
     toast.style.opacity = "0";
     setTimeout(() => {
       toast.remove();
+      // Remove from stack and adjust remaining toasts
+      toastStack = toastStack.filter(t => t !== toast);
+      updateToastPositions();
     }, 500);
   }, 2500);
+}
+
+function updateToastPositions() {
+  const toastHeight = 60; // Same as above
+  const baseOffset = 30;
+  
+  toastStack.forEach((toast, index) => {
+    toast.style.bottom = `${baseOffset + (index * toastHeight)}px`;
+  });
+}
+
+// Updated clearCookies function
+function clearCookies() {
+  localStorage.clear();
+  clearOldLocalStorage();
+  showToast("Cookies Have Been cleared");
+}
+
+function clearOldLocalStorage() {
+  if (!confirm("Clear data older than 6 months?")) return;
+  
+  const sixMonthsAgo = new Date();
+  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+  sixMonthsAgo.setHours(0, 0, 0, 0);
+  
+  const itemsToRemove = [];
+  const datePattern = /\d{4}-\d{2}-\d{2}/;
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const dateMatch = key.match(datePattern);
+    if (dateMatch) {
+      const dateStr = dateMatch[0];
+      const itemDate = new Date(dateStr);
+      if (!isNaN(itemDate.getTime()) && itemDate < sixMonthsAgo) {
+        itemsToRemove.push(key);
+      }
+    }
+  }
+
+  itemsToRemove.forEach(key => localStorage.removeItem(key));
+  showToast(`Cleared ${itemsToRemove.length} old items from storage`);
 }
 
 // function to update the calorie count for a specific day
@@ -1004,7 +1059,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateStreak();
   updateTheme();
   setTheme();
-
+  clearOldLocalStorage();
 });
 
 // Function to clear local cookies for the website
@@ -1015,6 +1070,35 @@ function clearCookies() {
 
   // Create toast
   showToast("Cookies Have Been cleared");
+}
+
+function clearOldLocalStorage() {
+  
+  const sixMonthsAgo = new Date();
+  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+  sixMonthsAgo.setHours(0, 0, 0, 0);
+  
+  const itemsToRemove = [];
+  const datePattern = /\d{4}-\d{2}-\d{2}/;
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const dateMatch = key.match(datePattern);
+    if (dateMatch) {
+      const dateStr = dateMatch[0];
+      const itemDate = new Date(dateStr);
+      if (!isNaN(itemDate.getTime()) && itemDate < sixMonthsAgo) {
+        itemsToRemove.push(key);
+      }
+    }
+  }
+
+  itemsToRemove.forEach(key => localStorage.removeItem(key));
+  
+  if (itemsToRemove.length > 0)
+  {
+	  showToast(`Cleared ${itemsToRemove.length} Old Items From Local Storage`);
+  }
 }
 
 
