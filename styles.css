@@ -185,6 +185,7 @@ header {
     color: #001f3f;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+    position: relative;
 }
 
 
@@ -238,19 +239,16 @@ header {
 
 
 /* Color-coded days */
-.date.good {
-    background-color: #4CAF50 !important;
-    color: white;
-}
-
-.date.decent {
-    background-color: #FFC107 !important;
-    color: black;
-}
-
-.date.bad {
-    background-color: #FF5722 !important;
-    color: white;
+.day-rating {
+    position: absolute;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 1px;
+    border-radius: 100%;
+    width: 8%;
+    aspect-ratio: 1;
+    top: 5%;
+    right: 5%;
 }
 
 /* Popup */
