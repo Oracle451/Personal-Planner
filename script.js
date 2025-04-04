@@ -551,6 +551,7 @@ function addTaskPopup(title, desc, date, time, addy, task) {
   document.getElementById("pushTask").addEventListener("click", () => addTask(givenTask, date));
 }
 
+
 /**
  * Checks if a day has any tasks in localStorage.
  * Parameter: {string} dateString - The date string to check.
@@ -593,9 +594,9 @@ function populateTaskArea(numb) {
           Title: ${localStorage.getItem(`${dateString}-task${k}`)} at
           <span class="times">${localStorage.getItem(`${dateString}-time${k}`)}</span>
           <br>
-          Where: ${localStorage.getItem(`${dateString}-addy${k}`)}
+          Where: ${localStorage.getItem(`${dateString}-addy${k}`) || "Not Provided"}
           <br>
-          Description: ${localStorage.getItem(`${dateString}-desc${k}`)}
+          Description: ${localStorage.getItem(`${dateString}-desc${k}`) || "Not Provided"}
           <br>
           <button class="edit-Task" id="edit-${dateString}-task${k}">edit</button>
           <button class="remove-Task" id="remove-${dateString}-task${k}">remove</button>
@@ -656,6 +657,50 @@ if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
   module.exports = { addTask, removeTask, doesDayHaveTasks };
 }
 
+function populateUpcomingEvents() {
+  const today = new Date();
+  let taskCount = 0;
+
+  for (i = 0; i < 8; i++) {
+
+    const dateString = generateDateString(today.getDate() + i, true);
+    if (doesDayHaveTasks(dateString)) {
+      const taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
+      const taskStart = localStorage.getItem(`${dateString}-taskStart`);
+
+      for (let k = taskStart; k <= taskAmount; k++) {
+        if (taskCount < 5) {
+          const task = document.createElement("div");
+          taskCount++;
+          task.className = "upcoming-event";
+          task.innerHTML = `
+              <p><u>${localStorage.getItem(`${dateString}-task${k}`)}</u></p>
+              <p>Date: ${dateString}</p>
+              <p>Time: ${localStorage.getItem(`${dateString}-time${k}`)}</p>
+              <p>Where: ${localStorage.getItem(`${dateString}-addy${k}`) || "No Address"}</p>
+              <p>
+                ${localStorage.getItem(`${dateString}-desc${k}`) || "No Desc..."}
+              </p>
+          `;
+
+          document.getElementById("upcoming-event-sect").appendChild(task);
+        } else {
+          k = taskAmount + 2;
+        }
+      }
+    }
+  }
+
+  if (taskCount > 0) {
+    document.getElementById("no-Tasks").innerHTML = '';
+  } else {
+    document.getElementById("no-Tasks").innerHTML = 'Nothing to do...';
+
+  }
+  setTheme();
+}
+
+
 /**
  * Initializes the application on DOM load.
  */
@@ -667,4 +712,5 @@ document.addEventListener("DOMContentLoaded", () => {
   updateTheme();
   setTheme();
   clearOldLocalStorage();
+  populateUpcomingEvents();
 });

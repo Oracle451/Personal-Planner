@@ -34,7 +34,7 @@ function generateCalendar(today) {
   let last_day = new Date(today.getFullYear(), today.getMonth() + 1, 0);
   let days_in_month = last_day.getDate(); /* gets the length of this month */
   let weekday = new Date(today.getFullYear(), today.getMonth(), 1).getDay(); /* gets the first weekday of this month */
-  
+
   // Get current date for comparison
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -47,7 +47,7 @@ function generateCalendar(today) {
     dateElement.className = "inactive-date";
     calendarElement.appendChild(dateElement);
   }
-  
+
   /* creates days of the month */
   for (let i = 1; i <= days_in_month; i++) {
     const dateElement = document.createElement("div");
@@ -102,15 +102,16 @@ function generateCalendar(today) {
     }
 
     calendarElement.appendChild(dateElement);
+
   }
-  
+
   /* creates filler after this month */
   for (let i = 0; i > days_in_month + weekday - 42; i--) {
     const dateElement = document.createElement("div");
     dateElement.className = "inactive-date";
     calendarElement.appendChild(dateElement);
   }
-  
+
   // Adds event listener to the add-task button and updates UI
   document.getElementById(`add-task`).addEventListener("click", () => addTaskPopup());
   setTheme();
