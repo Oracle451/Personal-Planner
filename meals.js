@@ -101,6 +101,7 @@ function openCreateMealPopup() {
 /**
  * Opens a popup for logging a meal, pre-filling the date with today's date.
  * Attaches event listeners for closing the popup and submitting the form.
+ * UPDATED to match the input style of Create Meal
  */
 function openLogMealPopup() {
   document.getElementById("popup-content").innerHTML = `
@@ -114,8 +115,8 @@ function openLogMealPopup() {
           <label for="meal-name">Meal Name:</label>
           <input
             type="text"
-            id="meal-name"
-            name="meal-name"
+            id="meal-name"        
+            name="meal-name"        
             class="inputArea"
             required
           >
@@ -127,18 +128,18 @@ function openLogMealPopup() {
             type="date"
             id="meal-date"
             name="meal-date"
-            value="${new Date().toISOString().split("T")[0]}"
+            value="${new Date().toISOString().split("T")[0]}" 
             class="inputArea"
             required
           >
         </div>
         <br>
         <div>
-          <label for="meal-calories">Calories:</label>
+          <label for="meal-calories">Calories (per serving):</label> 
           <input
             type="number"
-            id="meal-calories"
-            name="meal-calories"
+            id="meal-calories"    
+            name="meal-calories"    
             min="0"
             class="inputArea"
             required
@@ -146,12 +147,46 @@ function openLogMealPopup() {
         </div>
         <br>
         <div>
-          <label for="serving-size">Serving Size (Optional):</label>
+          <label for="log-meal-protein">Protein (grams per serving) (Optional):</label>
+          <input
+            type="number"
+            id="log-meal-protein" 
+            name="log-meal-protein" 
+            min="0"
+            class="inputArea"
+          >
+        </div>
+        <br>
+        <div>
+          <label for="log-meal-carbs">Carbohydrates (grams per serving) (Optional):</label>
+          <input
+            type="number"
+            id="log-meal-carbs"   
+            name="log-meal-carbs"   
+            min="0"
+            class="inputArea"
+          >
+        </div>
+        <br>
+        <div>
+          <label for="log-meal-fats">Fats (grams per serving) (Optional):</label>
+          <input
+            type="number"
+            id="log-meal-fats"    
+            name="log-meal-fats"    
+            min="0"
+            class="inputArea"
+          >
+        </div>
+        <br>
+        <div>
+          <label for="serving-size">Serving Size (Optional):</label> 
           <input
             type="text"
-            id="serving-size"
-            name="serving-size"
+            id="serving-size"     
+            name="serving-size"     
             class="inputArea"
+            
           >
         </div>
         <br>
@@ -174,6 +209,7 @@ function openLogMealPopup() {
 /**
  * Opens a popup to view logged and created meals from localStorage.
  * Displays meals in two sections with conditional rendering for empty states.
+ * UPDATED to display protein/carbs/fats for logged meals and format created meals display.
  */
 function openViewMealsPopup() {
   let loggedMealsHTML = "<h3>Logged Meals:</h3>";
@@ -193,13 +229,16 @@ function openViewMealsPopup() {
     }
   }
 
-  // Build HTML for logged meals
+  // Build HTML for logged meals - UPDATED
   if (loggedMeals.length > 0) {
     loggedMeals.forEach((meal) => {
       loggedMealsHTML += `
         <div class="meal-entry">
           <strong>${meal.name}</strong> (${meal.date})<br>
           Calories: ${meal.calories}
+          ${meal.protein ? `<br>Protein: ${meal.protein}g` : ""}
+          ${meal.carbs ? `<br>Carbs: ${meal.carbs}g` : ""}
+          ${meal.fats ? `<br>Fats: ${meal.fats}g` : ""}
           ${meal.servingSize ? `<br>Serving Size: ${meal.servingSize}` : ""}
         </div>
       `;
@@ -219,7 +258,7 @@ function openViewMealsPopup() {
     }
   }
 
-  // Build HTML for created meals
+  // Build HTML for created meals - UPDATED (added <br> before Serving Size)
   if (createdMeals.length > 0) {
     createdMeals.forEach((meal) => {
       createdMealsHTML += `
@@ -229,7 +268,7 @@ function openViewMealsPopup() {
           ${meal.protein ? `<br>Protein: ${meal.protein}g` : ""}
           ${meal.carbs ? `<br>Carbs: ${meal.carbs}g` : ""}
           ${meal.fats ? `<br>Fats: ${meal.fats}g` : ""}
-          Serving Size: ${meal.servingSize}
+          <br>Serving Size: ${meal.servingSize} 
         </div>
       `;
     });
@@ -260,6 +299,7 @@ function openViewMealsPopup() {
  * Handles the submission of the log meal form.
  * Stores the meal data in localStorage with a unique key and closes the popup.
  * Parameter: {Event} event - The form submission event.
+ * UPDATED to save protein, carbs, and fats.
  */
 function handleLogMealSubmit(event) {
   event.preventDefault();
@@ -268,13 +308,24 @@ function handleLogMealSubmit(event) {
   const mealName = document.getElementById("meal-name").value;
   const mealDate = document.getElementById("meal-date").value;
   const mealCalories = document.getElementById("meal-calories").value;
+  // --- New values ---
+  const mealProtein = document.getElementById("log-meal-protein").value;
+  const mealCarbs = document.getElementById("log-meal-carbs").value;
+  const mealFats = document.getElementById("log-meal-fats").value;
+  // --- Get serving size (was already optional) ---
   const servingSize = document.getElementById("serving-size").value;
+
 
   // Create meal object
   const loggedMeal = {
     name: mealName,
     date: mealDate,
     calories: mealCalories,
+    // --- Add the new fields to the object ---
+    protein: mealProtein,
+    carbs: mealCarbs,
+    fats: mealFats,
+    // --- Add serving size ---
     servingSize: servingSize,
   };
 
