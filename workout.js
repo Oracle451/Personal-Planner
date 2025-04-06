@@ -243,73 +243,75 @@ if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
 
 // Routines section
 function routinePopup() {
-    // Inject HTML for the workout popup
-    document.getElementById("popup-content").innerHTML = `
-      <button id="popup-close-btn" class="close-btn">Close</button>
-      <div id="routine-popup">
-        <div id="routine-title">
-          <h2>Routines:</h2>
+  // Inject HTML for the workout popup
+  document.getElementById("popup-content").innerHTML = `
+    <button id="popup-close-btn" class="close-btn">Close</button>
+    <div id="routine-popup">
+      <div id="routine-title">
+        <h2>Routines:</h2>
+      </div>
+      <div id="routine-editor" class="routine-tab">
+        <h3>Add Routines</h3>
+        <form id="routine-form">
+          <label for="routine-name">Routine Name</label>
+          <br>
+          <textarea
+            id="routine-name"
+            name="routine-name"
+            maxlength="63"
+            placeholder="Name routine here..."
+            required
+          ></textarea>
+          <br>
+          <label for="routine-desc">Description:</label>
+          <br>
+          <textarea
+            id="routine-desc"
+            name="routine-desc"
+            rows="6"
+            cols="30"
+            maxlength="255"
+            placeholder="Describe your routine here..."
+            required
+          ></textarea>
+          <br>
+          <input
+            type="submit"
+            value="Add Routine"
+            id="routine-submit"
+            class="submenuBtn"
+          >
+        </form>
+      </div>
+      <div id="routine-showcase">
+        <div id="routine-lib" class="routine-lib routine-tab">
+          <h3>Routine Library</h3>
         </div>
-        <div id="routine-editor" class="routine-tab">
-          <h3>Add Routines</h3>
-          <form id="routine-form">
-            <label for="routine-name">Routine Name</label>
-            <br>
-            <textarea
-              id="routine-name"
-              name="routine-name"
-              maxlength="63"
-              placeholder="Name routine here..."
-              required
-            ></textarea>
-            <br>
-            <label for="routine-desc">Description:</label>
-            <br>
-            <textarea
-              id="routine-desc"
-              name="routine-desc"
-              rows="6"
-              cols="30"
-              maxlength="255"
-              placeholder="Describe your routine here..."
-              required
-            ></textarea>
-            <br>
-            <input
-              type="submit"
-              value="Add Routine"
-              id="routine-submit"
-              class="submenuBtn"
-            >
-          </form>
-        </div>
-        <div id="routine-showcase">
-          <div id="routine-lib" class="routine-lib routine-tab">
-            <h3>Routine Library</h3>
-          </div>
-          <div id="workout-lib" class="routine-workout-lib routine-tab">
-            <h3>Workout Library</h3>
-          </div>
+        <div></div>
+        <div id="workout-lib" class="routine-workout-lib routine-tab">
+          <h3>Workout Library</h3>
         </div>
       </div>
-    `;
-  
-    // Add close button functionality
-    document.getElementById("popup-close-btn").addEventListener("click", closePopup);
-  
-    // Show the popup and overlay
-    document.getElementById("popup").style.display = "block";
-    document.getElementById("overlay-bg").style.display = "block";
-  
-    // Handle form submission
-    const form = document.getElementById("routine-form");
-    form.onsubmit = function (event) {
-      if (form.checkValidity()) {
-        event.preventDefault(); // Prevent default form submission
-        // addRoutine(); // Add new routine
-      } else {
-        console.log("Form is not valid.");
-        event.preventDefault(); // Prevent submission if invalid
-      }
-    };
+    </div>
+  `;
+
+  // Add close button functionality
+  document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+
+  // Show the popup and overlay
+  document.getElementById("popup").style.display = "block";
+  document.getElementById("overlay-bg").style.display = "block";
+
+  // Handle form submission
+  const form = document.getElementById("routine-form");
+  form.onsubmit = function (event) {
+    if (form.checkValidity()) {
+      event.preventDefault(); // Prevent default form submission
+      // addRoutine(); // Add new routine
+    } else {
+      console.log("Form is not valid.");
+      event.preventDefault(); // Prevent submission if invalid
+    }
+  };
+  showWorkoutLibrary();
 }

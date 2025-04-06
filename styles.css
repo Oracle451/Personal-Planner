@@ -658,18 +658,22 @@ header {
 
 #routine-showcase {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    height: 100%;
+    grid-template-rows: 50% 6px auto;
     grid-template-columns: auto;
+    overflow: auto;
 }
 
 .routine-lib {
+    height: 100%;
     border-top-right-radius: 10px;
     margin-left: 3px;
-    margin-bottom: 3px;
+    overflow: auto;
 }
 
 .routine-workout-lib {
+    height: 100%;
     border-bottom-right-radius: 10px;
     margin-left: 3px;
-    margin-top: 3px;
+    overflow: auto;
 }
