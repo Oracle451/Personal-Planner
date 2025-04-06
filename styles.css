@@ -413,7 +413,7 @@ header {
 }
 
 .task {
-    background-color: #f8d0c8; /* Light pink background */
+    background-color: #f0f2f0; /* Light grey background */
     border-radius: 50px; /* Fully rounded */
     text-align: start; /* Left-align text */
     padding: 5px 10px; /* Internal padding */
