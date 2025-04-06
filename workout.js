@@ -146,7 +146,7 @@ function addWorkout() {
   workoutPopup();
 }
 
-function showWorkoutLibrary() {
+function showWorkoutLibrary(where) {
   // Get the total number of workouts
   const amount = localStorage.getItem("workout-amount");
 
@@ -169,18 +169,23 @@ function showWorkoutLibrary() {
       if (category) {
         element += `<p class="workout-text">Categories: ${category}</p>`;
       }
-      element += `
-        <button class="edit-Task" id="edit-workout-${i}">Edit</button>
-        <button class="remove-Task" id="remove-workout-${i}">Remove</button>
-      `;
+      // Add edit and remove buttons if in workouts tab
+      if (where !== "routine") {
+        element += `
+          <button class="edit-Task" id="edit-workout-${i}">Edit</button>
+          <button class="remove-Task" id="remove-workout-${i}">Remove</button>
+        `;
+      }
 
       // Set the HTML and append to the library
       workout.innerHTML = element;
       document.getElementById("workout-lib").appendChild(workout);
 
       // Add event listeners for edit and remove buttons
-      document.getElementById(`edit-workout-${i}`).addEventListener("click", () => editWorkoutsSetup(i));
-      document.getElementById(`remove-workout-${i}`).addEventListener("click", () => removeWorkout(i));
+      if (where !== "routine") {
+        document.getElementById(`edit-workout-${i}`).addEventListener("click", () => editWorkoutsSetup(i));
+        document.getElementById(`remove-workout-${i}`).addEventListener("click", () => removeWorkout(i));
+      }
     }
   } else {
     // Display message if no workouts exist
@@ -313,5 +318,5 @@ function routinePopup() {
       event.preventDefault(); // Prevent submission if invalid
     }
   };
-  showWorkoutLibrary();
+  showWorkoutLibrary("routine");
 }
