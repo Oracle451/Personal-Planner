@@ -62,7 +62,7 @@ function workoutPopup(name, desc, category, type) {
           >
         </form>
       </div>
-      <div id="workout-lib" class="workout-tab">
+      <div id="workout-lib" class="workout-tab workout-lib">
         <h3>Workout Library</h3>
       </div>
     </div>
@@ -275,8 +275,6 @@ function routinePopup() {
               required
             ></textarea>
             <br>
-            <label for="workout-category">Category:</label>
-            <br>
             <input
               type="submit"
               value="Add Routine"
@@ -285,8 +283,13 @@ function routinePopup() {
             >
           </form>
         </div>
-        <div id="workout-lib" class="workout-tab">
-          <h3>Workout Library</h3>
+        <div id="routine-showcase">
+          <div id="routine-lib" class="routine-lib routine-tab">
+            <h3>Routine Library</h3>
+          </div>
+          <div id="workout-lib" class="routine-workout-lib routine-tab">
+            <h3>Workout Library</h3>
+          </div>
         </div>
       </div>
     `;
@@ -303,7 +306,7 @@ function routinePopup() {
     form.onsubmit = function (event) {
       if (form.checkValidity()) {
         event.preventDefault(); // Prevent default form submission
-        // addWorkout(); // Add new routine
+        // addRoutine(); // Add new routine
       } else {
         console.log("Form is not valid.");
         event.preventDefault(); // Prevent submission if invalid
