@@ -637,7 +637,8 @@ header {
     font-size: medium;
 }
 
-#workout-lib p {
+#workout-lib p,
+#routine-lib p {
     margin: 5px;
 }
 /* End of workout section */
