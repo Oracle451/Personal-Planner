@@ -133,7 +133,7 @@ function showWorkoutLibrary() {
   // Get the total number of workouts
   const amount = localStorage.getItem("workout-amount");
 
-  if (amount) {
+  if (amount && amount > 0) {
     // Loop through all workouts and display them
     for (let i = 1; i <= amount; i++) {
       const workout = document.createElement("div");

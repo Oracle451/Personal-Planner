@@ -217,7 +217,7 @@ function setTheme() {
         calendarColor3: "#f9ddd8",
         textColor1: "#ffffff",
         textColor2: "#ffffff",
-        textColor3: "#ffffff",
+        textColor3: "#056600",
       };
       break;
     case "Crimson":
@@ -293,6 +293,10 @@ function applyTheme(colors) {
 
   document.querySelectorAll(".current-date").forEach((element) => {
     element.style.backgroundColor = colors.calendarColor1;
+  });
+
+  document.querySelectorAll(".task").forEach((element) => {
+    element.style.backgroundColor = colors.calendarColor2;
   });
 }
 
