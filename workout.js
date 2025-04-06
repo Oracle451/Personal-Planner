@@ -291,6 +291,7 @@ function routinePopup() {
             placeholder="Name workouts here separated by ', '"
             required
           ></textarea>
+          <br>
           <input
             type="submit"
             value="Add Routine"
@@ -440,9 +441,8 @@ function showRoutineLibrary() {
       document.getElementById("routine-lib").appendChild(routine);
       /*
       // Add event listeners for edit and remove buttons
-      document.getElementById(`edit-routine-${i}`).addEventListener("click", () => editRoutineSetup(i));
-      document.getElementById(`remove-routine-${i}`).addEventListener("click", () => removeRoutineWorkout(i));
-      */
+      document.getElementById(`edit-routine-${i}`).addEventListener("click", () => editRoutineSetup(i)); */
+      document.getElementById(`remove-routine-${i}`).addEventListener("click", () => removeRoutine(i));
     }
   } else {
     // Display message if no workouts exist
@@ -450,4 +450,25 @@ function showRoutineLibrary() {
       No routines to show!<br>Try adding some new routines to see them here!
     `;
   }
+}
+
+function removeRoutine(type) {
+  // Get the current total number of workouts
+  const last = localStorage.getItem("routine-amount");
+
+  // Decrease the workout count
+  localStorage.setItem("routine-amount", last - 1);
+
+  // Move the last workout's data to the removed position
+  localStorage.setItem(`routine-name-${type}`, localStorage.getItem(`routine-name-${last}`));
+  localStorage.setItem(`routine-desc-${type}`, localStorage.getItem(`routine-desc-${last}`));
+  localStorage.setItem(`routine-workouts-${type}`, localStorage.getItem(`routine-workouts-${last}`));
+
+  // Remove the last workout's data
+  localStorage.removeItem(`routine-name-${last}`);
+  localStorage.removeItem(`routine-desc-${last}`);
+  localStorage.removeItem(`routine-workouts-${last}`);
+
+  // Refresh the popup to reflect changes
+  routinePopup();
 }
