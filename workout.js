@@ -85,7 +85,11 @@ function workoutPopup(name, desc, category, type) {
       if (name !== undefined && desc !== undefined) {
         editWorkout(type); // Edit existing workout
       } else {
-        addWorkout(); // Add new workout
+        if (isWorkoutNameUnique(document.getElementById("workout-name").value)) {
+          addWorkout(); // Add new workout
+        } else {
+          showToast("Name must be unique");
+        }
       }
     } else {
       console.log("Form is not valid.");
@@ -100,6 +104,19 @@ function workoutPopup(name, desc, category, type) {
 
   // Populate the workout library
   showWorkoutLibrary();
+}
+
+function isWorkoutNameUnique(name) {
+  var amount = localStorage.getItem("workout-amount");
+  if (amount === undefined) {
+    amount = 0;
+  }
+  for (let i = 1; i <= amount; i++) {
+    if (localStorage.getItem(`workout-name-${i}`) === name) {
+      return false;
+    }
+  }
+  return true;
 }
 
 function addWorkout() {
@@ -222,4 +239,74 @@ function removeWorkout(type) {
 // Export functions for testing or module use (optional)
 if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
   module.exports = { workoutPopup, addWorkout, showWorkoutLibrary, editWorkoutsSetup, editWorkout, removeWorkout };
+}
+
+// Routines section
+function routinePopup() {
+    // Inject HTML for the workout popup
+    document.getElementById("popup-content").innerHTML = `
+      <button id="popup-close-btn" class="close-btn">Close</button>
+      <div id="routine-popup">
+        <div id="routine-title">
+          <h2>Routines:</h2>
+        </div>
+        <div id="routine-editor" class="routine-tab">
+          <h3>Add Routines</h3>
+          <form id="routine-form">
+            <label for="routine-name">Routine Name</label>
+            <br>
+            <textarea
+              id="routine-name"
+              name="routine-name"
+              maxlength="63"
+              placeholder="Name routine here..."
+              required
+            ></textarea>
+            <br>
+            <label for="routine-desc">Description:</label>
+            <br>
+            <textarea
+              id="routine-desc"
+              name="routine-desc"
+              rows="6"
+              cols="30"
+              maxlength="255"
+              placeholder="Describe your routine here..."
+              required
+            ></textarea>
+            <br>
+            <label for="workout-category">Category:</label>
+            <br>
+            <input
+              type="submit"
+              value="Add Routine"
+              id="routine-submit"
+              class="submenuBtn"
+            >
+          </form>
+        </div>
+        <div id="workout-lib" class="workout-tab">
+          <h3>Workout Library</h3>
+        </div>
+      </div>
+    `;
+  
+    // Add close button functionality
+    document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+  
+    // Show the popup and overlay
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay-bg").style.display = "block";
+  
+    // Handle form submission
+    const form = document.getElementById("routine-form");
+    form.onsubmit = function (event) {
+      if (form.checkValidity()) {
+        event.preventDefault(); // Prevent default form submission
+        // addWorkout(); // Add new routine
+      } else {
+        console.log("Form is not valid.");
+        event.preventDefault(); // Prevent submission if invalid
+      }
+    };
 }
