@@ -37,9 +37,10 @@
               name="theme-select"
               onchange="updateTheme()"
             >
-              <option value="Deep Ocean">Deep Ocean</option>
+              <option value="Clear Sky">Clear Sky</option>
               <option value="Spring">Spring</option>
               <option value="Crimson">Crimson</option>
+              <option value="Deep Ocean">Deep Ocean</option>
             </select>
             <!-- Button to clear local storage -->
             <button class="clearcookiesBtn" onclick="clearCookies()">
@@ -64,11 +65,13 @@
         <hr />
 
         <!-- Calorie tracking -->
-        <div class="streak-section">
-          <h2><u>Calories</u></h2>
-          <p>Todays Calories: <span>0</span> Calories</p>
-          <p>Daily Goal: <span>0</span> Calories</p>
-          <button class="sidebarBtn">Set Daily Calorie Goal</button>
+        <div class ="calorie-section">
+          <div class="streak-section">
+            <h2><u>Calories</u></h2>
+            <p>Todays Calories: <span id="today-calories">0</span></p>
+            <p>Daily Calorie Goal: <span id="daily-goal">0</span></p>
+            <button class="sidebarBtn" id="set-calorie-goal">Set Daily Calorie Goal</button>
+          </div>
         </div>
         <hr />
 

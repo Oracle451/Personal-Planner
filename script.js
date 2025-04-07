@@ -194,7 +194,7 @@ function setTheme() {
 
   let colors = {};
   switch (selector.value) {
-    case "Deep Ocean":
+    case "Clear Sky":
       colors = {
         backgroundColor1: "#73c7e3", // Header Background
         backgroundColor2: "#f0f2f2", // Sidebar Background
@@ -217,7 +217,7 @@ function setTheme() {
         calendarColor3: "#f9ddd8",
         textColor1: "#ffffff",
         textColor2: "#ffffff",
-        textColor3: "#056600",
+        textColor3: "#162814",
       };
       break;
     case "Crimson":
@@ -231,6 +231,19 @@ function setTheme() {
         textColor1: "#ffffff",
         textColor2: "#ffffff",
         textColor3: "#ffffff",
+      };
+      break;
+    case "Deep Ocean":
+      colors = {
+        backgroundColor1: "#001f3f", // Header Background
+        backgroundColor2: "#003b6f", // Sidebar Background
+        backgroundColor3: "#002b50", // Calendar Section Background
+        calendarColor1: "#5a6e7f",   // Weekdays Header
+        calendarColor2: "#667684",   // Inactive Days
+        calendarColor3: "#7a8a99",   // Active Month Days
+        textColor1: "#ffffff",       // Header Text
+        textColor2: "#e0e0e0",       // Sidebar Text
+        textColor3: "#f0f8ff",       // Calendar Section Text
       };
       break;
   }
@@ -409,12 +422,19 @@ function updateCalories(day, change) {
   const dateString = generateDateString(day);
   let currentCalories = parseInt(localStorage.getItem(`calories-${dateString}`)) || 0;
   currentCalories += change;
+  if (currentCalories < 0) currentCalories = 0; // Prevent negative calories
   localStorage.setItem(`calories-${dateString}`, currentCalories);
   document.getElementById(`calories-${dateString}`).textContent = currentCalories;
 
   const dateElement = document.getElementById(`date-${day}`);
   if (dateElement) {
     dateElement.textContent = `${day} (${currentCalories} cal)`;
+  }
+  
+  // Update sidebar if it's today's date
+  const today = new Date();
+  if (dateString === generateDateString(today.getDate(), true)) {
+    updateCalorieDisplay();
   }
 }
 
@@ -654,6 +674,7 @@ function makeButtons() {
   document.getElementById("create-Meal").addEventListener("click", () => openCreateMealPopup());
   document.getElementById("log-Meal").addEventListener("click", () => openLogMealPopup());
   document.getElementById("view-Meals").addEventListener("click", () => openViewMealsPopup());
+  document.getElementById("set-calorie-goal").addEventListener("click", () => openSetCalorieGoalPopup());
 }
 
 // Jest compatibility for testing
@@ -717,4 +738,93 @@ document.addEventListener("DOMContentLoaded", () => {
   setTheme();
   clearOldLocalStorage();
   populateUpcomingEvents();
+  updateCalorieDisplay();
 });
+
+/**
+ * Opens a popup to set the daily calorie goal
+ */
+function openSetCalorieGoalPopup() {
+  // Get current goal from localStorage or default to 0
+  const currentGoal = localStorage.getItem("dailyCalorieGoal") || "0";
+
+  document.getElementById("popup-content").innerHTML = `
+    <div>
+      <h2>Set Daily Calorie Goal</h2>
+      <button id="popup-close-btn" class="close-btn">Close</button>
+      <form id="calorie-goal-form">
+        <div>
+          <label for="calorie-goal">Daily Calorie Goal:</label>
+          <input
+            type="number"
+            id="calorie-goal"
+            name="calorie-goal"
+            min="0"
+            value="${currentGoal}"
+            class="inputArea"
+            required
+          >
+        </div>
+        <br>
+        <div>
+          <p>Visit This Website to Calculate your Exact Calorie Goal: 
+            <a href="https://www.calculator.net/calorie-calculator.html" target="_blank">Calorie Calculator</a>
+          </p>
+        </div>
+        <br>
+        <button type="submit" class="submenuBtn">Set Goal</button>
+      </form>
+    </div>
+  `;
+
+  // Show popup and overlay
+  document.getElementById("popup").style.display = "block";
+  document.getElementById("overlay-bg").style.display = "block";
+
+  // Add event listeners
+  document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+  document
+    .getElementById("calorie-goal-form")
+    .addEventListener("submit", handleCalorieGoalSubmit);
+}
+
+/**
+ * Handles the submission of the calorie goal form
+ * @param {Event} event - The form submission event
+ */
+function handleCalorieGoalSubmit(event) {
+  event.preventDefault();
+  
+  const calorieGoal = document.getElementById("calorie-goal").value;
+  localStorage.setItem("dailyCalorieGoal", calorieGoal);
+  
+  closePopup();
+  updateCalorieDisplay(); // Update the sidebar display
+  showToast(`Daily Calorie Goal set to ${calorieGoal} calories`);
+}
+
+/**
+ * Updates the calorie display in the sidebar with current day's count and goal
+ */
+function updateCalorieDisplay() {
+  const today = new Date();
+  const dateString = generateDateString(today.getDate(), true);
+  const currentCalories = localStorage.getItem(`calories-${dateString}`) || "0";
+  const dailyGoal = localStorage.getItem("dailyCalorieGoal") || "0";
+  
+  const calorieSection = document.querySelector(".calorie-section"); // Third streak-section is for calories
+  calorieSection.innerHTML = `
+    <h2><u>Calories</u></h2>
+    <p>Todays Calories: <span id="today-calories">${currentCalories}</span></p>
+    <p>Daily Calorie Goal: <span id="daily-goal">${dailyGoal}</span></p>
+    <button class="sidebarBtn" id="set-calorie-goal">Set Daily Calorie Goal</button>
+  `;
+  
+  // Reattach event listener
+  document
+    .getElementById("set-calorie-goal")
+    .addEventListener("click", openSetCalorieGoalPopup);
+  
+  // Reapply theme to ensure button matches current theme
+  setTheme();
+}
