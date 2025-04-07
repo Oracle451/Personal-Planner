@@ -582,7 +582,8 @@ header {
 /* ========================================================================= */
 /* Workout section */
 
-#workout-popup {
+#workout-popup,
+#routine-popup {
     display: grid;
     grid-template-rows: auto 1fr;
     grid-template-columns: 2fr 3fr;
@@ -591,11 +592,13 @@ header {
     height: 100%;
 }
 
-#workout-popup h2{
+#workout-popup h2,
+#routine-popup h2{
     margin-top: 0;
 }
 
-#workout-title {
+#workout-title,
+#routine-title {
     grid-column: span 2;
 
 }
@@ -624,7 +627,7 @@ header {
     font-size: large;
 }
 
-#workout-lib {
+.workout-lib {
     margin-left: 3px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -634,7 +637,44 @@ header {
     font-size: medium;
 }
 
-#workout-lib p {
+#workout-lib p,
+#routine-lib p {
     margin: 5px;
 }
 /* End of workout section */
+
+/* Routine section */
+.routine-tab {
+    background-color: lightgray;
+    padding: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#routine-editor {
+    margin-right: 3px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#routine-showcase {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 50% 6px auto;
+    grid-template-columns: auto;
+    overflow: auto;
+}
+
+.routine-lib {
+    height: 100%;
+    border-top-right-radius: 10px;
+    margin-left: 3px;
+    overflow: auto;
+}
+
+.routine-workout-lib {
+    height: 100%;
+    border-bottom-right-radius: 10px;
+    margin-left: 3px;
+    overflow: auto;
+}
