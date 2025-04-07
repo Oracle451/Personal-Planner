@@ -194,7 +194,7 @@ function setTheme() {
 
   let colors = {};
   switch (selector.value) {
-    case "Deep Ocean":
+    case "Clear Sky":
       colors = {
         backgroundColor1: "#73c7e3", // Header Background
         backgroundColor2: "#f0f2f2", // Sidebar Background
@@ -217,7 +217,7 @@ function setTheme() {
         calendarColor3: "#f9ddd8",
         textColor1: "#ffffff",
         textColor2: "#ffffff",
-        textColor3: "#056600",
+        textColor3: "#162814",
       };
       break;
     case "Crimson":
@@ -231,6 +231,19 @@ function setTheme() {
         textColor1: "#ffffff",
         textColor2: "#ffffff",
         textColor3: "#ffffff",
+      };
+      break;
+    case "Deep Ocean":
+      colors = {
+        backgroundColor1: "#001f3f", // Header Background
+        backgroundColor2: "#003b6f", // Sidebar Background
+        backgroundColor3: "#002b50", // Calendar Section Background
+        calendarColor1: "#5a6e7f",   // Weekdays Header
+        calendarColor2: "#667684",   // Inactive Days
+        calendarColor3: "#7a8a99",   // Active Month Days
+        textColor1: "#ffffff",       // Header Text
+        textColor2: "#e0e0e0",       // Sidebar Text
+        textColor3: "#f0f8ff",       // Calendar Section Text
       };
       break;
   }
