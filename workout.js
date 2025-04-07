@@ -106,13 +106,13 @@ function workoutPopup(name, desc, category, type) {
   showWorkoutLibrary();
 }
 
-function isNameUnique(type, name) {
+function isNameUnique(type, name, possition) {
   var amount = localStorage.getItem(`${type}-amount`);
   if (amount === undefined) {
     amount = 0;
   }
   for (let i = 1; i <= amount; i++) {
-    if (localStorage.getItem(`${type}-name-${i}`) === name) {
+    if (localStorage.getItem(`${type}-name-${i}`) === name && possition !== i) {
       return false;
     }
   }
@@ -211,13 +211,17 @@ function editWorkout(type) {
   const desc = document.getElementById("workout-desc").value;
   const category = document.getElementById("workout-category").value;
 
-  // Store the updated values in localStorage
-  localStorage.setItem(`workout-name-${type}`, name);
-  localStorage.setItem(`workout-desc-${type}`, desc);
-  localStorage.setItem(`workout-categories-${type}`, category);
+  if (isNameUnique("workout", name, type)) {
+    // Store the updated values in localStorage
+    localStorage.setItem(`workout-name-${type}`, name);
+    localStorage.setItem(`workout-desc-${type}`, desc);
+    localStorage.setItem(`workout-categories-${type}`, category);
 
-  // Refresh the popup to reflect changes
-  workoutPopup();
+    // Refresh the popup to reflect changes
+    workoutPopup();
+  } else {
+    showToast("Name must be unique");
+  }
 }
 
 function removeWorkout(type) {
@@ -247,7 +251,12 @@ if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
 }
 
 // Routines section
-function routinePopup() {
+function routinePopup(name, desc, workouts, type) {
+    // Default values for optional parameters
+    const givenName = name || "";
+    const givenDesc = desc || "";
+    const givenWorkouts = workouts || "";
+
   // Inject HTML for the workout popup
   document.getElementById("popup-content").innerHTML = `
     <button id="popup-close-btn" class="close-btn">Close</button>
@@ -266,7 +275,7 @@ function routinePopup() {
             maxlength="63"
             placeholder="Name routine here..."
             required
-          ></textarea>
+          >${givenName}</textarea>
           <br>
           <label for="routine-desc">Description:</label>
           <br>
@@ -278,7 +287,7 @@ function routinePopup() {
             maxlength="255"
             placeholder="Describe your routine here..."
             required
-          ></textarea>
+          >${givenDesc}</textarea>
           <br>
           <label for="routine-workouts">Workouts Included:</label>
           <br>
@@ -290,7 +299,7 @@ function routinePopup() {
             maxlength="63"
             placeholder="Name workouts here separated by ', '"
             required
-          ></textarea>
+          >${givenWorkouts}</textarea>
           <br>
           <input
             type="submit"
@@ -325,16 +334,21 @@ function routinePopup() {
     if (form.checkValidity()) {
       event.preventDefault(); // Prevent default form submission
 
-      // check if the name is unique
-      if (!isNameUnique("routine", document.getElementById("routine-name").value)) { 
-        showToast("Name must be unique");
-      }
-      
-      // check of all the workouts exist
-      else if (!doWorkoutsExist()) {
-        showToast("Workouts must exist")
+      // check if the routine is geting edited
+      if (name !== undefined && desc !== undefined && workouts !== undefined) {
+        editRoutine(type);
       } else {
-      addRoutine(); // Add new routine
+        // check if the name is unique
+        if (!isNameUnique("routine", document.getElementById("routine-name").value)) { 
+          showToast("Name must be unique");
+        }
+        
+        // check of all the workouts exist
+        else if (!doWorkoutsExist()) {
+          showToast("Workouts must exist")
+        } else {
+        addRoutine(); // Add new routine
+        }
       }
 
     } else {
@@ -342,6 +356,12 @@ function routinePopup() {
       event.preventDefault(); // Prevent submission if invalid
     }
   };
+
+  // Update submit button text if editing
+  if (name !== undefined && desc !== undefined) {
+    document.getElementById("routine-submit").value = "Edit Routine";
+  }
+
   // show both libraries in the routine popup
   showRoutineLibrary();
   showWorkoutLibrary("routine");
@@ -439,9 +459,9 @@ function showRoutineLibrary() {
       // Set the HTML and append to the library
       routine.innerHTML = element;
       document.getElementById("routine-lib").appendChild(routine);
-      /*
+
       // Add event listeners for edit and remove buttons
-      document.getElementById(`edit-routine-${i}`).addEventListener("click", () => editRoutineSetup(i)); */
+      document.getElementById(`edit-routine-${i}`).addEventListener("click", () => editRoutineSetup(i));
       document.getElementById(`remove-routine-${i}`).addEventListener("click", () => removeRoutine(i));
     }
   } else {
@@ -471,4 +491,35 @@ function removeRoutine(type) {
 
   // Refresh the popup to reflect changes
   routinePopup();
+}
+
+function editRoutineSetup(type) {
+  // Retrieve data for the workout to be edited
+  const name = localStorage.getItem(`routine-name-${type}`);
+  const desc = localStorage.getItem(`routine-desc-${type}`);
+  const workouts = localStorage.getItem(`routine-workouts-${type}`);
+
+  // Open the popup with pre-filled data for editing
+  routinePopup(name, desc, workouts, type);
+}
+
+function editRoutine(type) {
+  // Update routine with new values from the form
+  const name = document.getElementById("routine-name").value;
+  const desc = document.getElementById("routine-desc").value;
+  const workouts = document.getElementById("routine-workouts").value;
+
+  if (isNameUnique("routine", name, type)) {
+    if (doWorkoutsExist()) {
+        // Store the updated values in localStorage
+        localStorage.setItem(`routine-name-${type}`, name);
+        localStorage.setItem(`routine-desc-${type}`, desc);
+        localStorage.setItem(`routine-workouts-${type}`, workouts);
+
+        // Refresh the popup to reflect changes
+        routinePopup();
+    }
+  } else {
+    showToast("Name must be unique")
+  }
 }
