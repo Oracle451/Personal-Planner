@@ -153,15 +153,6 @@ header {
     padding: 0.5rem; /* Internal padding */
 }
 
-.calendar {
-    display: grid; /* Grid layout for days */
-    grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
-    width: 100%; /* Full width */
-    height: 50vh; /* Fixed height */
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .month {
     padding: 1rem; /* Padding around month title */
     margin: 0; /* No margin */
@@ -174,10 +165,10 @@ header {
     grid-template-columns: repeat(7, 1fr); /* 7 columns for days */
     /* 7-day week */
     /*grid formatting*/
-    padding-left: 1rem; /* Left padding */
-    width: 70vw; /* Fixed width */
+    width: fit-content; /* dynamic width */
     height: 60vh; /* Fixed height */
-    padding-right: 30px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .current-date {
