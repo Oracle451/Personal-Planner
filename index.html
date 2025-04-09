@@ -26,82 +26,92 @@
             >
               <option value="standard">Deep Ocean</option>
               <option value="spring">Spring</option>
+              <option value="lavendar">Lavendar</option>
             </select>
-            <button class="clearcookiesBtn" onclick="clearCookies()">Clear Cookies</button>
+            <button class="clearcookiesBtn" onclick="clearCookies()">
+              Clear Cookies
+            </button>
           </div>
-		</div>
+        </div>
       </header>
       <!-- Weather Section (New Box) -->
       <section class="weather-section">
         <p id="weather-info">Loading weather...</p>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<h2><u>Streaks</u></h2>
-			<p>Current: <span id="streak-count">0</span> Days</p>
-			<p>Highest: <span id="peak-streak">0</span> Days</p>
-		</div>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<h2><u>Calories</u></h2>
-			<p>Todays Calories: <span>0</span> Calories</p>
-			<p>Daily Goal: <span>0</span> Calories</p>
-			<button class="sidebarBtn">Set Daily Calorie Goal</button>
-		</div>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<h2><u>Workouts</u></h2>
-			<button class="sidebarBtn" onclick="workoutPopup()">Workouts</button>
-			<br>
-			<br>
-		</div>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<h2><u>Meals</u></h2>
-			<button class="sidebarBtn" id="create-Meal">Create Meal</button>
-			<br>
-			<br>
-			<button class="sidebarBtn" id="log-Meal">Log Meal</button>
-			<br>
-			<br>
-			<button class="sidebarBtn" id="view-Meals">View Meals</button>
-		</div>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<h2><u>Upcoming Events</u></h2>
-		
-			<div class="upcoming-event">
-			<p><u>Event Example</u></p>
-			<p>Date: XX-XX-XXXX</p>
-			<p>Where: Example Place</p>
-			<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-			</div>
-			
-			<div class="upcoming-event">
-			<p><u>Event Example</u></p>
-			<p>Date: XX-XX-XXXX</p>
-			<p>Where: Example Place</p>
-			<p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-			</div>
-		</div>
-		
-		<hr>
-		
-		<div class="streak-section">
-			<p>Iron Man Planner 2025</p>
-		</div>
-		
-		<hr>
-		
+
+        <hr />
+
+        <div class="streak-section">
+          <h2><u>Streaks</u></h2>
+          <p>Current: <span id="streak-count">0</span> Days</p>
+          <p>Highest: <span id="peak-streak">0</span> Days</p>
+        </div>
+
+        <hr />
+
+        <div class="streak-section">
+          <h2><u>Calories</u></h2>
+          <p>Todays Calories: <span>0</span> Calories</p>
+          <p>Daily Goal: <span>0</span> Calories</p>
+          <button class="sidebarBtn">Set Daily Calorie Goal</button>
+        </div>
+
+        <hr />
+
+        <div class="streak-section">
+          <h2><u>Workouts</u></h2>
+          <button class="sidebarBtn" onclick="workoutPopup()">Workouts</button>
+          <br />
+          <br />
+        </div>
+
+        <hr />
+
+        <div class="streak-section">
+          <h2><u>Meals</u></h2>
+          <button class="sidebarBtn" id="create-Meal">Create Meal</button>
+          <br />
+          <br />
+          <button class="sidebarBtn" id="log-Meal">Log Meal</button>
+          <br />
+          <br />
+          <button class="sidebarBtn" id="view-Meals">View Meals</button>
+        </div>
+
+        <hr />
+
+        <div class="streak-section">
+          <h2><u>Upcoming Events</u></h2>
+
+          <div class="upcoming-event">
+            <p><u>Event Example</u></p>
+            <p>Date: XX-XX-XXXX</p>
+            <p>Where: Example Place</p>
+            <p>
+              Description: Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
+              aliqua.
+            </p>
+          </div>
+
+          <div class="upcoming-event">
+            <p><u>Event Example</u></p>
+            <p>Date: XX-XX-XXXX</p>
+            <p>Where: Example Place</p>
+            <p>
+              Description: Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
+              aliqua.
+            </p>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="streak-section">
+          <p>Iron Man Planner 2025</p>
+        </div>
+
+        <hr />
       </section>
 
       <!-- Calendar Section -->
@@ -109,10 +119,9 @@
         <h2 class="month">
           Your Calendar for <span id="current-month"></span>
         </h2>
-		
-        <button class="monthChangeBtn" id="back">&larr; Previous</button>
-		<button class="monthChangeBtn" id="next">Next &rarr;</button>
 
+        <button class="monthChangeBtn" id="back">&larr; Previous</button>
+        <button class="monthChangeBtn" id="next">Next &rarr;</button>
 
         <div class="day-labels">
           <div class="day">Sunday</div>
