@@ -637,3 +637,92 @@ header {
     margin: 5px;
 }
 /* End of workout section */
+
+
+/* Calorie Goal Modal Styles */
+/*  background/container */
+#calorie-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1001; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+    width: auto; 
+    min-width: 300px; 
+    max-width: 90%; 
+    background-color: #fefefe; 
+    border-radius: 10px; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+    padding: 25px; 
+    color: #2e4a70; 
+    text-align: center;
+  }
+  
+  /* class to show the modal */
+  #calorie-modal.calorie-modal-visible {
+    display: block; /* Make it visible */
+  }
+  
+  /* modal content area */
+  .calorie-modal-content {
+    position: relative; 
+  }
+  
+  /* close button */
+  .calorie-close-button {
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .calorie-close-button:hover,
+  .calorie-close-button:focus {
+    color: #ff4d4d; 
+    text-decoration: none;
+  }
+  
+  /*  number input field */
+  .calorie-input {
+    width: 60%; 
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .calorie-input:focus {
+      border-color: #73c7e3; 
+      outline: none;
+      box-shadow: 0 0 5px rgba(115, 199, 227, 0.5); 
+  }
+  
+  /* container for the modal buttons */
+  .calorie-modal-buttons {
+    display: flex; 
+    justify-content: center;
+    gap: 15px; 
+    margin-top: 15px;
+  }
+  
+  /* styles for modal buttons */
+  .calorie-save-btn,
+  .calorie-cancel-btn {
+
+    padding: 10px 20px; 
+  }
+  
+  /* error message */
+  .calorie-error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    min-height: 1.2em; 
+  }

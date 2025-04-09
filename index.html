@@ -67,8 +67,8 @@
         <div class="streak-section">
           <h2><u>Calories</u></h2>
           <p>Todays Calories: <span>0</span> Calories</p>
-          <p>Daily Goal: <span>0</span> Calories</p>
-          <button class="sidebarBtn">Set Daily Calorie Goal</button>
+          <p>Daily Goal: <span id="daily-goal-display">0</span> Calories</p>
+          <button class="sidebarBtn" id="set-calorie-goal-btn">Set Daily Calorie Goal</button>
         </div>
         <hr />
 
@@ -168,5 +168,23 @@
     <script src="workout.js"></script>
     <script src="calendar.js"></script>
 	<script src="meals.js"></script>
+
+  <!-- Calorie Goal Modal -->
+<div id="calorie-modal" class="calorie-modal">
+  <div class="calorie-modal-content">
+    <span class="calorie-close-button">×</span>
+    <h2>Set Daily Calorie Goal</h2>
+    <p>Enter your desired daily calorie intake:</p>
+    <input type="number" id="calorie-input" class="calorie-input" placeholder="Calories" min="0">
+    <div class="calorie-modal-buttons">
+      <button id="calorie-save-btn" class="calorie-save-btn sidebarBtn">Save Goal</button>
+      <button id="calorie-cancel-btn" class="calorie-cancel-btn sidebarBtn">Cancel</button>
+    </div>
+    <p id="calorie-error-message" class="calorie-error-message" style="color: red; display: none;">Please enter a valid positive number.</p>
+  </div>
+</div>
+
+<script src="caloriecount.js" defer></script>
+
   </body>
 </html>
