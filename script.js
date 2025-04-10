@@ -246,6 +246,19 @@ function setTheme() {
         textColor3: "#f0f8ff",       // Calendar Section Text
       };
       break;
+    case "Lavender":
+      colors = {
+        backgroundColor1: "#c8a5e4", // Header Background
+        backgroundColor2: "#e0c2ef", // Sidebar Background
+        backgroundColor3: "#f3e0f7", // Calendar Section Background
+        calendarColor1: "#8871be",   // Weekdays Header
+        calendarColor2: "#63589f",   // Inactive Days
+        calendarColor3: "#aa8bd4",   // Active Month Days
+        textColor1: "#ffffff",       // Header Text
+        textColor2: "#000000",       // Sidebar Text
+        textColor3: "#000000",       // Calendar Section Text
+      };
+      break;
   }
 
   applyTheme(colors);
