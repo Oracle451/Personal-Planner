@@ -114,6 +114,10 @@ header {
     overflow-y: auto; /* Scroll if content overflows */
 }
 
+.sidebar * {
+    text-shadow: none; /* Remove text shadow for children */
+}
+
 .streak-section {
     font-size: 1rem; /* Consistent font size */
     width: fit-content; /* Fit to content */
@@ -668,4 +672,3 @@ header {
     margin-left: 3px;
     overflow: auto;
 }
-
