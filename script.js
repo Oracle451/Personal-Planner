@@ -185,192 +185,146 @@ function updateTheme() {
   };
 }
 
-
-//     case "Crimson":
-//       colors = {
-//         backgroundColor1: "#313131",
-//         backgroundColor2: "#364651",
-//         backgroundColor3: "#393d42",
-//         calendarColor1: "#d3423d",
-//         calendarColor2: "#99180d",
-//         calendarColor3: "#b23028",
-//         textColor1: "#ffffff",
-//         textColor2: "#ffffff",
-//         textColor3: "#ffffff",
-//       };
-//       break;
-
+/**
+ * Applies the selected theme by loading colors from storage and applying them.
+ */
 function setTheme() {
-  var selector = document.getElementById("themes");
-  selector.value = localStorage.getItem("theme");
- 
-  /* Header Variables */
-  let HeadBkgrd;
-  let HeadTextShadow;
-  // Text for whole theme
-  let Text;
+  const selector = document.getElementById("themes");
+  selector.value = localStorage.getItem("theme") || "Deep Ocean"; // Default theme
 
-  /* Weather Sections Variables*/
-  let WeatherBkgrd;
-
-  /* Calendar Section Variables*/
-  let CalendarBkgrd;
-
-  /* Day Variables*/
-  let DayBkgrd;
-
-  // all borders on calendar sections
-  let BorderClr;
-
-  /* Date Variables*/
-  let DateBkgrd;
-  let DateHover;
-
-  /* Inactive Date Variables*/
-  let InactiveDateBkgrd;
-    
-  /* Options Variables*/
-  let OptionButtonBkgrd;
-
-  /* Upcoming Events Variables*/
-  let UpComeBkgrd;
-
+  let colors = {};
   switch (selector.value) {
-    case "standard":
-      HeadBkgrd = "#73c7e3";
-      HeadTextShadow = "-2px 2px #2e4a70";
-      Text = "#2e4a70";
-      WeatherBkgrd = "#f0f2f2";
-      CalendarBkgrd = "#fff9f0";
-      DayBkgrd = "#cf8a40";
-      BorderClr = "#2e4a70";
-      DateBkgrd = "#fff9f0";
-      DateHover = "#838b96";
-      InactiveDateBkgrd = "#bbc7d6";
-      OptionButtonBkgrd = "#73c7e3";
-      UpComeBkgrd = "#ffffff";
-    break;
-    case "spring":
-      HeadBkgrd = "#35522b";
-      HeadTextShadow = "-2px 2px #2f302f";
-      Text = "#ffffff";
-      WeatherBkgrd = "#799567";
-      CalendarBkgrd = "#a7b59e";
-      DayBkgrd = "#f3baba";
-      BorderClr = " #35522b";
-      DateBkgrd = "#f9ddd8";
-      DateHover = "#a7b59e";
-      InactiveDateBkgrd = "#f8d0c8";
-      OptionButtonBkgrd = "#f3baba";
-      UpComeBkgrd = "#a7b59e";
-    break;
-    case "lavendar":
-      HeadBkgrd = "#927857";
-      HeadTextShadow = "-2px 2px #4b3e2b";
-      Text = "#3c6435";
-      WeatherBkgrd = "#b5af9d";
-      CalendarBkgrd = "#dddcd2";
-      DayBkgrd = "#8d87c7";
-      BorderClr = "#49404c";
-      DateBkgrd = "#abacd6";
-      DateHover = "#838b96";
-      InactiveDateBkgrd = "#6e5eac";
-      OptionButtonBkgrd = "#bdd1b0";
-      UpComeBkgrd = "#dddcd2";
-    break;
+    case "Clear Sky":
+      colors = {
+        backgroundColor1: "#73c7e3", // Header Background
+        backgroundColor2: "#f0f2f2", // Sidebar Background
+        backgroundColor3: "#fff9f0", // Calendar Section Background
+        calendarColor1: "#73c7e3", // Weekdays Header
+        calendarColor2: "#bbc7d6", // Inactive Days
+        calendarColor3: "#fff9f0", // Active Month Days
+        textColor1: "#ffffff", // Header Text
+        textColor2: "#2e4a70", // Sidebar Text
+        textColor3: "#2e4a70", // Calendar Section Text
+      };
+      break;
+    case "Spring":
+      colors = {
+        backgroundColor1: "#35522b",
+        backgroundColor2: "#799567",
+        backgroundColor3: "#a7b59e",
+        calendarColor1: "#f3baba",
+        calendarColor2: "#f8d0c8",
+        calendarColor3: "#f9ddd8",
+        textColor1: "#ffffff",
+        textColor2: "#ffffff",
+        textColor3: "#162814",
+      };
+      break;
     case "Crimson":
-      HeadBkgrd = "#313131";
-      HeadTextShadow = "-2px 2px #4b3e2b";
-      Text = "#ffffff";
-      WeatherBkgrd = "#364651";
-      CalendarBkgrd = "#393d42";
-      DayBkgrd = "#d3423d";
-      BorderClr = "#49404c";
-      DateBkgrd = "#99180d";
-      DateHover = "#838b96";
-      InactiveDateBkgrd = "#b23028";
-      OptionButtonBkgrd = "#e3242b";
-      UpComeBkgrd = "#ff474c";
-    };
-    
-    /* Change head color*/
-    document.getElementById("head").style.backgroundColor = HeadBkgrd
-    /*text shadow color*/
-    document.getElementById("head").style.textShadow = HeadTextShadow
-
-    /*weather sections's background and text color*/
-    document.querySelectorAll(".sidebar").forEach(element => {
-      /*background color*/
-      element.style.backgroundColor = WeatherBkgrd;
-      /*text color*/
-      element.style.color = Text;
-    });
-
-    /*calendar sections's background and text color*/
-    document.querySelectorAll(".calendar-section").forEach(element => {
-      /*background color*/
-      element.style.backgroundColor = CalendarBkgrd;
-      /*text color*/
-      element.style.color = Text;
-    });
-
-
-    /*days of the week backgroung and text color*/
-    document.querySelectorAll(".day").forEach(element => {
-      /*background color*/
-      element.style.backgroundColor = DayBkgrd;
-      /*text color*/
-      element.style.color = Text;
-      /*border color*/
-      element.style.borderColor = BorderClr;
-    });
-
-    /*date background and text color*/
-    document.querySelectorAll(".date").forEach(element => {
-      /*background color*/
-      element.style.backgroundColor = DateBkgrd;
-      /*text color*/
-      element.style.color = Text;
-      /*border color*/
-      element.style.borderColor = BorderClr;
-      /*hover color*/
-      document.documentElement.style.setProperty('--date-hover-bg', DateHover);
-    });
-
-    /*inactive-date backgroung and text color*/
-    document.querySelectorAll(".inactive-date").forEach(element => {
-      /*background color*/
-      element.style.backgroundColor = InactiveDateBkgrd;
-      /*border color*/
-      element.style.borderColor = BorderClr;
-    });
-
-      // change options color
-    document.querySelectorAll(".option-content").forEach(element => {
-      /*background color*/
-       element.style.backgroundColor = OptionButtonBkgrd;
-    });
-	  
-	  // Change the background color of the sidebar buttons
-	  document.querySelectorAll(".sidebarBtn").forEach(element => {
-		element.style.backgroundColor = OptionButtonBkgrd; 
-	  });
-	  
-	  // Change the background color of the change month buttons
-	  document.querySelectorAll(".monthChangeBtn").forEach(element => {
-		element.style.backgroundColor = OptionButtonBkgrd; 
-	  });
-
-    /*upcoming event coloring */
-    document.querySelectorAll(".upcoming-event").forEach(element => {
-      /*background color*/
-      element.style.backgroundColor = UpComeBkgrd;
-      /*text color*/
-      element.style.color = Text;
-     });
+      colors = {
+        backgroundColor1: "#313131",
+        backgroundColor2: "#364651",
+        backgroundColor3: "#393d42",
+        calendarColor1: "#d3423d",
+        calendarColor2: "#99180d",
+        calendarColor3: "#b23028",
+        textColor1: "#ffffff",
+        textColor2: "#ffffff",
+        textColor3: "#ffffff",
+      };
+      break;
+    case "Deep Ocean":
+      colors = {
+        backgroundColor1: "#001f3f", // Header Background
+        backgroundColor2: "#003b6f", // Sidebar Background
+        backgroundColor3: "#002b50", // Calendar Section Background
+        calendarColor1: "#5a6e7f",   // Weekdays Header
+        calendarColor2: "#667684",   // Inactive Days
+        calendarColor3: "#7a8a99",   // Active Month Days
+        textColor1: "#ffffff",       // Header Text
+        textColor2: "#e0e0e0",       // Sidebar Text
+        textColor3: "#f0f8ff",       // Calendar Section Text
+      };
+      break;
+    case "Lavender":
+      colors = {
+        backgroundColor1: "#c8a5e4", // Header Background
+        backgroundColor2: "#e0c2ef", // Sidebar Background
+        backgroundColor3: "#f3e0f7", // Calendar Section Background
+        calendarColor1: "#8871be",   // Weekdays Header
+        calendarColor2: "#63589f",   // Inactive Days
+        calendarColor3: "#aa8bd4",   // Active Month Days
+        textColor1: "#ffffff",       // Header Text
+        textColor2: "#000000",       // Sidebar Text
+        textColor3: "#000000",       // Calendar Section Text
+      };
+      break;
   }
 
+  applyTheme(colors);
+}
 
+/**
+ * Applies theme colors to various DOM elements.
+ * Parameter: {Object} colors - The color scheme to apply.
+ */
+function applyTheme(colors) {
+  document.getElementById("head").style.backgroundColor = colors.backgroundColor1;
+  document.getElementById("head").style.color = colors.textColor1;
+
+  document.querySelectorAll(".sidebar").forEach((element) => {
+    element.style.backgroundColor = colors.backgroundColor2;
+    element.style.color = colors.textColor2;
+  });
+
+  document.querySelectorAll(".calendar-section").forEach((element) => {
+    element.style.backgroundColor = colors.backgroundColor3;
+    element.style.color = colors.textColor3;
+  });
+
+  document.querySelectorAll(".day").forEach((element) => {
+    element.style.backgroundColor = colors.calendarColor1;
+    element.style.color = colors.textColor3;
+  });
+
+  document.querySelectorAll(".date").forEach((element) => {
+    element.style.backgroundColor = colors.calendarColor3;
+    element.style.color = colors.textColor3;
+    element.style.fontSize = "12px";
+  });
+
+  document.querySelectorAll(".sidebarBtn").forEach((element) => {
+    element.style.backgroundColor = colors.calendarColor1;
+  });
+
+  document.querySelectorAll(".monthChangeBtn").forEach((element) => {
+    element.style.backgroundColor = colors.calendarColor1;
+  });
+
+  document.querySelectorAll(".inactive-date").forEach((element) => {
+    element.style.backgroundColor = colors.calendarColor2;
+  });
+
+  document.querySelectorAll(".upcoming-event").forEach((element) => {
+    element.style.backgroundColor = colors.backgroundColor3;
+  });
+
+  document.querySelectorAll(".option-content").forEach((element) => {
+    element.style.backgroundColor = colors.calendarColor2;
+  });
+
+  document.querySelectorAll(".add-task").forEach((element) => {
+    element.style.backgroundColor = colors.calendarColor1;
+  });
+
+  document.querySelectorAll(".current-date").forEach((element) => {
+    element.style.backgroundColor = colors.calendarColor1;
+  });
+
+  document.querySelectorAll(".task").forEach((element) => {
+    element.style.backgroundColor = colors.calendarColor2;
+  });
+}
 
 /**
  * Displays a toast notification with the given message.
@@ -447,7 +401,6 @@ function clearCookies() {
  */
 function clearOldLocalStorage() {
 
-// function to update the calorie count for a specific day
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
   sixMonthsAgo.setHours(0, 0, 0, 0);
@@ -887,4 +840,4 @@ function updateCalorieDisplay() {
   
   // Reapply theme to ensure button matches current theme
   setTheme();
-};
+}
