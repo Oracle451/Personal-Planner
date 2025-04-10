@@ -3,6 +3,35 @@
 //  * This module handles the creation, logging, and viewing of meals
 //  */
 
+const CREATED_MEALS_STORAGE_KEY = 'createdMeals'; 
+
+/**
+ * Safely retrieves the array of created meal templates from localStorage.
+ * @returns {Array} 
+ */
+function getCreatedMeals() {
+    const mealsJSON = localStorage.getItem(CREATED_MEALS_STORAGE_KEY);
+    try {
+
+        return mealsJSON ? JSON.parse(mealsJSON) : [];
+    } catch (e) {
+        console.error("Error parsing created meals from localStorage", e);
+        return []; 
+    }
+}
+
+/**
+ * Safely saves an array of created meal templates to localStorage.
+ * @param {Array} mealsArray 
+ */
+function saveCreatedMeals(mealsArray) {
+    try {
+        localStorage.setItem(CREATED_MEALS_STORAGE_KEY, JSON.stringify(mealsArray));
+    } catch (e) {
+        console.error("Error saving created meals to localStorage", e);
+    }
+}
+
 /**
  * Opens a popup for creating a new meal with a form to input meal details.
  * Attaches event listeners for closing the popup and submitting the form.
@@ -102,104 +131,119 @@ function openCreateMealPopup() {
  * Opens a popup for logging a meal, pre-filling the date with today's date.
  * Attaches event listeners for closing the popup and submitting the form.
  * UPDATED to match the input style of Create Meal
+ * ADDED meal template buttons section.
  */
 function openLogMealPopup() {
   document.getElementById("popup-content").innerHTML = `
-    <div>
-      <h2>Log Meal</h2>
-      <hr>
-      <br>
-      <button id="popup-close-btn" class="close-btn">Close</button>
-      <form id="log-meal-form">
-        <div>
-          <label for="meal-name">Meal Name:</label>
-          <input
-            type="text"
-            id="meal-name"        
-            name="meal-name"        
-            class="inputArea"
-            required
-          >
+  <div>
+    <h2>Log Meal</h2>
+    <hr>
+    <br>
+    <button id="popup-close-btn" class="close-btn">Close</button>
+
+    <!-- START: Add this section for template buttons -->
+    <div class="meal-templates-container" style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #ccc;">
+        <h4>Created Meals:</h4>
+        <div id="log-meal-template-buttons">
+            <!-- Saved meal buttons will be added here by JavaScript -->
+            <p>Loading templates...</p>
         </div>
-        <br>
-        <div>
-          <label for="meal-date">Date:</label>
-          <input
-            type="date"
-            id="meal-date"
-            name="meal-date"
-            value="${new Date().toISOString().split("T")[0]}" 
-            class="inputArea"
-            required
-          >
-        </div>
-        <br>
-        <div>
-          <label for="meal-calories">Calories (per serving):</label> 
-          <input
-            type="number"
-            id="meal-calories"    
-            name="meal-calories"    
-            min="0"
-            class="inputArea"
-            required
-          >
-        </div>
-        <br>
-        <div>
-          <label for="log-meal-protein">Protein (grams per serving) (Optional):</label>
-          <input
-            type="number"
-            id="log-meal-protein" 
-            name="log-meal-protein" 
-            min="0"
-            class="inputArea"
-          >
-        </div>
-        <br>
-        <div>
-          <label for="log-meal-carbs">Carbohydrates (grams per serving) (Optional):</label>
-          <input
-            type="number"
-            id="log-meal-carbs"   
-            name="log-meal-carbs"   
-            min="0"
-            class="inputArea"
-          >
-        </div>
-        <br>
-        <div>
-          <label for="log-meal-fats">Fats (grams per serving) (Optional):</label>
-          <input
-            type="number"
-            id="log-meal-fats"    
-            name="log-meal-fats"    
-            min="0"
-            class="inputArea"
-          >
-        </div>
-        <br>
-        <div>
-          <label for="serving-size">Serving Size (Optional):</label> 
-          <input
-            type="text"
-            id="serving-size"     
-            name="serving-size"     
-            class="inputArea"
-            
-          >
-        </div>
-        <br>
-        <button type="submit" class="submenuBtn">Log Meal</button>
-      </form>
     </div>
-  `;
+    <!-- END: Add this section for template buttons -->
+
+    <form id="log-meal-form">
+      <div>
+        <label for="meal-name">Meal Name:</label>
+        <input
+          type="text"
+          id="meal-name"
+          name="meal-name"
+          class="inputArea"
+          required
+        >
+      </div>
+      <br>
+      <div>
+        <label for="meal-date">Date:</label>
+        <input
+          type="date"
+          id="meal-date"
+          name="meal-date"
+          value="${new Date().toISOString().split("T")[0]}"
+          class="inputArea"
+          required
+        >
+      </div>
+      <br>
+      <div>
+        <label for="meal-calories">Calories (per serving):</label>
+        <input
+          type="number"
+          id="meal-calories"
+          name="meal-calories"
+          min="0"
+          class="inputArea"
+          required
+        >
+      </div>
+      <br>
+      <div>
+        <label for="log-meal-protein">Protein (grams per serving) (Optional):</label>
+        <input
+          type="number"
+          id="log-meal-protein"
+          name="log-meal-protein"
+          min="0"
+          class="inputArea"
+        >
+      </div>
+      <br>
+      <div>
+        <label for="log-meal-carbs">Carbohydrates (grams per serving) (Optional):</label>
+        <input
+          type="number"
+          id="log-meal-carbs"
+          name="log-meal-carbs"
+          min="0"
+          class="inputArea"
+        >
+      </div>
+      <br>
+      <div>
+        <label for="log-meal-fats">Fats (grams per serving) (Optional):</label>
+        <input
+          type="number"
+          id="log-meal-fats"
+          name="log-meal-fats"
+          min="0"
+          class="inputArea"
+        >
+      </div>
+      <br>
+      <div>
+        <label for="serving-size">Serving Size (Optional):</label>
+        <input
+          type="text"
+          id="serving-size"
+          name="serving-size"
+          class="inputArea"
+
+        >
+      </div>
+      <br>
+      <button type="submit" class="submenuBtn">Log Meal</button>
+    </form>
+  </div>
+`;
 
   // Attach event listeners after DOM update
   document.getElementById("popup-close-btn").addEventListener("click", closePopup);
   document
-    .getElementById("log-meal-form")
-    .addEventListener("submit", handleLogMealSubmit);
+      .getElementById("log-meal-form")
+      .addEventListener("submit", handleLogMealSubmit);
+
+  // Display the meal template buttons
+  displayMealTemplatesForLogging();
 
   // Show the popup and overlay
   document.getElementById("popup").style.display = "block";
@@ -241,8 +285,10 @@ function openViewMealsPopup() {
           ${meal.fats ? `<br>Fats: ${meal.fats}g` : ""}
           ${meal.servingSize ? `<br>Serving Size: ${meal.servingSize}` : ""}
         </div>
+         <hr>
       `;
     });
+
   } else {
     loggedMealsHTML += "<p>No meals have been logged yet.</p>";
   }
@@ -270,8 +316,10 @@ function openViewMealsPopup() {
           ${meal.fats ? `<br>Fats: ${meal.fats}g` : ""}
           <br>Serving Size: ${meal.servingSize} 
         </div>
+        <hr>
       `;
     });
+
   } else {
     createdMealsHTML += "<p>No meals have been created yet.</p>";
   }
@@ -342,45 +390,93 @@ function handleLogMealSubmit(event) {
 
 /**
  * Handles the submission of the create meal form.
- * Adds the new meal to the existing list in localStorage and closes the popup.
+ * Adds the new meal template to the list in localStorage and closes the popup.
  * Parameter: {Event} event - The form submission event.
  */
+
 function handleCreateMealSubmit(event) {
-  event.preventDefault();
+  event.preventDefault(); 
 
-  // Extract form values
-  const mealName = document.getElementById("create-meal-name").value;
-  const calories = document.getElementById("create-meal-calories").value;
-  const protein = document.getElementById("create-meal-protein").value;
-  const carbs = document.getElementById("create-meal-carbs").value;
-  const fats = document.getElementById("create-meal-fats").value;
-  const servingSize = document.getElementById("create-meal-serving-size").value;
+  // Extract form values 
+  const mealName = document.getElementById("create-meal-name").value.trim(); 
+  const calories = parseInt(document.getElementById("create-meal-calories").value) || 0;
+  const protein = parseInt(document.getElementById("create-meal-protein").value) || 0;
+  const carbs = parseInt(document.getElementById("create-meal-carbs").value) || 0;
+  const fats = parseInt(document.getElementById("create-meal-fats").value) || 0;
+  const servingSize = document.getElementById("create-meal-serving-size").value.trim(); 
 
-  // Create meal object
-  const newMeal = {
-    name: mealName,
-    calories: calories,
-    protein: protein,
-    carbs: carbs,
-    fats: fats,
-    servingSize: servingSize,
+  if (!mealName) {
+      alert('Please enter a meal name for the template.');
+      return; 
+  }
+   if (!servingSize) {
+      alert('Please enter a serving size for the template.');
+      return; 
+  }
+ 
+  // Create meal template object 
+  const newMealTemplate = {
+      id: Date.now().toString(), 
+      name: mealName,
+      calories: calories,
+      protein: protein,
+      carbs: carbs,
+      fats: fats,
+      servingSize: servingSize,
   };
 
-  // Load existing meals or initialize empty array
-  const existingMealsString = localStorage.getItem("createdMeals");
-  let existingMeals = [];
-  if (existingMealsString) {
-    try {
-      existingMeals = JSON.parse(existingMealsString);
-    } catch (e) {
-      console.error("Error parsing existing created meals:", e);
-    }
+  // Load existing, add new, and save using helper functions 
+  const existingMeals = getCreatedMeals();
+  existingMeals.push(newMealTemplate);
+  saveCreatedMeals(existingMeals);
+
+  // User Feedback
+  alert(`Meal template "${mealName}" saved successfully!`);
+
+  document.getElementById("create-meal-form").reset();
+
+  closePopup();
+}
+
+/**
+ * Fetches created meal templates from localStorage and displays them as buttons
+ * in the "Log Meal" popup. Clicking a button populates the form.
+ */
+function displayMealTemplatesForLogging() {
+  const templates = getCreatedMeals(); 
+  const container = document.getElementById('log-meal-template-buttons'); 
+
+  if (!container) {
+      console.error("Template button container not found in Log Meal popup.");
+      return; 
   }
 
-  // Add new meal and save
-  existingMeals.push(newMeal);
-  localStorage.setItem("createdMeals", JSON.stringify(existingMeals));
+  container.innerHTML = ''; 
 
-  // Close the popup
-  closePopup();
+  if (templates.length === 0) {
+      container.innerHTML = '<p>A meal has not been created yet. Create one using the "Create Meal" button!</p>';
+      return; 
+  }
+
+  templates.forEach(template => {
+      const button = document.createElement('button');
+      button.textContent = template.name; 
+      button.type = 'button'; 
+      button.classList.add('meal-template-btn'); 
+      button.style.margin = '3px'; 
+
+      // Add event listener 
+      button.addEventListener('click', () => {
+
+          document.getElementById('meal-name').value = template.name;
+          document.getElementById('meal-calories').value = template.calories;
+          document.getElementById('log-meal-protein').value = template.protein;
+          document.getElementById('log-meal-carbs').value = template.carbs;
+          document.getElementById('log-meal-fats').value = template.fats;
+          document.getElementById('serving-size').value = template.servingSize;
+
+      });
+
+      container.appendChild(button); 
+  });
 }
