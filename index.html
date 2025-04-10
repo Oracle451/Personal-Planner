@@ -37,10 +37,6 @@
               name="theme-select"
               onchange="updateTheme()"
             >
-              <option value="standard">Deep Ocean</option>
-              <option value="spring">Spring</option>
-              <option value="lavendar">Lavendar</option>
-            </select>
               <option value="Clear Sky">Clear Sky</option>
               <option value="Spring">Spring</option>
               <option value="Crimson">Crimson</option>
@@ -58,9 +54,6 @@
       <section class="sidebar">
         <!-- Weather information display -->
         <p id="weather-info">Loading weather...</p>
-
-        <hr />
-
         <hr />
 
         <!-- Streak tracking -->
@@ -69,18 +62,6 @@
           <p>Current: <span id="streak-count">0</span> Days</p>
           <p>Highest: <span id="peak-streak">0</span> Days</p>
         </div>
-
-        <hr />
-
-        <div class="streak-section">
-          <h2><u>Calories</u></h2>
-          <p>Todays Calories: <span>0</span> Calories</p>
-          <p>Daily Goal: <span>0</span> Calories</p>
-          <button class="sidebarBtn">Set Daily Calorie Goal</button>
-        </div>
-
-        <hr />
-
         <hr />
 
         <!-- Calorie tracking -->
@@ -100,10 +81,6 @@
           <button class="sidebarBtn" onclick="workoutPopup()">Workouts</button>
           <br />
           <br />
-        </div>
-
-        <hr />
-
           <button class="sidebarBtn" onclick="routinePopup()">Rountines</button>
         </div>
         <hr />
@@ -121,39 +98,6 @@
         </div>
 
         <hr />
-
-        <div class="streak-section">
-          <h2><u>Upcoming Events</u></h2>
-
-          <div class="upcoming-event">
-            <p><u>Event Example</u></p>
-            <p>Date: XX-XX-XXXX</p>
-            <p>Where: Example Place</p>
-            <p>
-              Description: Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua.
-            </p>
-          </div>
-
-          <div class="upcoming-event">
-            <p><u>Event Example</u></p>
-            <p>Date: XX-XX-XXXX</p>
-            <p>Where: Example Place</p>
-            <p>
-              Description: Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua.
-            </p>
-          </div>
-        </div>
-
-        <hr />
-
-        <div class="streak-section">
-          <p>Iron Man Planner 2025</p>
-        </div>
-
         
         <!-- Upcoming events section -->
         <div class="streak" id="upcoming-event-sect">
@@ -176,8 +120,6 @@
           Your Calendar for <span id="current-month"></span>
         </h2>
 
-        <button class="monthChangeBtn" id="back">&larr; Previous</button>
-        <button class="monthChangeBtn" id="next">Next &rarr;</button>
         <!-- Navigation buttons for months -->
         <button class="monthChangeBtn" id="back">← Previous</button>
         <button class="monthChangeBtn" id="next">Next →</button>
