@@ -1,4 +1,4 @@
-const { addTask, removeTask, doesDayHaveTasks } = require("./script"); // Adjust the path accordingly
+const { addTask, removeTask, doesDayHaveTasks } = require(".JavaScript/script"); // Adjust the path accordingly
 const dateString = "2025-03-22"
 
 beforeEach(() => {
