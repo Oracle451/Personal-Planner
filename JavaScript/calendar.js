@@ -118,40 +118,4 @@ function generateCalendar(today) {
   updateStreak();
 }
 
-function generateDateString(day, bool) {
-  // Determines whether to use real date or on-screen date
-  let realDate = bool || false;
-  let dateString;
 
-  if (!realDate) {
-    let date = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), day);
-    if (parseInt(date.getMonth() + 1) < 10) {
-      dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
-    } else {
-      dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
-    }
-
-    if (parseInt(date.getDate()) < 10) {
-      dateString = `${dateString}-0${date.getDate()}`;
-    } else {
-      dateString = `${dateString}-${date.getDate()}`;
-    }
-  } else {
-    let trueDate = new Date();
-    let date = new Date(trueDate.getFullYear(), trueDate.getMonth(), day);
-
-    if (parseInt(date.getMonth()) < 10) {
-      dateString = `${date.getFullYear()}-0${date.getMonth() + 1}`;
-    } else {
-      dateString = `${date.getFullYear()}-${date.getMonth() + 1}`;
-    }
-
-    if (parseInt(date.getDate()) < 10) {
-      dateString = `${dateString}-0${date.getDate()}`;
-    } else {
-      dateString = `${dateString}-${date.getDate()}`;
-    }
-  }
-
-  return dateString;
-}
