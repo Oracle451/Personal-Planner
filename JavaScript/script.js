@@ -461,8 +461,10 @@ function openSetCalorieGoalPopup() {
         </div>
         <br>
         <div>
-          <p>Visit This Website to Calculate your Exact Calorie Goal: 
-            <a href="https://www.calculator.net/calorie-calculator.html" target="_blank">Calorie Calculator</a>
+          <p>
+            <button class="submenuBtn" onclick="window.open('https://www.calculator.net/calorie-calculator.html', '_blank')">
+              Calculate Your Calorie Goal
+            </button>
           </p>
         </div>
         <br>
