@@ -122,23 +122,44 @@ test("populateUpcomingEvents edits the proper div and hides no-Tasks div", () =>
     localStorage.setItem("2025-04-10-addy1", "Library");
     localStorage.setItem("2025-04-10-desc1", "Study session");
 
-    // Run function
     populateUpcomingEvents();
 
-    // Check if task was appended
-    const tasks = document.querySelectorAll(".upcoming-event");
+    let tasks = document.querySelectorAll(".upcoming-event");
     expect(tasks.length).toBe(1);
     expect(tasks[0].textContent).toContain("Review");
     expect(tasks[0].textContent).toContain("1:00 pm");
 
-    // Check if "no-Tasks" div was cleared
     expect(document.getElementById("no-Tasks").textContent).toBe("");
 
     removeTask("2025-04-10", 1);
+    expect(doesDayHaveTasks("2025-04-10")).toBeFalsy();
 
     populateUpcomingEvents();
 
     expect(document.getElementById("no-Tasks").textContent).toBe("Nothing to do...");
+
+
+
+    for (let i = 1; i < 8; i++) {
+        localStorage.setItem(`2025-04-10-task${i}`, "Math Review");
+        localStorage.setItem(`2025-04-10-time${i}`, `${i}:00 pm`);
+        localStorage.setItem(`2025-04-10-addy${i}`, "Library");
+        localStorage.setItem(`2025-04-10-desc${i}`, "Study session");
+    }
+
+    localStorage.setItem("2025-04-10-taskAmount", "6");
+    localStorage.setItem("2025-04-10-taskStart", "1");
+
+    populateUpcomingEvents();
+
+    tasks = document.querySelectorAll(".upcoming-event");
+    expect(tasks.length).toBe(5);
+    expect(tasks[3].textContent).toContain("4:00 pm");
+
+    expect(document.getElementById("no-Tasks").textContent).toBe("");
+
+
+
 
 
 });

@@ -41,6 +41,11 @@ function populateUpcomingEvents() {
     const today = new Date();
     let taskCount = 0;
 
+    document.getElementById("upcoming-event-sect").innerHTML =
+        `
+        <h2><u>Upcoming Events</u></h2>
+        <p id="no-Tasks">Nothing to do...</p>`;
+
     for (i = 0; i < 8; i++) {
 
         const dateString = generateDateString(today.getDate() + i, true);
