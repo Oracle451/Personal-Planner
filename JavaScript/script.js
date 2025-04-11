@@ -506,8 +506,6 @@ function updateCalorieDisplay() {
   const currentCalories = parseInt(localStorage.getItem(`calories-${dateString}`) || "0");
   const dailyGoal = parseInt(localStorage.getItem("dailyCalorieGoal") || "0");
   const remainingCalories = Math.max(dailyGoal - currentCalories, 0);
-  const currentCalories = localStorage.getItem(`calories-${dateString}`) || "0";
-  const dailyGoal = localStorage.getItem("dailyCalorieGoal") || "0";
 
 
   const calorieSection = document.querySelector(".calorie-section"); // Third streak-section is for calories
