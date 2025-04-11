@@ -668,13 +668,15 @@ function handleCalorieGoalSubmit(event) {
 function updateCalorieDisplay() {
   const today = new Date();
   const dateString = generateDateString(today.getDate(), true);
-  const currentCalories = localStorage.getItem(`calories-${dateString}`) || "0";
-  const dailyGoal = localStorage.getItem("dailyCalorieGoal") || "0";
-  
+  const currentCalories = parseInt(localStorage.getItem(`calories-${dateString}`) || "0");
+  const dailyGoal = parseInt(localStorage.getItem("dailyCalorieGoal") || "0");
+  const remainingCalories = Math.max(dailyGoal - currentCalories, 0);
+
   const calorieSection = document.querySelector(".calorie-section"); // Third streak-section is for calories
   calorieSection.innerHTML = `
     <h2><u>Calories</u></h2>
-    <p>Todays Calories: <span id="today-calories">${currentCalories}</span></p>
+    <p>Today's Calories: <span id="today-calories">${currentCalories}</span></p>
+    <p>Calories Remaining: <span id="calories-remaining">${remainingCalories}</span></p>
     <p>Daily Calorie Goal: <span id="daily-goal">${dailyGoal}</span></p>
     <button class="sidebarBtn" id="set-calorie-goal">Set Daily Calorie Goal</button>
   `;
