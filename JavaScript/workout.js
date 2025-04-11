@@ -451,9 +451,7 @@ if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
 // removes old workout saving and turns it into new workout saving
 // delete when no longer useful
 function transitionWorkouts() {
-  console.log("entered transition")
   if (localStorage.getItem("workout-amount") !== null) {
-    console.log("workout transition")
     for (let i = 1; i <= localStorage.getItem("workout-amount"); i++) {
       // get all old workouts
       let name = localStorage.getItem(`workout-name-${i}`);
@@ -464,7 +462,6 @@ function transitionWorkouts() {
       localStorage.removeItem(`workout-name-${i}`);
       localStorage.removeItem(`workout-desc-${i}`);
       localStorage.removeItem(`workout-categories-${i}`);
-      localStorage.removeItem("workout-amount");
 
       // Get workouts or initialize empty array
       let workouts = JSON.parse(localStorage.getItem("workouts") || "[]");
@@ -479,10 +476,10 @@ function transitionWorkouts() {
       // Save to localStorage
       localStorage.setItem("workouts", JSON.stringify(workouts));
     }
+    localStorage.removeItem("workout-amount");
   }
 
   if (localStorage.getItem("routine-amount") !== null) {
-    console.log("routine transition")
     for (let i = 1; i <= localStorage.getItem("routine-amount"); i++) {
       // get all old routines
       let name = localStorage.getItem(`routine-name-${i}`);
@@ -493,7 +490,6 @@ function transitionWorkouts() {
       localStorage.removeItem(`routine-name-${i}`);
       localStorage.removeItem(`routine-desc-${i}`);
       localStorage.removeItem(`routine-workouts-${i}`);
-      localStorage.removeItem("routine-amount");
 
       // Get workouts or initialize empty array
       let routines = JSON.parse(localStorage.getItem("routines") || "[]");
@@ -508,5 +504,6 @@ function transitionWorkouts() {
       // Save to localStorage
       localStorage.setItem("routines", JSON.stringify(routines));
     }
+    localStorage.removeItem("routine-amount");
   }
 }
