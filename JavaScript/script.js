@@ -527,3 +527,46 @@ function updateCalorieDisplay() {
   // Reapply theme to ensure button matches current theme
   setTheme();
 }
+
+/*
+ * Writes all local storage to a file and downloads the file
+ */
+function downloadSave() {
+  // get the size of the local storage
+  var size = localStorage.length;
+  // set the file content to be empty
+  var fileContent = "";
+  // loop though the lenght of the local storage
+  for (let i = 0; i < size; i++) {
+    // get the key 
+    let key = localStorage.key(i);
+    // use key to get the value from key
+    let content = localStorage.getItem(key);
+    // set the file content to the key-value pair
+    fileContent += `${key}|${content}`;
+    // check if last element
+    if (i < size - 1) {
+      // add separator if not last element
+      fileContent += "||";
+    }
+  }
+
+  // Create a Blob with the content
+  const blob = new Blob([fileContent], { type: 'text/plain' });
+  // Create a link element
+  const link = document.createElement('a');
+  // Create an object URL for the Blob
+  const url = URL.createObjectURL(blob);
+  // Set the 'href' attribute of the link to the Blob URL
+  link.href = url;
+  // Set the 'download' attribute to specify the filename
+  link.download = 'ironMan-save.txt';
+  // Append the link to the DOM temporarily (it doesn't need to be visible)
+  document.body.appendChild(link);
+  // Programmatically click the link to start the download
+  link.click();
+  // Clean up by revoking the object URL
+  URL.revokeObjectURL(url);
+  // Remove the link element from the DOM
+  document.body.removeChild(link);
+}
