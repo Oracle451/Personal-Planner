@@ -103,6 +103,19 @@ function setTheme() {
                 textColor3: "#000000",
             };
             break;
+        case "Forest":
+            colors = {
+                backgroundColor1: "#2b4c12",
+                backgroundColor2: "#2c5123",
+                backgroundColor3: "#4f7149",
+                calendarColor1: "#616161",
+                calendarColor2: "#787878",
+                calendarColor3: "#878787",
+                textColor1: "#ffffff",
+                textColor2: "#e0e0e0",
+                textColor3: "#f2f8fe",
+            };
+            break;
         case "Custom":
             colors = loadCustomTheme(); // Load custom theme colors
             break;
