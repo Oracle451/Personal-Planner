@@ -143,6 +143,7 @@ function showWorkoutLibrary(where) {
     workouts.forEach((workout, index) => {
       const workoutDiv = document.createElement("div");
       workoutDiv.className = "task-Long";
+      workoutDiv.id = "workout";
 
       let element = `
         <p class="workout-text">Name: ${workout.name}</p>
