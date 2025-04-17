@@ -11,5 +11,17 @@
     "testEnvironment": "jsdom"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oracle451/Personal-Planner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Oracle451/Personal-Planner/issues"
+  },
+  "homepage": "https://github.com/Oracle451/Personal-Planner#readme",
+  "devDependencies": {
+    "cypress": "^14.3.0",
+    "serve": "^14.2.4"
+  }
 }
