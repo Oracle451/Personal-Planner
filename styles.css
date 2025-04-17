@@ -669,3 +669,55 @@ header {
     overflow: auto;
 }
 
+.help-tooltip-container {
+    position: relative; 
+    display: inline-block; 
+    margin-left: 10px; 
+    vertical-align: middle;
+    z-index: 10; 
+    cursor: help; 
+  }
+  
+  .help-icon {
+    font-size: 1.8em; 
+  }
+  
+ 
+  .help-tooltip-container .tooltip-text {
+    visibility: hidden; 
+    width: 250px; 
+    background-color: #555; 
+    color: #fff; 
+    text-align: left;
+    border-radius: 6px;
+    padding: 8px 10px; 
+    position: absolute; 
+    z-index: 1; 
+    bottom: 125%; 
+    left: 50%;
+    margin-left: -125px; 
+    opacity: 0; 
+    transition: opacity 0.3s; 
+    font-size: 0.9em; 
+    line-height: 1.4;
+  }
+  
+  .help-tooltip-container .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent; 
+  }
+  
+  .help-tooltip-container:hover .tooltip-text {
+    visibility: visible; 
+    opacity: 1; 
+  }
+  
+  .meal-entry {
+    margin-bottom: 15px; 
+  }
