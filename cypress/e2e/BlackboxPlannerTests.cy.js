@@ -60,7 +60,8 @@ describe('Iron Man Planner - Feature Tests', () => {
          cy.get('#popup').should('be.visible');
          cy.get('#meal-name').type('Oatmeal');
          cy.get('#meal-calories').type('200');
-         cy.get('#meal-date').should('have.value', '2025-04-17');
+         // Set value to current date
+         cy.get('#meal-date').should('have.value', '2025-04-18');
          cy.get('#log-meal-form').submit();
          cy.window().then((win) => {
            const keys = Object.keys(win.localStorage).filter(k => k.startsWith('loggedMeal-'));
