@@ -514,3 +514,20 @@ function displayMealTemplatesForLogging() {
       container.appendChild(button); 
   });
 }
+
+      
+// ======= MEALS TEST =======
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    CREATED_MEALS_STORAGE_KEY: typeof CREATED_MEALS_STORAGE_KEY !== 'undefined' ? CREATED_MEALS_STORAGE_KEY : 'createdMeals', // Provide default if somehow undefined
+
+    // functions we want to test
+    getCreatedMeals: typeof getCreatedMeals !== 'undefined' ? getCreatedMeals : () => {},
+    saveCreatedMeals: typeof saveCreatedMeals !== 'undefined' ? saveCreatedMeals : () => {},
+
+  };
+}
+// ===== END OF MEALS TEST =====
+
+    
