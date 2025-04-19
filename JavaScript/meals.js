@@ -114,13 +114,25 @@ function openCreateMealPopup() {
         <button type="submit" class="submenuBtn">Create Meal</button>
       </form>
     </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="help-tooltip-container">
+        <span class="help-icon">❓</span>
+        <span class="tooltip-text">
+          You can create meals that are often eaten regularly and name it. Once finished, the meals that you created can be quickly accessed in "Log Meal" and viewed in "View Meals".
+        </span>
+      </div>
+
   `;
 
   // Attach event listeners after DOM update
   document.getElementById("popup-close-btn").addEventListener("click", closePopup);
   document
-    .getElementById("create-meal-form")
-    .addEventListener("submit", handleCreateMealSubmit);
+      .getElementById("create-meal-form")
+      .addEventListener("submit", handleCreateMealSubmit);
 
   // Show the popup and overlay
   document.getElementById("popup").style.display = "block";
@@ -138,9 +150,8 @@ function openLogMealPopup() {
   <div>
     <h2>Log Meal</h2>
     <hr>
-    <br>
+    <br>  
     <button id="popup-close-btn" class="close-btn">Close</button>
-
     <!-- START: Add this section for template buttons -->
     <div class="meal-templates-container" style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #ccc;">
         <h4>Created Meals:</h4>
@@ -234,6 +245,18 @@ function openLogMealPopup() {
       <button type="submit" class="submenuBtn">Log Meal</button>
     </form>
   </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="help-tooltip-container">
+        <span class="help-icon">❓</span>
+        <span class="tooltip-text">
+          Meals can be logged here and shown in the "View Meals" window. If a meal has been created during "Create Meal", the created meal can be pressed to easily fill out the information required below!
+        </span>
+      </div>
+
 `;
 
   // Attach event listeners after DOM update
@@ -273,7 +296,7 @@ function openViewMealsPopup() {
     }
   }
 
-  // Build HTML for logged meals - UPDATED
+  // Build HTML for logged meals 
   if (loggedMeals.length > 0) {
     loggedMeals.forEach((meal) => {
       loggedMealsHTML += `
@@ -285,7 +308,6 @@ function openViewMealsPopup() {
           ${meal.fats ? `<br>Fats: ${meal.fats}g` : ""}
           ${meal.servingSize ? `<br>Serving Size: ${meal.servingSize}` : ""}
         </div>
-         <hr>
       `;
     });
 
@@ -316,7 +338,7 @@ function openViewMealsPopup() {
           ${meal.fats ? `<br>Fats: ${meal.fats}g` : ""}
           <br>Serving Size: ${meal.servingSize} 
         </div>
-        <hr>
+       
       `;
     });
 
@@ -333,6 +355,18 @@ function openViewMealsPopup() {
       <hr>
       ${createdMealsHTML}
     </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="help-tooltip-container">
+        <span class="help-icon">❓</span>
+        <span class="tooltip-text">
+          This window will let you view the meals that have been logged and created. Both "Logged Meals" and "Created Meals" will show the macros that you have inputted.
+        </span>
+      </div>
+
   `;
 
   // Attach event listener for closing
@@ -480,3 +514,20 @@ function displayMealTemplatesForLogging() {
       container.appendChild(button); 
   });
 }
+
+      
+// ======= MEALS TEST =======
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    CREATED_MEALS_STORAGE_KEY: typeof CREATED_MEALS_STORAGE_KEY !== 'undefined' ? CREATED_MEALS_STORAGE_KEY : 'createdMeals', // Provide default if somehow undefined
+
+    // functions we want to test
+    getCreatedMeals: typeof getCreatedMeals !== 'undefined' ? getCreatedMeals : () => {},
+    saveCreatedMeals: typeof saveCreatedMeals !== 'undefined' ? saveCreatedMeals : () => {},
+
+  };
+}
+// ===== END OF MEALS TEST =====
+
+    

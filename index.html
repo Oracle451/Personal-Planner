@@ -22,7 +22,7 @@
         
         <!-- Options dropdown -->
         <div class="option">
-          <button class="optionbtn">
+          <button class="optionbtn" id="optionMenu">
             <img src="personal_planner_icon.ico" alt="options_button" />
           </button>
           <div class="option-content">
@@ -41,10 +41,18 @@
               <option value="Lavender">Lavender</option>
               <option value="Spring">Spring</option>
               <option value="Crimson">Crimson</option>
+              <option value="Forest">Forest</option>
               <option value="Deep Ocean">Deep Ocean</option>
               <option value="Custom">Custom</option>
             </select>
+            <hr style="width: 80%;">
+            <!-- Buttons to save and load data -->
+            Saving and Loading:
+            <button id="saveButton" onclick="downloadSave()">Save To File</button>
+            <button id="loadButton" onclick="uploadSavePopup()">Upload A File</button>
+            <hr style="width: 80%;">
             <!-- Button to clear local storage -->
+             Clearing Data:
             <button class="clearcookiesBtn" onclick="clearCookies()">
               Clear Cookies
             </button>
@@ -56,22 +64,23 @@
       <section class="sidebar">
         <!-- Weather information display -->
         <p id="weather-info">Loading weather...</p>
-        <hr />
-
-        <!-- Streak tracking -->
-        <div class="streak-section">
-          <h2><u>Streaks</u></h2>
-          <p>Current: <span id="streak-count">0</span> Days</p>
-          <p>Highest: <span id="peak-streak">0</span> Days</p>
+        
+        <!-- Upcoming events section -->
+        <div class="streak" id="upcoming-event-sect">
+        <h2><u>Upcoming Events</u></h2>
+        <p id="no-Tasks">Nothing to do...</p>
+          
         </div>
-        <hr />
 
         <!-- Calorie tracking -->
         <div class ="calorie-section">
           <div class="streak-section">
             <h2><u>Calories</u></h2>
             <p>Todays Calories: <span id="today-calories">0</span></p>
+            <!-- remaining calories for a user -->
+            <p>Calories Remaining: <span id="calories-remaining">0</span></p>
             <p>Daily Calorie Goal: <span id="daily-goal">0</span></p>
+
             <button class="sidebarBtn" id="set-calorie-goal">Set Daily Calorie Goal</button>
           </div>
         </div>
@@ -101,12 +110,13 @@
 
         <hr />
         
-        <!-- Upcoming events section -->
-        <div class="streak" id="upcoming-event-sect">
-          <h2><u>Upcoming Events</u></h2>
-          <p id="no-Tasks">Nothing to do...</p>
-          
+        <!-- Streak tracking -->
+        <div class="streak-section">
+          <h2><u>Streaks</u></h2>
+          <p>Current: <span id="streak-count">0</span> Days</p>
+          <p>Highest: <span id="peak-streak">0</span> Days</p>
         </div>
+        <hr />
 
         <!-- Footer note in sidebar -->
         <div class="streak-section">
@@ -143,7 +153,7 @@
     </main>
 
     <!-- Button to add a new task -->
-    <button class="add-task" id="add-task">+ Add Task</button>
+    <button class="add-task" id="add-task" onclick="addTaskPopup()">+ Add Task</button>
 
     <!-- Overlay for popup background -->
     <div id="overlay-bg" class="overlay-bg" onclick="closePopup()"></div>
@@ -159,5 +169,8 @@
     <script src="JavaScript/calendar.js"></script>
 	  <script src="JavaScript/meals.js"></script>
     <script src="JavaScript/theme.js"></script>
+    <script src="JavaScript/testedFunctions.js"></script>
+    <script src="JavaScript/calories.js"></script>
+
   </body>
 </html>

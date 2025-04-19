@@ -111,7 +111,6 @@ function closePopup() {
 function setDayStatus(day, status) {
   const dateString = generateDateString(day);
   const inputDate = new Date(onScreenDate.getFullYear(), onScreenDate.getMonth(), day);
-
   // Normalize dates to midnight for comparison
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -289,7 +288,7 @@ function updateCalories(day, change) {
   if (dateElement) {
     dateElement.textContent = `${day} (${currentCalories} cal)`;
   }
-  
+
   // Update sidebar if it's today's date
   const today = new Date();
   if (dateString === generateDateString(today.getDate(), true)) {
@@ -297,65 +296,6 @@ function updateCalories(day, change) {
   }
 }
 
-/**
- * Adds a new task to localStorage or updates an existing one.
- * Parameter: {number} taskNumb - The task number (0 for new).
- * Parameter: {string} oldDate - The previous date if editing.
- */
-function addTask(taskNumb, oldDate) {
-  const date = document.getElementById("date").value;
-  const time = fixTime(document.getElementById("time").value);
-  const address = document.getElementById("location").value;
-  const desc = document.getElementById("desc").value;
-  const title = document.getElementById("title").value;
-  const givenDate = oldDate || "";
-
-  if (title && date && time !== ":NaN am") {
-    if (!localStorage.getItem(`${date}-taskAmount`)) {
-      localStorage.setItem(`${date}-taskStart`, "1");
-      localStorage.setItem(`${date}-taskAmount`, "1");
-      localStorage.setItem(`${date}-task1`, title);
-      localStorage.setItem(`${date}-desc1`, desc);
-      localStorage.setItem(`${date}-time1`, time);
-      localStorage.setItem(`${date}-addy1`, address);
-    } else {
-      let taskAmount =
-        taskNumb && givenDate === date
-          ? taskNumb
-          : parseInt(localStorage.getItem(`${date}-taskAmount`)) + 1;
-      localStorage.setItem(`${date}-taskAmount`, taskAmount);
-      localStorage.setItem(`${date}-task${taskAmount}`, title);
-      localStorage.setItem(`${date}-desc${taskAmount}`, desc);
-      localStorage.setItem(`${date}-time${taskAmount}`, time);
-      localStorage.setItem(`${date}-addy${taskAmount}`, address);
-    }
-
-    if (givenDate !== date && taskNumb) {
-      removeTask(givenDate, taskNumb);
-    }
-  }
-}
-
-/**
- * Removes a task from localStorage and shifts remaining tasks.
- * Parameter: {string} when - The date string of the task.
- * Parameter: {number} which - The task number to remove.
- */
-function removeTask(when, which) {
-  const taskStart = parseInt(localStorage.getItem(`${when}-taskStart`));
-  localStorage.setItem(`${when}-task${which}`, localStorage.getItem(`${when}-task${taskStart}`));
-  localStorage.setItem(`${when}-desc${which}`, localStorage.getItem(`${when}-desc${taskStart}`));
-  localStorage.setItem(`${when}-time${which}`, localStorage.getItem(`${when}-time${taskStart}`));
-  localStorage.setItem(`${when}-addy${which}`, localStorage.getItem(`${when}-addy${taskStart}`));
-  localStorage.setItem(`${when}-taskStart`, taskStart + 1);
-
-  localStorage.removeItem(`${when}-task${taskStart}`);
-  localStorage.removeItem(`${when}-desc${taskStart}`);
-  localStorage.removeItem(`${when}-time${taskStart}`);
-  localStorage.removeItem(`${when}-addy${taskStart}`);
-
-  location.reload();
-}
 
 /**
  * Sets up the task edit popup with existing task data.
@@ -435,29 +375,6 @@ function addTaskPopup(title, desc, date, time, addy, task) {
 }
 
 
-/**
- * Checks if a day has any tasks in localStorage.
- * Parameter: {string} dateString - The date string to check.
- * @returns {boolean} True if tasks exist, false otherwise.
- */
-function doesDayHaveTasks(dateString) {
-  let total = -1;
-  if (
-    localStorage.getItem(`${dateString}-taskAmount`) !== null &&
-    localStorage.getItem(`${dateString}-taskAmount`) > 0
-  ) {
-    const taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
-    const taskStart = localStorage.getItem(`${dateString}-taskStart`);
-    total = taskAmount - taskStart;
-  }
-
-  if (total < 0) {
-    localStorage.removeItem(`${dateString}-taskAmount`);
-    localStorage.removeItem(`${dateString}-taskStart`);
-    return false;
-  }
-  return true;
-}
 
 /**
  * Populates the task area in the day popup with tasks from localStorage.
@@ -501,88 +418,6 @@ function populateTaskArea(numb) {
   }
 }
 
-/**
- * Formats a time string into a 12-hour format with AM/PM.
- * Parameter: {string} timeStr - The time string (e.g., "13:05").
- * @returns {string} The formatted time (e.g., "1:05 pm").
- */
-function fixTime(timeStr) {
-  const [hours, minutes] = timeStr.split(":");
-  let hourNum = parseInt(hours);
-  const minuteNum = parseInt(minutes);
-
-  if (hourNum > 0 && hourNum <= 12) {
-    timeStr = `${hourNum}`;
-  } else if (hourNum > 12) {
-    timeStr = `${hourNum - 12}`;
-  } else if (hourNum === 0) {
-    timeStr = "12";
-  }
-
-  timeStr += minuteNum < 10 ? `:0${minuteNum}` : `:${minuteNum}`;
-  timeStr += hourNum >= 12 ? " pm" : " am";
-  return timeStr;
-}
-
-/**
- * Attaches event listeners to navigation and meal-related buttons.
- */
-function makeButtons() {
-  document.getElementById("back").addEventListener("click", () => updateOnScreen(-1));
-  document.getElementById("next").addEventListener("click", () => updateOnScreen(1));
-  document.getElementById("create-Meal").addEventListener("click", () => openCreateMealPopup());
-  document.getElementById("log-Meal").addEventListener("click", () => openLogMealPopup());
-  document.getElementById("view-Meals").addEventListener("click", () => openViewMealsPopup());
-  document.getElementById("set-calorie-goal").addEventListener("click", () => openSetCalorieGoalPopup());
-}
-
-// Jest compatibility for testing
-if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
-  module.exports = { addTask, removeTask, doesDayHaveTasks };
-}
-
-function populateUpcomingEvents() {
-  const today = new Date();
-  let taskCount = 0;
-
-  for (i = 0; i < 8; i++) {
-
-    const dateString = generateDateString(today.getDate() + i, true);
-    if (doesDayHaveTasks(dateString)) {
-      const taskAmount = localStorage.getItem(`${dateString}-taskAmount`);
-      const taskStart = localStorage.getItem(`${dateString}-taskStart`);
-
-      for (let k = taskStart; k <= taskAmount; k++) {
-        if (taskCount < 5) {
-          const task = document.createElement("div");
-          taskCount++;
-          task.className = "upcoming-event";
-          task.innerHTML = `
-              <p><u>${localStorage.getItem(`${dateString}-task${k}`)}</u></p>
-              <p>Date: ${dateString}</p>
-              <p>Time: ${localStorage.getItem(`${dateString}-time${k}`)}</p>
-              <p>Where: ${localStorage.getItem(`${dateString}-addy${k}`) || "No Address"}</p>
-              <p>
-                ${localStorage.getItem(`${dateString}-desc${k}`) || "No Desc..."}
-              </p>
-          `;
-
-          document.getElementById("upcoming-event-sect").appendChild(task);
-        } else {
-          k = taskAmount + 2;
-        }
-      }
-    }
-  }
-
-  if (taskCount > 0) {
-    document.getElementById("no-Tasks").innerHTML = '';
-  } else {
-    document.getElementById("no-Tasks").innerHTML = 'Nothing to do...';
-
-  }
-  setTheme();
-}
 
 
 /**
@@ -626,8 +461,10 @@ function openSetCalorieGoalPopup() {
         </div>
         <br>
         <div>
-          <p>Visit This Website to Calculate your Exact Calorie Goal: 
-            <a href="https://www.calculator.net/calorie-calculator.html" target="_blank">Calorie Calculator</a>
+          <p>
+            <button class="submenuBtn" onclick="window.open('https://www.calculator.net/calorie-calculator.html', '_blank')">
+              Calculate Your Calorie Goal
+            </button>
           </p>
         </div>
         <br>
@@ -653,10 +490,10 @@ function openSetCalorieGoalPopup() {
  */
 function handleCalorieGoalSubmit(event) {
   event.preventDefault();
-  
+
   const calorieGoal = document.getElementById("calorie-goal").value;
   localStorage.setItem("dailyCalorieGoal", calorieGoal);
-  
+
   closePopup();
   updateCalorieDisplay(); // Update the sidebar display
   showToast(`Daily Calorie Goal set to ${calorieGoal} calories`);
@@ -668,22 +505,180 @@ function handleCalorieGoalSubmit(event) {
 function updateCalorieDisplay() {
   const today = new Date();
   const dateString = generateDateString(today.getDate(), true);
-  const currentCalories = localStorage.getItem(`calories-${dateString}`) || "0";
-  const dailyGoal = localStorage.getItem("dailyCalorieGoal") || "0";
-  
+  const currentCalories = parseInt(localStorage.getItem(`calories-${dateString}`) || "0");
+  const dailyGoal = parseInt(localStorage.getItem("dailyCalorieGoal") || "0");
+  const remainingCalories = Math.max(dailyGoal - currentCalories, 0);
+
+
   const calorieSection = document.querySelector(".calorie-section"); // Third streak-section is for calories
   calorieSection.innerHTML = `
     <h2><u>Calories</u></h2>
-    <p>Todays Calories: <span id="today-calories">${currentCalories}</span></p>
+    <p>Today's Calories: <span id="today-calories">${currentCalories}</span></p>
+    <p>Calories Remaining: <span id="calories-remaining">${remainingCalories}</span></p>
     <p>Daily Calorie Goal: <span id="daily-goal">${dailyGoal}</span></p>
     <button class="sidebarBtn" id="set-calorie-goal">Set Daily Calorie Goal</button>
   `;
-  
+
   // Reattach event listener
   document
     .getElementById("set-calorie-goal")
     .addEventListener("click", openSetCalorieGoalPopup);
-  
+
   // Reapply theme to ensure button matches current theme
   setTheme();
+}
+
+/*
+ * Writes all local storage to a file and downloads the file
+ */
+function downloadSave() {
+  // get the size of the local storage
+  var size = localStorage.length;
+  // set the file content to be empty
+  var fileContent = "";
+  // loop though the lenght of the local storage
+  for (let i = 0; i < size; i++) {
+    // get the key 
+    let key = localStorage.key(i);
+    // use key to get the value from key
+    let content = localStorage.getItem(key);
+    // set the file content to the key-value pair
+    fileContent += `${key}|${content || ""}`;
+    // check if last element
+    if (i < size - 1) {
+      // add separator if not last element
+      fileContent += "\\/";
+    }
+  }
+
+  // Create a Blob with the content
+  const blob = new Blob([fileContent], { type: 'text/plain' });
+  // Create a link element
+  const link = document.createElement('a');
+  // Create an object URL for the Blob
+  const url = URL.createObjectURL(blob);
+  // Set the 'href' attribute of the link to the Blob URL
+  link.href = url;
+  // Set the 'download' attribute to specify the filename
+  link.download = 'ironMan-save';
+  // Append the link to the DOM temporarily (it doesn't need to be visible)
+  document.body.appendChild(link);
+  // Programmatically click the link to start the download
+  link.click();
+  // Clean up by revoking the object URL
+  URL.revokeObjectURL(url);
+  // Remove the link element from the DOM
+  document.body.removeChild(link);
+}
+
+/* 
+ * Opens a popup to upload a file 
+ * Offers the option to keep current tasks, workouts, and routines, etc
+ */
+function uploadSavePopup() {
+  document.getElementById("popup-content").innerHTML = `
+  <button id="popup-close-btn" class="close-btn">Close</button>
+  <div id="upload-popup">
+    <h2>Upload File</h2>
+    <div id="drop-box">
+    Drag and drop files here
+    <br>
+    Or click to select a file
+    </div>
+    <input type="file" hidden id="file-input">
+
+    <form>
+      <input type="radio" id="append-save" name="save-type" value="append" checked>
+      <label for="append-save">Appened the loaded save with the current save</label>
+      <br>
+
+      <input type="radio" id="write-over" name="save-type" value="overwrite">
+      <label for="write-over">Write over the current save with the new save</label>
+    </form>
+    <button id="submit-file">Submit</button>
+  </div>
+`;
+
+// Add close button functionality
+document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+
+// Show the popup and overlay
+document.getElementById("popup").style.display = "block";
+document.getElementById("overlay-bg").style.display = "block";
+
+var dropBox = document.getElementById("drop-box");
+var fileInput = document.getElementById("file-input");
+var files = null; // 👈 define it here so it’s shared across the script
+
+// Prevent default drag behaviors
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+  dropBox.addEventListener(eventName, e => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+});
+
+// Handle file drop
+dropBox.addEventListener('drop', e => {
+  files = e.dataTransfer.files; // 👈 assign to the shared variable
+  console.log("Dropped files:", files);
+  dropBox.style.backgroundColor = "grey";
+});
+
+// Open file selector on click
+dropBox.addEventListener("click", () => {
+  fileInput.click();
+});
+
+// Handle selecting a file
+fileInput.addEventListener("change", e => {
+  files = e.target.files; // 👈 again, assign to the shared variable
+  dropBox.style.backgroundColor = "grey";
+});
+
+// Submit the file for processing
+document.getElementById("submit-file").addEventListener("click", () => {
+  loadSave(files);
+});
+
+}
+
+/*
+ * Takes a file and loads the content into local storage
+ */
+function loadSave(files) {
+  // initialize file unpacking
+  const file = files[0];
+  const reader = new FileReader();
+  // grab the type of load
+  const type = document.querySelector('input[name="save-type"]:checked').value;
+
+  // create file unpacker function
+  reader.onload = function(data) {
+    // split data
+    const content = data.target.result;
+    const rows = content.split("\\/");
+
+    // check the load type
+    if (type === "overwrite") {
+      localStorage.clear();
+      for (let i = 0; i < rows.length; i++) {
+        // split the rows into key value pairs
+        let row = rows[i].split("|");
+        if (row.length == 1) {
+          localStorage.setItem(row[0], "");
+        } else {
+          localStorage.setItem(row[0], row[1]);
+        }
+      }
+    } else if (type === "append") {
+      console.log("no")
+    } else {
+      console.warn("incorrect type selected")
+    }
+    window.location.reload();
+  };
+
+  // start file unpacking
+  reader.readAsText(file);
 }

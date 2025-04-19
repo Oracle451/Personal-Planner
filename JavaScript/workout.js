@@ -1,11 +1,14 @@
 /**
  * workouts.js
  * 
- * This module manages workout-related functionality for the application. It provides
- * functions to create, edit, remove, and display workouts stored in localStorage.
+ * This module manages workout and routine-related functionality for the application. It provides
+ * functions to create, edit, remove, and display workouts and routines stored in localStorage using JSON.
  */
 
 function workoutPopup(name, desc, category, type) {
+
+  transitionWorkouts(); // delete this like when not needed
+
   // Default values for optional parameters
   const givenName = name || "";
   const givenDesc = desc || "";
@@ -106,89 +109,65 @@ function workoutPopup(name, desc, category, type) {
   showWorkoutLibrary();
 }
 
-function isNameUnique(type, name, possition) {
-  var amount = localStorage.getItem(`${type}-amount`);
-  if (amount === undefined) {
-    amount = 0;
-  }
-  for (let i = 1; i <= amount; i++) {
-    if (localStorage.getItem(`${type}-name-${i}`) === name && possition !== i) {
-      return false;
-    }
-  }
-  return true;
+function isNameUnique(type, name, position) {
+  const data = JSON.parse(localStorage.getItem(type + "s") || "[]");
+  return !data.some((item, index) => item.name === name && index + 1 !== position);
 }
 
 function addWorkout() {
-  // Retrieve form input values
   const name = document.getElementById("workout-name").value;
   const desc = document.getElementById("workout-desc").value;
   const categories = document.getElementById("workout-category").value;
 
-  // Check if there are any existing workouts
-  const workoutAmount = localStorage.getItem("workout-amount");
-  if (!workoutAmount) {
-    // If no workouts exist, initialize with the first one
-    localStorage.setItem("workout-amount", "1");
-    localStorage.setItem("workout-name-1", name);
-    localStorage.setItem("workout-desc-1", desc);
-    localStorage.setItem("workout-categories-1", categories);
-  } else {
-    // Increment the workout count and store the new workout
-    const newAmount = parseInt(workoutAmount, 10) + 1;
-    localStorage.setItem("workout-amount", newAmount);
-    localStorage.setItem(`workout-name-${newAmount}`, name);
-    localStorage.setItem(`workout-desc-${newAmount}`, desc);
-    localStorage.setItem(`workout-categories-${newAmount}`, categories);
-  }
+  // Get existing workouts or initialize empty array
+  let workouts = JSON.parse(localStorage.getItem("workouts") || "[]");
+  
+  // Add new workout
+  workouts.push({
+    name,
+    desc,
+    categories
+  });
 
-  // Refresh the popup to reflect changes
+  // Save to localStorage
+  localStorage.setItem("workouts", JSON.stringify(workouts));
+
+  // Refresh popup
   workoutPopup();
 }
 
 function showWorkoutLibrary(where) {
-  // Get the total number of workouts
-  const amount = localStorage.getItem("workout-amount");
+  const workouts = JSON.parse(localStorage.getItem("workouts") || "[]");
 
-  if (amount && amount > 0) {
-    // Loop through all workouts and display them
-    for (let i = 1; i <= amount; i++) {
-      const workout = document.createElement("div");
-      workout.className = "task-Long";
+  if (workouts.length > 0) {
+    workouts.forEach((workout, index) => {
+      const workoutDiv = document.createElement("div");
+      workoutDiv.className = "task-Long";
+      workoutDiv.id = "workout";
 
-      // Fetch workout details from storage
-      const name = localStorage.getItem(`workout-name-${i}`);
-      const desc = localStorage.getItem(`workout-desc-${i}`);
-      const category = localStorage.getItem(`workout-categories-${i}`);
-
-      // Build the workout HTML content
       let element = `
-        <p class="workout-text">Name: ${name}</p>
-        <p class="workout-text">Description: ${desc}</p>
+        <p class="workout-text">Name: ${workout.name}</p>
+        <p class="workout-text">Description: ${workout.desc}</p>
       `;
-      if (category) {
-        element += `<p class="workout-text">Categories: ${category}</p>`;
+      if (workout.categories) {
+        element += `<p class="workout-text">Categories: ${workout.categories}</p>`;
       }
-      // Add edit and remove buttons if in workouts tab
       if (where !== "routine") {
         element += `
-          <button class="edit-Task" id="edit-workout-${i}">Edit</button>
-          <button class="remove-Task" id="remove-workout-${i}">Remove</button>
+          <button class="edit-Task" id="edit-workout-${index + 1}">Edit</button>
+          <button class="remove-Task" id="remove-workout-${index + 1}">Remove</button>
         `;
       }
 
-      // Set the HTML and append to the library
-      workout.innerHTML = element;
-      document.getElementById("workout-lib").appendChild(workout);
+      workoutDiv.innerHTML = element;
+      document.getElementById("workout-lib").appendChild(workoutDiv);
 
-      // Add event listeners for edit and remove buttons
       if (where !== "routine") {
-        document.getElementById(`edit-workout-${i}`).addEventListener("click", () => editWorkoutsSetup(i));
-        document.getElementById(`remove-workout-${i}`).addEventListener("click", () => removeWorkout(i));
+        document.getElementById(`edit-workout-${index + 1}`).addEventListener("click", () => editWorkoutsSetup(index + 1));
+        document.getElementById(`remove-workout-${index + 1}`).addEventListener("click", () => removeWorkout(index + 1));
       }
-    }
+    });
   } else {
-    // Display message if no workouts exist
     document.getElementById("workout-lib").innerHTML += `
       No workouts to show!<br>Try adding some new workouts to see them here!
     `;
@@ -196,28 +175,28 @@ function showWorkoutLibrary(where) {
 }
 
 function editWorkoutsSetup(type) {
-  // Retrieve data for the workout to be edited
-  const name = localStorage.getItem(`workout-name-${type}`);
-  const desc = localStorage.getItem(`workout-desc-${type}`);
-  const category = localStorage.getItem(`workout-categories-${type}`);
-
-  // Open the popup with pre-filled data for editing
-  workoutPopup(name, desc, category, type);
+  const workouts = JSON.parse(localStorage.getItem("workouts") || "[]");
+  const workout = workouts[type - 1];
+  
+  workoutPopup(workout.name, workout.desc, workout.categories, type);
 }
 
 function editWorkout(type) {
-  // Update workout with new values from the form
   const name = document.getElementById("workout-name").value;
   const desc = document.getElementById("workout-desc").value;
   const category = document.getElementById("workout-category").value;
 
   if (isNameUnique("workout", name, type)) {
-    // Store the updated values in localStorage
-    localStorage.setItem(`workout-name-${type}`, name);
-    localStorage.setItem(`workout-desc-${type}`, desc);
-    localStorage.setItem(`workout-categories-${type}`, category);
+    let workouts = JSON.parse(localStorage.getItem("workouts") || "[]");
+    
+    // Update the specific workout
+    workouts[type - 1] = {
+      name,
+      desc,
+      categories: category
+    };
 
-    // Refresh the popup to reflect changes
+    localStorage.setItem("workouts", JSON.stringify(workouts));
     workoutPopup();
   } else {
     showToast("Name must be unique");
@@ -225,39 +204,25 @@ function editWorkout(type) {
 }
 
 function removeWorkout(type) {
-  // Get the current total number of workouts
-  const last = localStorage.getItem("workout-amount");
-
-  // Decrease the workout count
-  localStorage.setItem("workout-amount", last - 1);
-
-  // Move the last workout's data to the removed position
-  localStorage.setItem(`workout-name-${type}`, localStorage.getItem(`workout-name-${last}`));
-  localStorage.setItem(`workout-desc-${type}`, localStorage.getItem(`workout-desc-${last}`));
-  localStorage.setItem(`workout-categories-${type}`, localStorage.getItem(`workout-categories-${last}`));
-
-  // Remove the last workout's data
-  localStorage.removeItem(`workout-name-${last}`);
-  localStorage.removeItem(`workout-desc-${last}`);
-  localStorage.removeItem(`workout-categories-${last}`);
-
-  // Refresh the popup to reflect changes
+  let workouts = JSON.parse(localStorage.getItem("workouts") || "[]");
+  
+  // Remove the workout at the specified index
+  workouts.splice(type - 1, 1);
+  
+  localStorage.setItem("workouts", JSON.stringify(workouts));
   workoutPopup();
 }
 
-// Export functions for testing or module use (optional)
-if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
-  module.exports = { workoutPopup, addWorkout, showWorkoutLibrary, editWorkoutsSetup, editWorkout, removeWorkout };
-}
-
-// Routines section
 function routinePopup(name, desc, workouts, type) {
-    // Default values for optional parameters
-    const givenName = name || "";
-    const givenDesc = desc || "";
-    const givenWorkouts = workouts || "";
 
-  // Inject HTML for the workout popup
+  transitionWorkouts(); // delete this line when not needed
+
+  // Default values for optional parameters
+  const givenName = name || "";
+  const givenDesc = desc || "";
+  const givenWorkouts = workouts || "";
+
+  // Inject HTML for the routine popup
   document.getElementById("popup-content").innerHTML = `
     <button id="popup-close-btn" class="close-btn">Close</button>
     <div id="routine-popup">
@@ -334,23 +299,19 @@ function routinePopup(name, desc, workouts, type) {
     if (form.checkValidity()) {
       event.preventDefault(); // Prevent default form submission
 
-      // check if the routine is geting edited
+      // Check if the routine is being edited
       if (name !== undefined && desc !== undefined && workouts !== undefined) {
         editRoutine(type);
       } else {
-        // check if the name is unique
+        // Check if the name is unique
         if (!isNameUnique("routine", document.getElementById("routine-name").value)) { 
           showToast("Name must be unique");
-        }
-        
-        // check of all the workouts exist
-        else if (!doWorkoutsExist()) {
-          showToast("Workouts must exist")
+        } else if (!doWorkoutsExist()) {
+          showToast("Workouts must exist");
         } else {
-        addRoutine(); // Add new routine
+          addRoutine(); // Add new routine
         }
       }
-
     } else {
       console.log("Form is not valid.");
       event.preventDefault(); // Prevent submission if invalid
@@ -362,164 +323,188 @@ function routinePopup(name, desc, workouts, type) {
     document.getElementById("routine-submit").value = "Edit Routine";
   }
 
-  // show both libraries in the routine popup
+  // Show both libraries in the routine popup
   showRoutineLibrary();
   showWorkoutLibrary("routine");
 }
 
 function doWorkoutsExist() {
-  // the the input results
-  var input = document.getElementById("routine-workouts").value;
-  var workouts = input.split(", ");
-  var length = workouts.length;
+  const input = document.getElementById("routine-workouts").value;
+  const workoutNames = input.split(", ").filter(name => name.trim() !== "");
+  const storedWorkouts = JSON.parse(localStorage.getItem("workouts") || "[]");
 
-  // get stored workouts
-  var storedAmount = localStorage.getItem("workout-amount")
-  var storedWorkouts = [storedAmount];
-  for (let i = 0; i < storedAmount; i++) {
-    storedWorkouts[i] = localStorage.getItem(`workout-name-${i+1}`)
-  }
-
-  // compare all inputted workouts to stored workouts
-  for (let i = 0; i < length; i++) {
-    let stored = false
-    for (let j = 0; j < storedAmount; j++) {
-      if (stored) {
-        break;
-      } else {
-        if (workouts[i] == storedWorkouts[j]) {
-          stored = true;
-        }
-      }
-    }
-    if (!stored) {
-      showToast(`Workout "${workouts[i]}" doesn't exist`)
-      return false
+  for (let name of workoutNames) {
+    if (!storedWorkouts.some(workout => workout.name === name)) {
+      showToast(`Workout "${name}" doesn't exist`);
+      return false;
     }
   }
   return true;
 }
 
 function addRoutine() {
-  // Retrieve form input values
   const name = document.getElementById("routine-name").value;
   const desc = document.getElementById("routine-desc").value;
   const workouts = document.getElementById("routine-workouts").value;
 
-  // Check if there are any existing workouts
-  const routineAmount = localStorage.getItem("routine-amount");
-  if (!routineAmount) {
-    // If no workouts exist, initialize with the first one
-    localStorage.setItem("routine-amount", "1");
-    localStorage.setItem("routine-name-1", name);
-    localStorage.setItem("routine-desc-1", desc);
-    localStorage.setItem("routine-workouts-1", workouts);
-  } else {
-    // Increment the workout count and store the new workout
-    const newAmount = parseInt(routineAmount, 10) + 1;
-    localStorage.setItem("routine-amount", newAmount);
-    localStorage.setItem(`routine-name-${newAmount}`, name);
-    localStorage.setItem(`routine-desc-${newAmount}`, desc);
-    localStorage.setItem(`routine-workouts-${newAmount}`, workouts);
-  }
+  let routines = JSON.parse(localStorage.getItem("routines") || "[]");
+  
+  routines.push({
+    name,
+    desc,
+    workouts
+  });
 
-  // Refresh the popup to reflect changes
+  localStorage.setItem("routines", JSON.stringify(routines));
   routinePopup();
 }
 
 function showRoutineLibrary() {
-  // Get the total number of workouts
-  const amount = localStorage.getItem("routine-amount");
+  const routines = JSON.parse(localStorage.getItem("routines") || "[]");
 
-  if (amount && amount > 0) {
-    // Loop through all routines and display them
-    for (let i = 1; i <= amount; i++) {
-      const routine = document.createElement("div");
-      routine.className = "task-Long";
+  if (routines.length > 0) {
+    routines.forEach((routine, index) => {
+      const routineDiv = document.createElement("div");
+      routineDiv.className = "task-Long";
 
-      // Fetch routine details from storage
-      const name = localStorage.getItem(`routine-name-${i}`);
-      const desc = localStorage.getItem(`routine-desc-${i}`);
-      const workouts = localStorage.getItem(`routine-workouts-${i}`);
-
-      // Build the workout HTML content
       let element = `
-        <p class="routine-text">Name: ${name}</p>
-        <p class="routine-text">Description: ${desc}</p>
+        <p class="routine-text">Name: ${routine.name}</p>
+        <p class="routine-text">Description: ${routine.desc}</p>
       `;
-      if (workouts) {
-        element += `<p class="routine-text">Workouts: ${workouts}</p>`;
+      if (routine.workouts) {
+        element += `<p class="routine-text">Workouts: ${routine.workouts}</p>`;
       }
-      // Add edit and remove buttons if in routines tab
       element += `
-        <button class="edit-Task" id="edit-routine-${i}">Edit</button>
-        <button class="remove-Task" id="remove-routine-${i}">Remove</button>
+        <button class="edit-Task" id="edit-routine-${index + 1}">Edit</button>
+        <button class="remove-Task" id="remove-routine-${index + 1}">Remove</button>
       `;
 
-      // Set the HTML and append to the library
-      routine.innerHTML = element;
-      document.getElementById("routine-lib").appendChild(routine);
+      routineDiv.innerHTML = element;
+      document.getElementById("routine-lib").appendChild(routineDiv);
 
-      // Add event listeners for edit and remove buttons
-      document.getElementById(`edit-routine-${i}`).addEventListener("click", () => editRoutineSetup(i));
-      document.getElementById(`remove-routine-${i}`).addEventListener("click", () => removeRoutine(i));
-    }
+      document.getElementById(`edit-routine-${index + 1}`).addEventListener("click", () => editRoutineSetup(index + 1));
+      document.getElementById(`remove-routine-${index + 1}`).addEventListener("click", () => removeRoutine(index + 1));
+    });
   } else {
-    // Display message if no workouts exist
     document.getElementById("routine-lib").innerHTML += `
       No routines to show!<br>Try adding some new routines to see them here!
     `;
   }
 }
 
-function removeRoutine(type) {
-  // Get the current total number of workouts
-  const last = localStorage.getItem("routine-amount");
-
-  // Decrease the workout count
-  localStorage.setItem("routine-amount", last - 1);
-
-  // Move the last workout's data to the removed position
-  localStorage.setItem(`routine-name-${type}`, localStorage.getItem(`routine-name-${last}`));
-  localStorage.setItem(`routine-desc-${type}`, localStorage.getItem(`routine-desc-${last}`));
-  localStorage.setItem(`routine-workouts-${type}`, localStorage.getItem(`routine-workouts-${last}`));
-
-  // Remove the last workout's data
-  localStorage.removeItem(`routine-name-${last}`);
-  localStorage.removeItem(`routine-desc-${last}`);
-  localStorage.removeItem(`routine-workouts-${last}`);
-
-  // Refresh the popup to reflect changes
-  routinePopup();
-}
-
 function editRoutineSetup(type) {
-  // Retrieve data for the workout to be edited
-  const name = localStorage.getItem(`routine-name-${type}`);
-  const desc = localStorage.getItem(`routine-desc-${type}`);
-  const workouts = localStorage.getItem(`routine-workouts-${type}`);
-
-  // Open the popup with pre-filled data for editing
-  routinePopup(name, desc, workouts, type);
+  const routines = JSON.parse(localStorage.getItem("routines") || "[]");
+  const routine = routines[type - 1];
+  
+  routinePopup(routine.name, routine.desc, routine.workouts, type);
 }
 
 function editRoutine(type) {
-  // Update routine with new values from the form
   const name = document.getElementById("routine-name").value;
   const desc = document.getElementById("routine-desc").value;
   const workouts = document.getElementById("routine-workouts").value;
 
   if (isNameUnique("routine", name, type)) {
     if (doWorkoutsExist()) {
-        // Store the updated values in localStorage
-        localStorage.setItem(`routine-name-${type}`, name);
-        localStorage.setItem(`routine-desc-${type}`, desc);
-        localStorage.setItem(`routine-workouts-${type}`, workouts);
+      let routines = JSON.parse(localStorage.getItem("routines") || "[]");
+      
+      routines[type - 1] = {
+        name,
+        desc,
+        workouts
+      };
 
-        // Refresh the popup to reflect changes
-        routinePopup();
+      localStorage.setItem("routines", JSON.stringify(routines));
+      routinePopup();
     }
   } else {
-    showToast("Name must be unique")
+    showToast("Name must be unique");
+  }
+}
+
+function removeRoutine(type) {
+  let routines = JSON.parse(localStorage.getItem("routines") || "[]");
+  
+  routines.splice(type - 1, 1);
+  
+  localStorage.setItem("routines", JSON.stringify(routines));
+  routinePopup();
+}
+
+// Export functions for testing or module use
+if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
+  module.exports = { 
+    workoutPopup, 
+    addWorkout, 
+    showWorkoutLibrary, 
+    editWorkoutsSetup, 
+    editWorkout, 
+    removeWorkout,
+    routinePopup,
+    addRoutine,
+    showRoutineLibrary,
+    editRoutineSetup,
+    editRoutine,
+    removeRoutine
+  };
+}
+
+// removes old workout saving and turns it into new workout saving
+// delete when no longer useful
+function transitionWorkouts() {
+  if (localStorage.getItem("workout-amount") !== null) {
+    for (let i = 1; i <= localStorage.getItem("workout-amount"); i++) {
+      // get all old workouts
+      let name = localStorage.getItem(`workout-name-${i}`);
+      let desc = localStorage.getItem(`workout-desc-${i}`);
+      let categories = localStorage.getItem(`workout-categories-${i}`);
+
+      // delete all old workouts
+      localStorage.removeItem(`workout-name-${i}`);
+      localStorage.removeItem(`workout-desc-${i}`);
+      localStorage.removeItem(`workout-categories-${i}`);
+
+      // Get workouts or initialize empty array
+      let workouts = JSON.parse(localStorage.getItem("workouts") || "[]");
+  
+      // Add new workout
+      workouts.push({
+        name,
+        desc,
+        categories
+      });
+    
+      // Save to localStorage
+      localStorage.setItem("workouts", JSON.stringify(workouts));
+    }
+    localStorage.removeItem("workout-amount");
+  }
+
+  if (localStorage.getItem("routine-amount") !== null) {
+    for (let i = 1; i <= localStorage.getItem("routine-amount"); i++) {
+      // get all old routines
+      let name = localStorage.getItem(`routine-name-${i}`);
+      let desc = localStorage.getItem(`routine-desc-${i}`);
+      let workouts = localStorage.getItem(`routine-workouts-${i}`);
+
+      // delete all old routines
+      localStorage.removeItem(`routine-name-${i}`);
+      localStorage.removeItem(`routine-desc-${i}`);
+      localStorage.removeItem(`routine-workouts-${i}`);
+
+      // Get workouts or initialize empty array
+      let routines = JSON.parse(localStorage.getItem("routines") || "[]");
+  
+      // Add new workout
+      routines.push({
+        name,
+        desc,
+        workouts
+      });
+    
+      // Save to localStorage
+      localStorage.setItem("routines", JSON.stringify(routines));
+    }
+    localStorage.removeItem("routine-amount");
   }
 }
