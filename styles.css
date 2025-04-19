@@ -86,6 +86,31 @@ header {
 }
 
 /* ========================================================================= */
+/* Upload File Popup */
+/* ========================================================================= */
+
+#upload-popup {
+    height: 100%;
+}
+
+#drop-box {
+    height: 70%;
+    width: 90%;
+    border-style: dashed;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+#drop-box:hover {
+    background-color: lightgrey;
+}
+
+/* ========================================================================= */
 /* Typography and Fonts */
 /* ========================================================================= */
 /* Font Section */

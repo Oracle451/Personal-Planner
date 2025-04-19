@@ -571,10 +571,82 @@ function downloadSave() {
   document.body.removeChild(link);
 }
 
-/*
- * Takes a file and loads the content into local storage
+/* 
+ * Opens a popup to upload a file 
  * Offers the option to keep current tasks, workouts, and routines, etc
  */
-function loadSave() {
-  
+function uploadSavePopup() {
+  document.getElementById("popup-content").innerHTML = `
+  <button id="popup-close-btn" class="close-btn">Close</button>
+  <div id="upload-popup">
+    <h2>Upload File</h2>
+    <div id="drop-box">
+    Drag and drop files here
+    <br>
+    Or click to select a file
+    </div>
+    <input type="file" hidden id="file-input">
+
+    <form>
+      <input type="radio" id="append-save" name="save-type" value="append" checked>
+      <label for="append-save">Appened the loaded save with the current save</label>
+      <br>
+
+      <input type="radio" id="write-over" name="save-type" value="overwrite">
+      <label for="write-over">Write over the current save with the new save</label>
+    </form>
+    <button id="submit-file">Submit</button>
+  </div>
+`;
+
+// Add close button functionality
+document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+
+// Show the popup and overlay
+document.getElementById("popup").style.display = "block";
+document.getElementById("overlay-bg").style.display = "block";
+
+var dropBox = document.getElementById("drop-box");
+var fileInput = document.getElementById("file-input");
+var files = null; // 👈 define it here so it’s shared across the script
+
+// Prevent default drag behaviors
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+  dropBox.addEventListener(eventName, e => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+});
+
+// Handle file drop
+dropBox.addEventListener('drop', e => {
+  files = e.dataTransfer.files; // 👈 assign to the shared variable
+  console.log("Dropped files:", files);
+  dropBox.style.backgroundColor = "grey";
+});
+
+// Open file selector on click
+dropBox.addEventListener("click", () => {
+  fileInput.click();
+});
+
+// Handle selecting a file
+fileInput.addEventListener("change", e => {
+  files = e.target.files; // 👈 again, assign to the shared variable
+  dropBox.style.backgroundColor = "grey";
+});
+
+// Submit the file for processing
+document.getElementById("submit-file").addEventListener("click", () => {
+  loadSave(files);
+});
+
+}
+
+/*
+ * Takes a file and loads the content into local storage
+ */
+function loadSave(files) {
+  const file = files[0];
+  console.log(file.name);
 }
