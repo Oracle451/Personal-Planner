@@ -527,3 +527,158 @@ function updateCalorieDisplay() {
   // Reapply theme to ensure button matches current theme
   setTheme();
 }
+
+/*
+ * Writes all local storage to a file and downloads the file
+ */
+function downloadSave() {
+  // get the size of the local storage
+  var size = localStorage.length;
+  // set the file content to be empty
+  var fileContent = "";
+  // loop though the lenght of the local storage
+  for (let i = 0; i < size; i++) {
+    // get the key 
+    let key = localStorage.key(i);
+    // use key to get the value from key
+    let content = localStorage.getItem(key);
+    // set the file content to the key-value pair
+    fileContent += `${key}|${content || ""}`;
+    // check if last element
+    if (i < size - 1) {
+      // add separator if not last element
+      fileContent += "\\/";
+    }
+  }
+
+  // Create a Blob with the content
+  const blob = new Blob([fileContent], { type: 'text/plain' });
+  // Create a link element
+  const link = document.createElement('a');
+  // Create an object URL for the Blob
+  const url = URL.createObjectURL(blob);
+  // Set the 'href' attribute of the link to the Blob URL
+  link.href = url;
+  // Set the 'download' attribute to specify the filename
+  link.download = 'ironMan-save';
+  // Append the link to the DOM temporarily (it doesn't need to be visible)
+  document.body.appendChild(link);
+  // Programmatically click the link to start the download
+  link.click();
+  // Clean up by revoking the object URL
+  URL.revokeObjectURL(url);
+  // Remove the link element from the DOM
+  document.body.removeChild(link);
+}
+
+/* 
+ * Opens a popup to upload a file 
+ * Offers the option to keep current tasks, workouts, and routines, etc
+ */
+function uploadSavePopup() {
+  document.getElementById("popup-content").innerHTML = `
+  <button id="popup-close-btn" class="close-btn">Close</button>
+  <div id="upload-popup">
+    <h2>Upload File</h2>
+    <div id="drop-box">
+    Drag and drop files here
+    <br>
+    Or click to select a file
+    </div>
+    <input type="file" hidden id="file-input">
+
+    <form>
+      <input type="radio" id="append-save" name="save-type" value="append" checked>
+      <label for="append-save">Appened the loaded save with the current save</label>
+      <br>
+
+      <input type="radio" id="write-over" name="save-type" value="overwrite">
+      <label for="write-over">Write over the current save with the new save</label>
+    </form>
+    <button id="submit-file">Submit</button>
+  </div>
+`;
+
+// Add close button functionality
+document.getElementById("popup-close-btn").addEventListener("click", closePopup);
+
+// Show the popup and overlay
+document.getElementById("popup").style.display = "block";
+document.getElementById("overlay-bg").style.display = "block";
+
+var dropBox = document.getElementById("drop-box");
+var fileInput = document.getElementById("file-input");
+var files = null; // 👈 define it here so it’s shared across the script
+
+// Prevent default drag behaviors
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+  dropBox.addEventListener(eventName, e => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+});
+
+// Handle file drop
+dropBox.addEventListener('drop', e => {
+  files = e.dataTransfer.files; // 👈 assign to the shared variable
+  console.log("Dropped files:", files);
+  dropBox.style.backgroundColor = "grey";
+});
+
+// Open file selector on click
+dropBox.addEventListener("click", () => {
+  fileInput.click();
+});
+
+// Handle selecting a file
+fileInput.addEventListener("change", e => {
+  files = e.target.files; // 👈 again, assign to the shared variable
+  dropBox.style.backgroundColor = "grey";
+});
+
+// Submit the file for processing
+document.getElementById("submit-file").addEventListener("click", () => {
+  loadSave(files);
+});
+
+}
+
+/*
+ * Takes a file and loads the content into local storage
+ */
+function loadSave(files) {
+  // initialize file unpacking
+  const file = files[0];
+  const reader = new FileReader();
+  // grab the type of load
+  const type = document.querySelector('input[name="save-type"]:checked').value;
+
+  // create file unpacker function
+  reader.onload = function(data) {
+    // split data
+    const content = data.target.result;
+    const rows = content.split("\\/");
+
+    // check the load type
+    if (type === "overwrite") {
+      localStorage.clear();
+      for (let i = 0; i < rows.length; i++) {
+        // split the rows into key value pairs
+        let row = rows[i].split("|");
+        if (row.length == 1) {
+          localStorage.setItem(row[0], "");
+        } else {
+          localStorage.setItem(row[0], row[1]);
+        }
+      }
+    } else if (type === "append") {
+      console.log("no")
+    } else {
+      console.warn("incorrect type selected")
+    }
+    window.location.reload();
+  };
+
+  // start file unpacking
+  reader.readAsText(file);
+}
