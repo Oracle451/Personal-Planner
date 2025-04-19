@@ -543,11 +543,11 @@ function downloadSave() {
     // use key to get the value from key
     let content = localStorage.getItem(key);
     // set the file content to the key-value pair
-    fileContent += `${key}|${content}`;
+    fileContent += `${key}|${content || ""}`;
     // check if last element
     if (i < size - 1) {
       // add separator if not last element
-      fileContent += "||";
+      fileContent += "\\/";
     }
   }
 
@@ -647,6 +647,38 @@ document.getElementById("submit-file").addEventListener("click", () => {
  * Takes a file and loads the content into local storage
  */
 function loadSave(files) {
+  // initialize file unpacking
   const file = files[0];
-  console.log(file.name);
+  const reader = new FileReader();
+  // grab the type of load
+  const type = document.querySelector('input[name="save-type"]:checked').value;
+
+  // create file unpacker function
+  reader.onload = function(data) {
+    // split data
+    const content = data.target.result;
+    const rows = content.split("\\/");
+
+    // check the load type
+    if (type === "overwrite") {
+      localStorage.clear();
+      for (let i = 0; i < rows.length; i++) {
+        // split the rows into key value pairs
+        let row = rows[i].split("|");
+        if (row.length == 1) {
+          localStorage.setItem(row[0], "");
+        } else {
+          localStorage.setItem(row[0], row[1]);
+        }
+      }
+    } else if (type === "append") {
+      console.log("no")
+    } else {
+      console.warn("incorrect type selected")
+    }
+    window.location.reload();
+  };
+
+  // start file unpacking
+  reader.readAsText(file);
 }
