@@ -560,7 +560,7 @@ function downloadSave() {
   // Set the 'href' attribute of the link to the Blob URL
   link.href = url;
   // Set the 'download' attribute to specify the filename
-  link.download = 'ironMan-save.txt';
+  link.download = 'ironMan-save';
   // Append the link to the DOM temporarily (it doesn't need to be visible)
   document.body.appendChild(link);
   // Programmatically click the link to start the download
@@ -569,4 +569,12 @@ function downloadSave() {
   URL.revokeObjectURL(url);
   // Remove the link element from the DOM
   document.body.removeChild(link);
+}
+
+/*
+ * Takes a file and loads the content into local storage
+ * Offers the option to keep current tasks, workouts, and routines, etc
+ */
+function loadSave() {
+  
 }
