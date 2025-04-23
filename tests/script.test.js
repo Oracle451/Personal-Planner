@@ -1,4 +1,4 @@
-const { generateDateString, doesDayHaveTasks, addTask, removeTask, populateUpcomingEvents, fixTime } = require("./JavaScript/testedFunctions.js")
+const { generateDateString, doesDayHaveTasks, addTask, removeTask, populateUpcomingEvents, fixTime } = require("../JavaScript/testedFunctions.js")
 
 const dateString = "2025-03-22"
 global.setTheme = jest.fn();
